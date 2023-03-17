@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  display: flex;
+  height: 400px;
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+.menu-spacer {
+    flex: 1 1 auto;
+  }
+
+.card {
+  position: absolute;
+  width: 50%;
+  top: 30%;
+  bottom: auto;
+  left: 25%;
+  right: auto;
+  margin: auto;
+}
+form{
+    padding: 14px;
+}
+mat-form-field{
+    width: 100%;
+}
