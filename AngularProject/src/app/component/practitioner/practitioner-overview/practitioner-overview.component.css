@@ -1,38 +1,39 @@
-.container{
+.container {
   position: relative;
 }
 
-
-h2{
-    padding: 14px;
-    height: inherit;
+h2 {
+  padding: 14px;
+  height: inherit;
 }
 
-td, th {
-    vertical-align: middle !important;
-  }
-  th{
-    font-size:medium;
-    text-transform: capitalize;
-  }
+td,
+th {
+  vertical-align: middle !important;
+}
+th {
+  font-size: medium;
+  text-transform: capitalize;
+}
 
-  th,tr:nth-child(even) {
-    background-color: #F6F6F7;
-  }
-  /* .dashbord{
+th,
+tr:nth-child(even) {
+  background-color: #f6f6f7;
+}
+/* .dashbord{
     position: relative;
   } */
 
-  button{    
-    padding-top: 0%;
-    float: right;
-    /* position: absolute; */
-  }
- 
-  .verticalLine {
-    background-color: #aaa9a9;
-    width: 2px;
-    height: 100%;
-  
-    margin: auto;
-  }
+button {
+  padding-top: 0%;
+  float: right;
+  /* position: absolute; */
+}
+
+.verticalLine {
+  background-color: #aaa9a9;
+  width: 2px;
+  height: 100%;
+
+  margin: auto;
+}

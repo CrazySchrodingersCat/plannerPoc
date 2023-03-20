@@ -8,8 +8,8 @@
 }
 
 .menu-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
 
 .card {
   position: absolute;
@@ -20,9 +20,9 @@
   right: auto;
   margin: auto;
 }
-form{
-    padding: 14px;
+form {
+  padding: 14px;
 }
-mat-form-field{
-    width: 100%;
+mat-form-field {
+  width: 100%;
 }

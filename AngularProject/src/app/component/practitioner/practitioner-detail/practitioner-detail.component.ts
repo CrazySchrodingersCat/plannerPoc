@@ -38,7 +38,7 @@ export class PractitionerDetailComponent {
       this.practitioner = new Practitioner('', '');
       console.log(this.practitioner);
     } else {
-      console.log(this.id)
+      console.log(this.id);
       this.service
         .getPractitionerById(this.id)
         .subscribe((data: Practitioner) => {
@@ -47,7 +47,6 @@ export class PractitionerDetailComponent {
           this.name = data.displayName;
           console.log(this.practitioner);
         });
-       
     }
 
     this.practitionerForm = new FormGroup({

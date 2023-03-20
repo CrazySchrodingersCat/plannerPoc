@@ -7,29 +7,28 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 
 @Component({
   selector: 'app-practitioner-overview',
-  templateUrl:'./practitioner-overview.component.html',
-  styleUrls: ['./practitioner-overview.component.css']
+  templateUrl: './practitioner-overview.component.html',
+  styleUrls: ['./practitioner-overview.component.css'],
 })
 export class PractitionerOverviewComponent implements AfterViewInit, OnInit {
-    list!: Practitioner[] ;
-    displayedColumns: string[] = ['displayName', 'discipline'];
-    dataSource = new MatTableDataSource<Practitioner>(); 
+  list!: Practitioner[];
+  displayedColumns: string[] = ['displayName', 'discipline'];
+  dataSource = new MatTableDataSource<Practitioner>();
 
-    @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-    ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-    }  
-  
-    constructor(private practitionerService: PractitionerService){}
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
-    ngOnInit():void{
-      let practitionersyFetch = this.practitionerService.getPractitioners();
-      practitionersyFetch.subscribe((practitioners:any)=>{
-        this.list = practitioners;
-        this.dataSource.data = practitioners
-        console.log(this.list)
-      })
-    }
+  constructor(private practitionerService: PractitionerService) {}
+
+  ngOnInit(): void {
+    let practitionersyFetch = this.practitionerService.getPractitioners();
+    practitionersyFetch.subscribe((practitioners: any) => {
+      this.list = practitioners;
+      this.dataSource.data = practitioners;
+      console.log(this.list);
+    });
+  }
 }
-
