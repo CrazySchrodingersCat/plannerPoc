@@ -3,8 +3,8 @@ export class Practitioner{
     discipline:string;
     id?:string;
 
-    constructor(name:string, discipline:string, id?:string){
-        this.displayName = name;
+    constructor(displayName:string, discipline:string, id?:string){
+        this.displayName = displayName;
         this.discipline =   discipline;
         this.id= id;
     }

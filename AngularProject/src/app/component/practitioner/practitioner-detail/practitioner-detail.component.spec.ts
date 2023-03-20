@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PractitionerDetailComponent } from './practitioner-detail.component';
 
 describe('PractitionerDetailComponent', () => {

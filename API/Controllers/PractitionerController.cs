@@ -70,7 +70,7 @@ namespace API.Controllers
         public async Task<IActionResult> DeletePractitioner(string id)
         {
             await _service.DeletePractitionerById(id);
-            return Ok();
+            return Ok(true);
         }
 
     }

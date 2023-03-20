@@ -1,7 +1,6 @@
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Practitioner } from 'src/app/models/practitioner.model';
 import { PractitionerService } from 'src/app/services/practitioner.service';
 
@@ -26,14 +25,13 @@ export class PractitionerDetailComponent {
 
   constructor(
     private service: PractitionerService,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id == 0) {
-      
       this.isNew = true;
       this.practitioner = new Practitioner('', '');
       console.log(this.practitioner);
@@ -47,10 +45,9 @@ export class PractitionerDetailComponent {
     }
 
     this.practitionerForm = new FormGroup({
-      displayName : new FormControl<String>('', [Validators.required]),
-      discipline: new FormControl<String>('')})
-
-      
+      displayName: new FormControl<String>('', [Validators.required]),
+      discipline: new FormControl<String>(''),
+    });
   }
 
   get formControls() {
@@ -58,8 +55,33 @@ export class PractitionerDetailComponent {
   }
 
   onSubmit() {
-    if(this.practitionerForm.valid) {
-      
+    if (this.practitionerForm.valid) {
+      let newPractitioner:Practitioner = new Practitioner(
+         this.practitionerForm.value["displayName"],
+         this.practitionerForm.value["discipline"]);
+         console.log("new" + newPractitioner);
+
+      if (this.id =='0') {
+        console.log("new" + newPractitioner);
+        this.service.addPractitioner(newPractitioner).subscribe(()=> {
+          alert('Practitioner added successfully');
+          this.router.navigate(['/Practitioners']);
+        });
+
+
+      }else {
+        
+      }
     }
+  }
+
+  delete() {
+    this.service.deleteById(this.id).subscribe((data) => {
+      this.router.navigate(['/Practitioners']);
+    });
+  }
+
+  openDialog(){
+
   }
 }

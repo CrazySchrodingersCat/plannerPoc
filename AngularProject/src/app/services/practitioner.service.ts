@@ -18,4 +18,12 @@ export class PractitionerService {
   getPractitionerById( id: string):Observable<Practitioner>{
     return this.http.get<Practitioner>(environment.apiUrl + '/Practitioner/' + id)
   }
+
+  deleteById( id: string):Observable<boolean>{
+    return this.http.delete<boolean>(environment.apiUrl + '/Practitioner/' + id)
+  }
+
+  addPractitioner(newPractititoner:Practitioner):Observable<any>{
+    return this.http.post<Practitioner>(environment.apiUrl + '/Practitioner/', newPractititoner);
+  }
 }

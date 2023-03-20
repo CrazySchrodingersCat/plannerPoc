@@ -4,38 +4,58 @@
       <mat-card-title><h2>Practitioner</h2></mat-card-title>
       <mat-form-field>
         <mat-label>display name</mat-label>
-        <input matInput type="text" value="{{ practitioner.displayName }}" />
-        <small *ngIf="formControls['displayName'].errors?.['required'] && formControls['displayName'].touched">Name is
-          required!</small>
+        <input
+          matInput
+          type="text"
+          value="{{ practitioner.displayName }}"
+          required
+          minlength="2"
+          formControlName="displayName"
+        />
+        <small
+          *ngIf="formControls['displayName'].errors?.['required'] && formControls['displayName'].touched"
+          >Name is required!</small
+        >
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>discipline</mat-label>
-        <input matInput type="text" value="{{ practitioner.discipline }}" />
+        <input
+          matInput
+          type="text"
+          value="{{ practitioner.discipline }}"
+          required
+          formControlName="discipline"
+          
+        />
       </mat-form-field>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>discipline:</mat-label>
-        <mat-select formControlName="discipline" >
+        <mat-select formControlName="discipline">
           <mat-option *ngFor="let discipline of disciplines">
             {{ discipline }}
           </mat-option>
         </mat-select>
-      </mat-form-field>
-    </form>
-
-    <!-- <mat-card-title>Name</mat-card-title>  -->
-    <!-- <mat-card-subtitle>Discipline</mat-card-subtitle> -->
-    <!-- <mat-card-content>More info</mat-card-content> -->
-
+      </mat-form-field> -->
+  
     <mat-card-actions>
-      <button mat-fab extended><mat-icon>edit</mat-icon> Save</button>
-      <button *ngIf="!isNew"  mat-fab extended color="warn">
+      <button
+        type="submit"
+        [disabled]="!practitionerForm.valid"
+        mat-fab
+        extended
+      >
+        <mat-icon>edit</mat-icon> Save
+      </button>
+
+      <button (click)="delete()" *ngIf="!isNew" mat-fab extended color="warn">
         <mat-icon>delete</mat-icon> Delete
       </button>
       <span class="menu-spacer"></span>
 
       <button
+        (click)="delete()"
         class="close"
         a
         [routerLink]="['/practitioners']"
@@ -46,5 +66,6 @@
         <mat-icon>close</mat-icon>Back to list
       </button>
     </mat-card-actions>
+  </form>
   </mat-card>
 </div>
