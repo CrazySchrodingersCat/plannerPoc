@@ -1,15 +1,29 @@
 .container {
   position: relative;
 }
-
+.dashbord {
+  position: relative;
+  height: 70px;
+}
+.menu-spacer {
+  flex: 1 1 auto;
+}
 h2 {
   padding: 14px;
-  height: inherit;
+  margin-top: 10px;
+  position: absolute;
+}
+
+button {
+  margin-top: 10px;
+  margin-right: 14px;
+  float: right;
 }
 
 td,
 th {
   vertical-align: middle !important;
+  
 }
 th {
   font-size: medium;
@@ -20,20 +34,4 @@ th,
 tr:nth-child(even) {
   background-color: #f6f6f7;
 }
-/* .dashbord{
-    position: relative;
-  } */
 
-button {
-  padding-top: 0%;
-  float: right;
-  /* position: absolute; */
-}
-
-.verticalLine {
-  background-color: #aaa9a9;
-  width: 2px;
-  height: 100%;
-
-  margin: auto;
-}
