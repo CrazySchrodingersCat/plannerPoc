@@ -26,4 +26,8 @@ export class PractitionerService {
   addPractitioner(newPractititoner:Practitioner):Observable<any>{
     return this.http.post<Practitioner>(environment.apiUrl + '/Practitioner/', newPractititoner);
   }
+
+  editPractitioner(id: string, editPractititoner:Practitioner):Observable<any>{
+    return this.http.put<Practitioner>(environment.apiUrl + '/Practitioner/' + id, editPractititoner);
+  }
 }

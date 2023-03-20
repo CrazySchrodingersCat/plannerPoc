@@ -5,6 +5,7 @@
 
 h2{
     padding: 14px;
+    height: inherit;
 }
 
 td, th {

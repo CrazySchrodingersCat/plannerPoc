@@ -15,6 +15,7 @@ export class PractitionerDetailComponent {
   isNew: boolean = false;
   id!: any;
   selectedDiscipline!: string;
+  name!: string;
   disciplines: string[] = [
     'Fysiotherapeut',
     'Regiebehandelaar',
@@ -31,17 +32,22 @@ export class PractitionerDetailComponent {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id == 0) {
+    console.log(this.id);
+    if (this.id == '') {
       this.isNew = true;
       this.practitioner = new Practitioner('', '');
       console.log(this.practitioner);
     } else {
+      console.log(this.id)
       this.service
         .getPractitionerById(this.id)
         .subscribe((data: Practitioner) => {
           this.practitioner = data;
           this.selectedDiscipline = data.discipline;
+          this.name = data.displayName;
+          console.log(this.practitioner);
         });
+       
     }
 
     this.practitionerForm = new FormGroup({
@@ -56,22 +62,27 @@ export class PractitionerDetailComponent {
 
   onSubmit() {
     if (this.practitionerForm.valid) {
-      let newPractitioner:Practitioner = new Practitioner(
-         this.practitionerForm.value["displayName"],
-         this.practitionerForm.value["discipline"]);
-         console.log("new" + newPractitioner);
+      let newPractitioner: Practitioner = new Practitioner(
+        this.practitionerForm.value['displayName'],
+        this.practitionerForm.value['discipline']
+      );
 
-      if (this.id =='0') {
-        console.log("new" + newPractitioner);
-        this.service.addPractitioner(newPractitioner).subscribe(()=> {
+      if (this.id == '') {
+        this.service.addPractitioner(newPractitioner).subscribe(() => {
           alert('Practitioner added successfully');
           this.router.navigate(['/Practitioners']);
         });
-
-
-      }else {
-        
+      } else {
+        this.service
+          .editPractitioner(this.id, newPractitioner)
+          .subscribe(() => {
+            alert('Practitioner changed successfully');
+            this.router.navigate(['/Practitioners']);
+          });
       }
+    } else {
+      // alert("form validation error.");
+      return;
     }
   }
 
@@ -81,7 +92,5 @@ export class PractitionerDetailComponent {
     });
   }
 
-  openDialog(){
-
-  }
+  openDialog() {}
 }

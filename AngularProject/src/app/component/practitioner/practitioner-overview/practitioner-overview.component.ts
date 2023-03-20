@@ -7,7 +7,7 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 
 @Component({
   selector: 'app-practitioner-overview',
-  templateUrl: './practitioner-overview.component.html',
+  templateUrl:'./practitioner-overview.component.html',
   styleUrls: ['./practitioner-overview.component.css']
 })
 export class PractitionerOverviewComponent implements AfterViewInit, OnInit {

@@ -7,7 +7,7 @@
         <input
           matInput
           type="text"
-          value="{{ practitioner.displayName }}"
+          value="{{ name }}"
           required
           minlength="2"
           formControlName="displayName"
@@ -18,26 +18,26 @@
         >
       </mat-form-field>
 
-      <mat-form-field>
+      <!-- <mat-form-field>
         <mat-label>discipline</mat-label>
         <input
           matInput
           type="text"
-          value="{{ practitioner.discipline }}"
+          value="{{ selectedDiscipline }}"
           required
           formControlName="discipline"
           
         />
-      </mat-form-field>
+      </mat-form-field> -->
 
-      <!-- <mat-form-field>
+      <mat-form-field>
         <mat-label>discipline:</mat-label>
-        <mat-select formControlName="discipline">
-          <mat-option *ngFor="let discipline of disciplines">
+        <mat-select formControlName="discipline" [(value)]="selectedDiscipline" required>
+          <mat-option *ngFor="let discipline of disciplines" [value]="discipline" >
             {{ discipline }}
           </mat-option>
         </mat-select>
-      </mat-form-field> -->
+      </mat-form-field>
   
     <mat-card-actions>
       <button
@@ -54,8 +54,7 @@
       </button>
       <span class="menu-spacer"></span>
 
-      <button
-        (click)="delete()"
+      <button        
         class="close"
         a
         [routerLink]="['/practitioners']"
