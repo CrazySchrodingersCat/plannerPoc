@@ -1,43 +1,47 @@
 <script>
 	import { page } from '$app/stores';
-
 </script>
 
 <header>
 	<nav>
-		<!-- <svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg> -->
+		<span>Planner App Test.V_0</span>
+		<span class="menu-spacer" />
+		<div>
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
+				<a href="/">Planner</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
+				<a href="/about">Practitioners</a>
 			</li>
 			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
+				<a href="/sverdle">Login</a>
 			</li>
 		</ul>
-		<!-- <svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg> -->
+	</div>
 	</nav>
-
-	
 </header>
 
 <style>
+	.menu-spacer {
+		flex: 1 1 auto;
+	}
+	/* mat-toolbar-row, */
+	a {
+		color: #3b5736;
+		padding: 14px 18px 5px;
+	}
 	header {
 		display: flex;
 		justify-content: space-between;
+		background: #f5f5f5;;
 	}
+
 	nav {
 		display: flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
-	}
 
+	}
 
 	ul {
 		position: relative;
@@ -55,9 +59,11 @@
 	li {
 		position: relative;
 		height: 100%;
+		color: #3b5736;
+		padding: 14px 18px 5px;
 	}
 
-	li[aria-current='page']::before {
+	/* li[aria-current='page']::before {
 		--size: 6px;
 		content: '';
 		width: 0;
@@ -67,14 +73,14 @@
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
 		border-top: var(--size) solid var(--color-theme-1);
-	}
+	} */
 
 	nav a {
 		display: flex;
 		height: 100%;
 		align-items: center;
 		padding: 0 0.5rem;
-		color: var(--color-text);
+		/* color: var(--color-text); */
 		font-weight: 700;
 		font-size: 0.8rem;
 		text-transform: uppercase;
@@ -83,7 +89,7 @@
 		transition: color 0.2s linear;
 	}
 
-	a:hover {
+	/* a:hover {
 		color: var(--color-theme-1);
-	}
+	} */
 </style>
