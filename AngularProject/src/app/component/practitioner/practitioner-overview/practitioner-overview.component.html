@@ -3,30 +3,21 @@
     <h2>Practitioners:</h2>
     <span class="menu-spacer"></span>
     <button a [routerLink]="['/practitioners/', '']" mat-fab extended>
-      <mat-icon>person_add</mat-icon>New </button>
+      <mat-icon>person_add</mat-icon>New
+    </button>
   </div>
   <div class="mat-elevation-z8"></div>
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="displayName">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td
-        a
-        [routerLink]="['/practitioners/', element.id]"
-        mat-cell
-        *matCellDef="let element"
-      >
+      <td mat-cell *matCellDef="let element" (click)="goToDetails(element.id)">
         {{ element.displayName }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="discipline">
       <th mat-header-cell *matHeaderCellDef>Discipline</th>
-      <td
-        mat-cell
-        *matCellDef="let element"
-        a
-        [routerLink]="['/practitioners/', element.id]"
-      >
+      <td mat-cell *matCellDef="let element" (click)="goToDetails(element.id)">
         {{ element.discipline }}
       </td>
     </ng-container>

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Practitioner } from 'src/app/models/practitioner.model';
 
 import { PractitionerService } from 'src/app/services/practitioner.service';
@@ -21,14 +22,18 @@ export class PractitionerOverviewComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private practitionerService: PractitionerService) {}
+  constructor(private practitionerService: PractitionerService, private router: Router) {}
 
   ngOnInit(): void {
-    let practitionersyFetch = this.practitionerService.getPractitioners();
-    practitionersyFetch.subscribe((practitioners: any) => {
+    let practitionersFetch = this.practitionerService.getPractitioners();
+    practitionersFetch.subscribe((practitioners: any) => {
       this.list = practitioners;
       this.dataSource.data = practitioners;
       console.log(this.list);
     });
+  }
+
+  goToDetails(id: string){    
+    this.router.navigate(['/practitioners/', id], { skipLocationChange: true });
   }
 }
