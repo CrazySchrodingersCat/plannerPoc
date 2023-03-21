@@ -32,20 +32,16 @@ export class PractitionerDetailComponent {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
     if (this.id == '') {
       this.isNew = true;
       this.practitioner = new Practitioner('', '');
-      console.log(this.practitioner);
-    } else {
-      console.log(this.id);
+    } else {      
       this.service
         .getPractitionerById(this.id)
         .subscribe((data: Practitioner) => {
           this.practitioner = data;
           this.selectedDiscipline = data.discipline;
           this.name = data.displayName;
-          console.log(this.practitioner);
         });
     }
 
@@ -90,6 +86,4 @@ export class PractitionerDetailComponent {
       this.router.navigate(['/Practitioners']);
     });
   }
-
-  openDialog() {}
 }
