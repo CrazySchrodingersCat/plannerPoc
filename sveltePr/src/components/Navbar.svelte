@@ -1,5 +1,9 @@
 <script>
-  //   export let data;
+  import Router from "svelte-spa-router";
+  import PractitionerDetail from "./Practitioners/PractitionerDetail.svelte";
+  import PractitionerOverview from "./Practitioners/PractitionerOverview.svelte";
+
+
   let windowWidth = window.innerWidth;
   let clicked = false;
 
@@ -17,14 +21,14 @@
 </script>
 
 <svelte:window in:resize={handleResize} />
-<div class={clicked ? "navbar-clicked" : "navbar"}>
+<div class="navbar">
   <span>Planner App SVELTE Test.V_0</span>
   <span class="menu-spacer" />
-  <a href="">Planner</a>
-  <a href="">Practitioners</a>
-  <a href="">Login</a>
+  <a href="#/planner">Planner</a>
+  <a href="#/practitioners">Practitioners</a>
+  <a href="#/login">Login</a>
 </div>
-<div style="clear: both;"></div>
+<div style="clear: both;" />
 
 <style>
   .menu-spacer {

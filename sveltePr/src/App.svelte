@@ -1,14 +1,30 @@
 <script>
+
   import Navbar from "./components/Navbar.svelte";
+
+  import PractitionerDetail from "./components/Practitioners/PractitionerDetail.svelte";
   import PractitionerOverview from "./components/Practitioners/PractitionerOverview.svelte";
+  import Planner from "./components/Plan/Planner.svelte";
+
+
+  import Router from "svelte-spa-router";
+  let routes = {
+    
+    "/practitioners":PractitionerOverview,
+    "/practitioners/:id":PractitionerDetail,
+	"/planner":Planner,
+
+    "*":PractitionerOverview,
+  };
 </script>
 
 <div class="app">
   <Navbar />
   <div style="clear: both;" />
-  <main>
+  <main>		
     <section class="container">
-      <PractitionerOverview />
+		<Router {routes} />
+      <!-- <PractitionerOverview /> -->
     </section>
   </main>
 </div>
