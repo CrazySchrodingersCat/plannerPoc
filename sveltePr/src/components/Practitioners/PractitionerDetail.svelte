@@ -3,8 +3,13 @@
   export let params = {};
   const url = "https://localhost:7034/api";
 
-  let id;
+  let id = 'dc9f3012-9826-4bdb-90ef-38cf8366235a';
   let practitioner = { id: id, displayName: "", discipline: "" };
+
+  fetch(url + "/Practitioner/" + id)
+    .then((response) => response.json())
+    .then((data) => (practitioner = data))
+    .then(() => console.log(practitioner));
 
   const to_overview = () => {
     push("/practitioners");
@@ -50,7 +55,7 @@
 
   form > div {
     display: flex;
-    justify-content: space-between;
+     justify-content: space-between; 
   }
 
   form > div + * {
@@ -79,13 +84,14 @@
   .menu-spacer {
     flex: 1 1 auto;
   }
-  /* button {
-    order-radius: 24px;
+  button {
+    border-radius: 24px;
     padding-left: 20px;
     padding-right: 20px;
     width: auto;
     max-width: 100%;
     height: 48px;
     line-height: normal;
-  } */
+   
+  }
 </style>
