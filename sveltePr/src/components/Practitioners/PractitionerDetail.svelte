@@ -8,13 +8,12 @@
   let id = params.id;
   let practitioner = { id: id, displayName: "", discipline: "" };
 
-  if (id != "0") {    
+  if (id != "0") {
     fetch(url + "/Practitioner/" + id)
       .then((response) => response.json())
       .then((data) => (practitioner = data))
       .then(() => console.log(practitioner.displayName));
-  }
-  else if (id == "0") {
+  } else if (id == "0") {
     practitioner = { displayName: "", discipline: "" };
   }
 
@@ -87,16 +86,14 @@
         <label for="discipline">Discipline</label>
         <!-- <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} /> -->
         <select type="text" bind:value={practitioner.discipline} on:change={() => (discipline = "")}>
-            {#each disciplines as disc}
-              <option value={disc}>
-                {disc}
-              </option>
-            {/each}
-          </select>
-    
-    </div>
+          {#each disciplines as disc}
+            <option value={disc}>
+              {disc}
+            </option>
+          {/each}
+        </select>
+      </div>
 
-      
       <div>
         {#if id == "0"}
           <button on:click={create_user}>Add</button>

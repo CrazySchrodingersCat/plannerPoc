@@ -1,29 +1,26 @@
 <script>
-
   import Navbar from "./components/Navbar.svelte";
 
   import PractitionerDetail from "./components/Practitioners/PractitionerDetail.svelte";
   import PractitionerOverview from "./components/Practitioners/PractitionerOverview.svelte";
   import Planner from "./components/Plan/Planner.svelte";
 
-
   import Router from "svelte-spa-router";
   let routes = {
-    
-    "/practitioners":PractitionerOverview,
-    "/practitioners/:id":PractitionerDetail,
-	"/planner":Planner,
+    "/practitioners": PractitionerOverview,
+    "/practitioners/:id": PractitionerDetail,
+    "/planner": Planner,
 
-    "*":PractitionerOverview,
+    "*": PractitionerOverview,
   };
 </script>
 
 <div class="app">
   <Navbar />
   <div style="clear: both;" />
-  <main>		
+  <main>
     <section class="container">
-		<Router {routes} />
+      <Router {routes} />
     </section>
   </main>
 </div>
@@ -35,7 +32,6 @@
     min-height: 100vh;
   }
   main {
-
     flex: 1;
     display: flex;
     flex-direction: column;

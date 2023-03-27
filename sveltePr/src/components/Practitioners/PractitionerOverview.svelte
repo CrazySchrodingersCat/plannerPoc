@@ -19,12 +19,11 @@
   ];
 
   function goToDetail(event) {
-        push("/practitioners/"  + event.detail.row.id)
-        
-    }
+    push("/practitioners/" + event.detail.row.id);
+  }
 
-  function goToAddNew(event){
-    push("/practitioners/" + '0') 
+  function goToAddNew(event) {
+    push("/practitioners/" + "0");
   }
 </script>
 
