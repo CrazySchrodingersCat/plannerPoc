@@ -8,23 +8,18 @@
   let id = params.id;
   let practitioner = { id: id, displayName: "", discipline: "" };
 
-  if (id != "0") {
-    //  try{
+  if (id != "0") {    
     fetch(url + "/Practitioner/" + id)
       .then((response) => response.json())
       .then((data) => (practitioner = data))
       .then(() => console.log(practitioner.displayName));
   }
-  // } catch(e) {
-  //     console.log('There was an error', e);
-  // }
   else if (id == "0") {
     practitioner = { displayName: "", discipline: "" };
   }
 
   let disciplines = ["Fysiotherapeut", "Regiebehandelaar", "Psycholoog(LV)", "Psycholoog (CGT)", "Psycholoog (PS)"];
 
-  let selected = practitioner.discipline;
   let discipline = "";
 
   const to_overview = () => {
@@ -92,9 +87,9 @@
         <label for="discipline">Discipline</label>
         <!-- <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} /> -->
         <select type="text" bind:value={practitioner.discipline} on:change={() => (discipline = "")}>
-            {#each disciplines as question}
-              <option value={question}>
-                {question}
+            {#each disciplines as disc}
+              <option value={disc}>
+                {disc}
               </option>
             {/each}
           </select>
