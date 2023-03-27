@@ -44,14 +44,35 @@
     push("/practitioners");
   };
 
-  const save = () => {
-    // fetch(url + "/Practitioner/", newPractitioner);
+  const delete_user_byId = (e) => {
+    e.preventDefault();
+    fetch(url + "/Practitioner/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => console.log(res));
+    go;
+    push("/practitioners");
   };
-  function deleteById(event, id) {
-    alert(event.detail.text);
-  }
 
-  console.log(params);
+  const edit_user = (e) => {
+    // fetch(url + "/Practitioner/", newPractitioner);
+    e.preventDefault();
+    const user = {
+      displayName: practitioner.displayName,
+      discipline: practitioner.discipline,
+    };
+    console.log(user);
+
+    fetch(url + "/Practitioner/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    push("/practitioners");
+  };
 </script>
 
 <!-- svelte-ignore missing-declaration -->
@@ -70,8 +91,14 @@
         <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} />
       </div>
       <div>
-        <button on:click={create_user}>Save</button>
-        <button on:click={to_overview}>Delete</button>
+        {#if id == "0"}
+          <button on:click={create_user}>Save</button>
+        {/if}
+        {#if id != "0"}
+          <button on:click={edit_user}>Edit</button>
+          <button on:click={delete_user_byId}>Delete</button>
+        {/if}
+        
         <span class="menu-spacer" />
 
         <button on:click={to_overview}>Back to list</button>

@@ -19,8 +19,6 @@
   ];
 
   function goToDetail(event) {
-        // const rowId = event.detail.row.id
-        // console.log(rowId);
         push("/practitioners/"  + event.detail.row.id)
         
     }
