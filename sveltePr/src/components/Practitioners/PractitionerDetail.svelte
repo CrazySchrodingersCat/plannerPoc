@@ -32,6 +32,16 @@
       displayName: practitioner.displayName,
       discipline: practitioner.discipline,
     };
+    console.log(user);
+
+    fetch(url + "/Practitioner/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    push("/practitioners");
   };
 
   const save = () => {
@@ -60,7 +70,7 @@
         <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} />
       </div>
       <div>
-        <button on:click={save}>Save</button>
+        <button on:click={create_user}>Save</button>
         <button on:click={to_overview}>Delete</button>
         <span class="menu-spacer" />
 
