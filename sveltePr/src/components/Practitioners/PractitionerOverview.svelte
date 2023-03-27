@@ -19,20 +19,22 @@
   ];
 
   function goToDetail(event) {
-        const rowId = event.detail.row.id
-        console.log(rowId);
-        push("/practitioners/"  + rowId)
+        // const rowId = event.detail.row.id
+        // console.log(rowId);
+        push("/practitioners/"  + event.detail.row.id)
         
     }
 
-  const add_new = () => {};
+  function goToAddNew(event){
+    push("/practitioners/" + '0') 
+  }
 </script>
 
 <div>
   <div class="dashbord">
     <h2>Practitoners:</h2>
     <span class="menu-spacer" />
-    <button on:click={add_new}>New</button>
+    <button on:click={goToAddNew}>New</button>
 
     <!-- <button on:click={add_new}>
       <Icon class="material-icons">favorite</Icon>

@@ -7,12 +7,20 @@
 
   let id = params.id;
   let practitioner = { id: id, displayName: "", discipline: "" };
-  let newPractitioner = { displayName: "", discipline: "" };
 
-  fetch(url + "/Practitioner/" + id)
-    .then((response) => response.json())
-    .then((data) => (practitioner = data))
-    .then(() => console.log(practitioner.displayName));
+  if (id != "0") {
+    //  try{
+    fetch(url + "/Practitioner/" + id)
+      .then((response) => response.json())
+      .then((data) => (practitioner = data))
+      .then(() => console.log(practitioner.displayName));
+  }
+  // } catch(e) {
+  //     console.log('There was an error', e);
+  // }
+  else if (id == "0") {
+    practitioner = { displayName: "", discipline: "" };
+  }
 
   const to_overview = () => {
     push("/practitioners");
