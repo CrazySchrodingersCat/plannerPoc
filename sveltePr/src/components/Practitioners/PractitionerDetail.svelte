@@ -22,6 +22,11 @@
     practitioner = { displayName: "", discipline: "" };
   }
 
+  let disciplines = ["Fysiotherapeut", "Regiebehandelaar", "Psycholoog(LV)", "Psycholoog (CGT)", "Psycholoog (PS)"];
+
+  let selected = practitioner.discipline;
+  let discipline = "";
+
   const to_overview = () => {
     push("/practitioners");
   };
@@ -75,12 +80,9 @@
   };
 </script>
 
-<!-- svelte-ignore missing-declaration -->
 <div class="container">
   <div class="card">
     <h1>Practitioner</h1>
-    <!-- <h1>ID: {params.id}</h1> -->
-
     <form>
       <div>
         <label for="displayName">Name</label>
@@ -88,17 +90,27 @@
       </div>
       <div>
         <label for="discipline">Discipline</label>
-        <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} />
-      </div>
+        <!-- <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} /> -->
+        <select type="text" bind:value={practitioner.discipline} on:change={() => (discipline = "")}>
+            {#each disciplines as question}
+              <option value={question}>
+                {question}
+              </option>
+            {/each}
+          </select>
+    
+    </div>
+
+      
       <div>
         {#if id == "0"}
-          <button on:click={create_user}>Save</button>
+          <button on:click={create_user}>Add</button>
         {/if}
         {#if id != "0"}
-          <button on:click={edit_user}>Edit</button>
+          <button on:click={edit_user}>Save</button>
           <button on:click={delete_user_byId}>Delete</button>
         {/if}
-        
+
         <span class="menu-spacer" />
 
         <button on:click={to_overview}>Back to list</button>
