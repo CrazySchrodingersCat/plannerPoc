@@ -31,8 +31,6 @@
       displayName: practitioner.displayName,
       discipline: practitioner.discipline,
     };
-    console.log(user);
-
     fetch(url + "/Practitioner/", {
       method: "POST",
       headers: {
@@ -83,8 +81,7 @@
         <input type="text" id="displayName" name="displayName" bind:value={practitioner.displayName} />
       </div>
       <div>
-        <label for="discipline">Discipline</label>
-        <!-- <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} /> -->
+        <label for="discipline">Discipline</label>       
         <select type="text" bind:value={practitioner.discipline} on:change={() => (discipline = "")}>
           {#each disciplines as disc}
             <option value={disc}>
@@ -96,11 +93,11 @@
 
       <div>
         {#if id == "0"}
-          <button on:click={create_user}>Add</button>
+          <button disabled={!practitioner.displayName || !practitioner.discipline} on:click={create_user}>Add</button>
         {/if}
         {#if id != "0"}
-          <button on:click={edit_user}>Save</button>
-          <button on:click={delete_user_byId}>Delete</button>
+          <button disabled={!practitioner.displayName} on:click={edit_user}>Save</button>
+          <button  class="warn" on:click={delete_user_byId}>Delete</button>
         {/if}
 
         <span class="menu-spacer" />
@@ -126,6 +123,7 @@
   form > div + * {
     margin-top: 10px;
   }
+
   .container {
     position: relative;
     display: flex;
@@ -153,9 +151,12 @@
     border-radius: 24px;
     padding-left: 20px;
     padding-right: 20px;
-    width: auto;
     max-width: 100%;
     height: 48px;
     line-height: normal;
+  }
+  .warn{
+    background-color: #f44336;
+    color: white;;
   }
 </style>

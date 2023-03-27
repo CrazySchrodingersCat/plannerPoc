@@ -38,7 +38,7 @@
     </button> -->
   </div>
 
-  <SvelteTable {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} />
+  <SvelteTable class='table' {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} />
 
   <!-- <hr />
 
@@ -50,12 +50,11 @@
 </div>
 
 <style>
-  table,
-  th,
-  td {
+  SvelteTable{
     border: 1px solid;
     border-collapse: collapse;
     margin-bottom: 10px;
+    background-color: white;;
   }
 
   .menu-spacer {
@@ -68,13 +67,20 @@
 
   h2 {
     padding: 14px;
-    margin-top: 10px;
+    margin-top: 20px;
     position: absolute;
   }
 
   button {
-    margin-top: 10px;
+    margin-top: 20px;
     margin-right: 14px;
     float: right;
+    background-color: #ffd740;
+    border-radius: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100px;
+    max-width: 100%;
+    height: 48px;
   }
 </style>
