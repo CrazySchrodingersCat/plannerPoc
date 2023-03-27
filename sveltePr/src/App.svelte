@@ -24,7 +24,6 @@
   <main>		
     <section class="container">
 		<Router {routes} />
-      <!-- <PractitionerOverview /> -->
     </section>
   </main>
 </div>

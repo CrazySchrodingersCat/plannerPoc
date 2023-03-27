@@ -1,26 +1,42 @@
-<script lang="ts">
-  import { push, pop, replace } from "svelte-spa-router";
+<script>
+  import { push } from "svelte-spa-router";
   export let params = {};
+  console.log("params:");
+  console.log(params);
   const url = "https://localhost:7034/api";
 
-  let id = 'dc9f3012-9826-4bdb-90ef-38cf8366235a';
+  let id = params.id;
   let practitioner = { id: id, displayName: "", discipline: "" };
+  let newPractitioner = { displayName: "", discipline: "" };
 
   fetch(url + "/Practitioner/" + id)
     .then((response) => response.json())
     .then((data) => (practitioner = data))
-    .then(() => console.log(practitioner));
+    .then(() => console.log(practitioner.displayName));
 
   const to_overview = () => {
     push("/practitioners");
   };
 
-  const save = () => {};
-  const deleteById = () => {};
+  const create_user = (e) => {
+    e.preventDefault();
+    const user = {
+      displayName: practitioner.displayName,
+      discipline: practitioner.discipline,
+    };
+  };
+
+  const save = () => {
+    // fetch(url + "/Practitioner/", newPractitioner);
+  };
+  function deleteById(event, id) {
+    alert(event.detail.text);
+  }
 
   console.log(params);
 </script>
 
+<!-- svelte-ignore missing-declaration -->
 <div class="container">
   <div class="card">
     <h1>Practitioner</h1>
@@ -29,14 +45,14 @@
     <form>
       <div>
         <label for="displayName">Name</label>
-        <input type="text" id="displayName" name="displayName" value={practitioner.displayName} />
+        <input type="text" id="displayName" name="displayName" bind:value={practitioner.displayName} />
       </div>
       <div>
         <label for="discipline">Discipline</label>
-        <input type="text" id="discipline" name="discipline" value={practitioner.discipline} />
+        <input type="text" id="discipline" name="discipline" bind:value={practitioner.discipline} />
       </div>
       <div>
-        <button on:click={to_overview}>Save</button>
+        <button on:click={save}>Save</button>
         <button on:click={to_overview}>Delete</button>
         <span class="menu-spacer" />
 
@@ -55,7 +71,7 @@
 
   form > div {
     display: flex;
-     justify-content: space-between; 
+    justify-content: space-between;
   }
 
   form > div + * {
@@ -92,6 +108,5 @@
     max-width: 100%;
     height: 48px;
     line-height: normal;
-   
   }
 </style>

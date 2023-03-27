@@ -2,6 +2,7 @@
   // import PractitionerService from "../../services/PractitionerService";
 
   import SvelteTable from "svelte-table";
+  import { push, pop, replace } from "svelte-spa-router";
 
   const url = "https://localhost:7034/api";
 
@@ -17,6 +18,13 @@
     { key: "discipline", title: "discipline", value: (v) => v.discipline },
   ];
 
+  function goToDetail(event) {
+        const rowId = event.detail.row.id
+        console.log(rowId);
+        push("/practitioners/"  + rowId)
+        
+    }
+
   const add_new = () => {};
 </script>
 
@@ -24,14 +32,14 @@
   <div class="dashbord">
     <h2>Practitoners:</h2>
     <span class="menu-spacer" />
-    <button   on:click={add_new}>New</button>
+    <button on:click={add_new}>New</button>
 
-     <!-- <button on:click={add_new}>
+    <!-- <button on:click={add_new}>
       <Icon class="material-icons">favorite</Icon>
     </button> -->
   </div>
 
-  <SvelteTable {columns} rows={practitioners} />
+  <SvelteTable {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} />
 
   <!-- <hr />
 
