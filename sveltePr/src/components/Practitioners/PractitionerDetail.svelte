@@ -8,12 +8,13 @@
   let id = params.id;
   let practitioner = { id: id, displayName: "", discipline: "" };
 
+  
   if (id != "0") {
     fetch(url + "/Practitioner/" + id)
       .then((response) => response.json())
       .then((data) => (practitioner = data))
       .then(() => console.log(practitioner.displayName));
-  } else if (id == "0") {
+  } else if (id == "0") {                              //set empty form if id was 0
     practitioner = { displayName: "", discipline: "" };
   }
 
@@ -22,7 +23,7 @@
   let discipline = "";
 
   const to_overview = () => {
-    push("/practitioners");
+    getData();
   };
 
   const create_user = (e) => {
@@ -38,7 +39,7 @@
       },
       body: JSON.stringify(user),
     });
-    push("/practitioners");
+    getData();
   };
 
   const delete_user_byId = (e) => {
@@ -48,10 +49,15 @@
     })
       .then((res) => res.text()) // or res.json()
       .then((res) => console.log(res));
-    go;
-    push("/practitioners");
+    getData();
   };
+  const getData = (e) => {
+    // fetch(url + "/Practitioner").then((response) => response.json());
 
+    push("/practitioners").then(() => {
+      fetch(url + "/Practitioner").then((response) => response.json());
+    });
+  };
   const edit_user = (e) => {
     // fetch(url + "/Practitioner/", newPractitioner);
     e.preventDefault();
@@ -68,7 +74,10 @@
       },
       body: JSON.stringify(user),
     });
-    push("/practitioners");
+    getData();
+    // push("/practitioners").then(() => {
+    //     fetch(url + "/Practitioner").then((response) => response.json());
+    // });
   };
 </script>
 
@@ -81,7 +90,7 @@
         <input type="text" id="displayName" name="displayName" bind:value={practitioner.displayName} />
       </div>
       <div>
-        <label for="discipline">Discipline</label>       
+        <label for="discipline">Discipline</label>
         <select type="text" bind:value={practitioner.discipline} on:change={() => (discipline = "")}>
           {#each disciplines as disc}
             <option value={disc}>
@@ -97,7 +106,7 @@
         {/if}
         {#if id != "0"}
           <button disabled={!practitioner.displayName} on:click={edit_user}>Save</button>
-          <button  class="warn" on:click={delete_user_byId}>Delete</button>
+          <button class="warn" on:click={delete_user_byId}>Delete</button>
         {/if}
 
         <span class="menu-spacer" />
@@ -155,8 +164,8 @@
     height: 48px;
     line-height: normal;
   }
-  .warn{
+  .warn {
     background-color: #f44336;
-    color: white;;
+    color: white;
   }
 </style>

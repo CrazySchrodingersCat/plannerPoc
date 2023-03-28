@@ -1,6 +1,6 @@
 <script>
   // import PractitionerService from "../../services/PractitionerService";
-
+  import { onMount } from 'svelte'
   import SvelteTable from "svelte-table";
   import { push, pop, replace } from "svelte-spa-router";
 
@@ -8,10 +8,16 @@
 
   let practitioners = [];
 
-  fetch(url + "/Practitioner")
+  onMount(async()=>{
+
+    fetch(url + "/Practitioner")
     .then((response) => response.json())
     .then((data) => (practitioners = data))
     .then(() => console.log(practitioners));
+
+  })
+
+  
 
   const columns = [
     { key: "displayName", title: "name", value: (v) => v.displayName },
@@ -38,7 +44,7 @@
     </button> -->
   </div>
 
-  <SvelteTable class='table' {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} />
+  <SvelteTable {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} />
 
   <!-- <hr />
 
@@ -50,12 +56,12 @@
 </div>
 
 <style>
-  SvelteTable{
+  /* .table{
     border: 1px solid;
     border-collapse: collapse;
     margin-bottom: 10px;
     background-color: white;;
-  }
+  } */
 
   .menu-spacer {
     flex: 1 1 auto;
