@@ -2,9 +2,9 @@
   <nav>
     <span>Planner App SVELTE Test.V_0</span>
     <span class="menu-spacer" />
-    <router-link to="/">Planner</router-link
-    ><router-link to="/practitioners">Plactitioners</router-link
-    ><router-link to="/">Login</router-link>
+    <router-link to="/">Planner</router-link>
+    <router-link to="/practitioners">Plactitioners</router-link>
+    <router-link to="/">Login</router-link>
   </nav>
   <router-view />
 </template>
