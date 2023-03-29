@@ -1,27 +1,24 @@
 <script>
   // import PractitionerService from "../../services/PractitionerService";
-  import { onMount } from 'svelte'
+  import { onMount } from "svelte";
   import SvelteTable from "svelte-table";
-  import { push, pop, replace } from "svelte-spa-router";
+  import { push } from "svelte-spa-router";
+
 
   const url = "https://localhost:7034/api";
 
   let practitioners = [];
 
-  onMount(async()=>{
-
+  onMount(async () => {
     fetch(url + "/Practitioner")
-    .then((response) => response.json())
-    .then((data) => (practitioners = data))
-    .then(() => console.log(practitioners));
-
-  })
-
-  
+      .then((response) => response.json())
+      .then((data) => (practitioners = data))
+      .then(() => console.log(practitioners));
+  });
 
   const columns = [
-    { key: "displayName", title: "name", value: (v) => v.displayName },
-    { key: "discipline", title: "discipline", value: (v) => v.discipline },
+    { key: "displayName", title: "Name", value: (v) => v.displayName },
+    { key: "discipline", title: "Discipline", value: (v) => v.discipline },
   ];
 
   function goToDetail(event) {
@@ -33,60 +30,48 @@
   }
 </script>
 
-<div>
-  <div class="dashbord">
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+  integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+  crossorigin="anonymous"
+/>
+<div class="container">
+  <div class="dashboard">
     <h2>Practitoners:</h2>
     <span class="menu-spacer" />
-    <button on:click={goToAddNew}>New</button>
-
-    <!-- <button on:click={add_new}>
-      <Icon class="material-icons">favorite</Icon>
-    </button> -->
+    <button on:click={goToAddNew}>New </button>
   </div>
-
-  <SvelteTable {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} />
-
-  <!-- <hr />
-
-  {#each practitioners as pr (pr.id)}
-    <p>{pr.displayName}, <span>{pr.discipline}</span></p>
-  {:else}
-    <p>Loading....</p>
-  {/each} -->
+  <div class="row">
+    <SvelteTable {columns} rows={practitioners} rowKey="id" on:clickRow={goToDetail} 
+    classNameTable={["table table-striped"]}  
+    classNameSelect={['custom-select']}/>
+  </div>
 </div>
 
 <style>
-  /* .table{
-    border: 1px solid;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-    background-color: white;;
-  } */
-
   .menu-spacer {
     flex: 1 1 auto;
   }
-  .dashbord {
-    position: relative;
-    height: 70px;
-  }
+  .container {
+    /* position: absolute; */
 
-  h2 {
+    margin-top: 0rem;
+  }
+  .dashboard {
+    position: relative;
+    background-color: #b1afafa3;
+    height: 4rem;
     padding: 14px;
-    margin-top: 20px;
-    position: absolute;
   }
 
   button {
-    margin-top: 20px;
-    margin-right: 14px;
     float: right;
     background-color: #ffd740;
     border-radius: 24px;
-    padding-left: 20px;
-    padding-right: 20px;
     width: 100px;
     max-width: 100%;
     height: 48px;
   }
+ 
 </style>

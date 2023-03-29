@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="dashboard">
     <h1>Practitioners:</h1>
     <span class="menu-spacer" />
     <button>Add</button>
@@ -19,5 +19,20 @@ span {
 nav {
   position: relative;
   height: 70px;
+}
+.dashboard {
+  background-color: rgb(224, 222, 222);
+}
+button {
+  margin-top: 20px;
+  margin-right: 14px;
+  float: right;
+  background-color: #ffd740;
+  border-radius: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100px;
+  max-width: 100%;
+  height: 48px;
 }
 </style>

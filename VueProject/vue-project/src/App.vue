@@ -4,7 +4,7 @@
     <span class="menu-spacer" />
     <router-link to="/">Planner</router-link> |
     <router-link to="/practitioners">Plactitioners</router-link> |
-    <router-link to="/login">Login</router-link>
+    <router-link to="/">Login</router-link>
   </nav>
   <router-view />
 </template>
