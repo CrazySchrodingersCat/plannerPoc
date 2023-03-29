@@ -2,9 +2,9 @@
   <nav>
     <span>Planner App SVELTE Test.V_0</span>
     <span class="menu-spacer" />
-    <router-link to="/">Planner</router-link> |
-    <router-link to="/practitioners">Plactitioners</router-link> |
-    <router-link to="/">Login</router-link>
+    <router-link to="/">Planner</router-link
+    ><router-link to="/practitioners">Plactitioners</router-link
+    ><router-link to="/">Login</router-link>
   </nav>
   <router-view />
 </template>
@@ -24,15 +24,15 @@
 a,
 span {
   color: #3b5736;
-  padding: 14px 18px 5px;
+  /* padding: 14px 18px 5px; */
 }
 
 nav {
-  padding: 10px;
+  padding: 14px auto 5px;
   position: fixed;
   top: 0;
   width: 100%;
-  height: 5rem;
+  height: 4rem;
   background-color: #f5f5f5;
   color: rgba(0, 0, 0, 0.87);
   z-index: 999;
@@ -45,7 +45,6 @@ nav {
 }
 
 nav a {
-  font-weight: bold;
   color: #2c3e50;
 }
 

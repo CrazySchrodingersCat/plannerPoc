@@ -18,10 +18,11 @@ span {
 
 nav {
   position: relative;
-  height: 70px;
+  height: 4rem;
 }
 .dashboard {
   background-color: rgb(224, 222, 222);
+  padding-left: 14px;
 }
 button {
   margin-top: 20px;
