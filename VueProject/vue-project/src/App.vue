@@ -17,6 +17,9 @@
   text-align: center;
   color: #2c3e50;
 }
+html {
+  background-color: #dcdcdcb3;
+}
 .menu-spacer {
   flex: 1 1 auto;
 }
