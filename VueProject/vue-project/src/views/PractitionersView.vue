@@ -18,24 +18,16 @@ export default {
     },
   },
 };
-
-// @Options({
-//   components: {
-//      PractitionersTable
-//   },
-// })
 </script>
 <style>
 .menu-spacer {
   flex: 1 1 auto;
 }
-
 a,
 span {
   color: #3b5736;
   padding: 14px 18px 5px;
 }
-
 nav {
   position: relative;
   height: 4rem;
