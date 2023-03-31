@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       v$: useValidate(),
-      id: "0",
+      id: this.$route.params,
       practitioner: {
         displayName: "",
         discipline: "",
@@ -60,6 +60,22 @@ export default {
         console.error(error);
       }
     },
+    getPractitioner(id) {
+      try {
+        // this.id="1E069300-3D27-1617-0B9A-B31173FF3F9F";
+        const url = "https://localhost:7034/api/Practitioner/";
+        const config = { "content-type": "application/json" };
+        axios.get(url + id, config).then((response)=>this.practitioner=response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  mounted() {
+    console.log("+++");
+    console.log(this.id.id);
+    this.getPractitioner(this.id.id);
+    console.log(this.practitioner);
   },
   validations() {
     return {

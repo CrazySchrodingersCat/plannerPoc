@@ -52,8 +52,6 @@
     getData();
   };
   const getData = (e) => {
-    // fetch(url + "/Practitioner").then((response) => response.json());
-
     push("/practitioners").then(() => {
       fetch(url + "/Practitioner").then((response) => response.json());
     });
