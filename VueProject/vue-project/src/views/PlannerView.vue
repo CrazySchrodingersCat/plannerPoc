@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Hier zal planner zijns</h1>
+    <h1>Planning module</h1>
     <!-- <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
   </div>

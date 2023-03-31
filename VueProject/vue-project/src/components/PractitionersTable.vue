@@ -34,7 +34,7 @@ export default {
         .get("https://localhost:7034/api/Practitioner")
         .then((resp) => {
           this.practitioners = resp.data;
-          //   console.log(this.practitioners);
+            console.log(this.practitioners);
         })
         .catch((err) => {
           console.log(err);

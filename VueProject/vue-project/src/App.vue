@@ -1,9 +1,9 @@
 <template>
   <nav>
-    <span>Planner App SVELTE Test.V_0</span>
+    <span>Planner App VUE Test.V_0</span>
     <span class="menu-spacer" />
     <router-link to="/">Planner</router-link>
-    <router-link to="/practitioners">Plactitioners</router-link>
+    <router-link to="/practitioners">Practitioners</router-link>
     <router-link to="/">Login</router-link>
   </nav>
   <router-view />
@@ -14,7 +14,7 @@
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
 }
 html {

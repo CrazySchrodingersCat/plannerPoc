@@ -2,26 +2,72 @@
   <div class="container">
     <h2>Practitioner</h2>
     <form>
+      <p>
+        <label>Name</label>
+
+        <input v-model="practitioner.displayName" type="text" />
+      </p>
+      <p>
+        <label>Discipline</label>
+        <select v-model="practitioner.discipline">
+          <option v-for="discipline in disciplines" :value="discipline" :key="discipline">{{ discipline }}</option>
+        </select>
+      </p>
       <div>
-        <label class="label">Name</label>
-        <div class="control">
-          <input v-model="name" type="text" placeholder="Name practitioner" />
+        <button type="button" v-if="this.id == 0" @click="addPractitioner">Add</button>
+        <div v-if="this.id != 0">
+          <button type="button">Save</button>
+          <button class="danger" type="button">Delete</button>
         </div>
-      </div>
-      <div>
-        <label class="label">Discipline</label>
-        <div class="control">
-          <input v-model="discipline" type="text" placeholder="Name practitioner"/>
-        </div>
+        <span class="menu-spacer" />
+        <button type="button" class="white" @click="goToList">To list</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import useValidate from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
+import axios from "axios";
+
 export default {
   data() {
-    return {};
+    return {
+      v$: useValidate(),
+      id: "0",
+      practitioner: {
+        displayName: "",
+        discipline: "",
+      },
+      selected: null,
+      disciplines: ["Fysiotherapeut", "Regiebehandelaar", "Psycholoog(LV)", "Psycholoog (CGT)", "Psycholoog (PS)"],
+    };
+  },
+  methods: {
+    goToList() {
+      this.$router.push("/practitioners");
+    },
+    addPractitioner() {
+      try {
+        const url = "https://localhost:7034/api/Practitioner";
+        const data = { displayName: this.practitioner.displayName, discipline: this.practitioner.discipline };
+        const config = { "content-type": "application/json" };
+        axios.post(url, data, config);
+
+        this.goToList();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  validations() {
+    return {
+      practitioner: {
+        displayName: { required },
+        discipline: { required },
+      },
+    };
   },
 };
 </script>
@@ -30,25 +76,48 @@ export default {
 .container {
   position: absolute;
   top: 20%;
+  width: 50%;
+  margin: 20px 25% auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 5px;
 }
 .form {
-  position: relative;
   width: 50%;
   margin: 25%;
+  display: flex;
+  justify-content: space-between;
 }
-h2 {
-  display: block;
-  font-size: 1.5em;
-  margin-block-start: 0.83em;
-  margin-block-end: 0.83em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
+
+form > div {
+  display: flex;
+  justify-content: space-between;
+}
+form > div + * {
+  margin-top: 10px;
+}
+p,
+select,
+input {
+  background-color: #f5f5f5;
+  padding: 14px;
+}
+label {
+  color: #0009;
+}
+input,
+select {
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 1em;
+  padding: 5px 0;
+  margin: 10px 0 5px 0;
+  width: 100%;
 }
 button {
   margin-top: 20px;
   margin-right: 14px;
-  float: right;
   background-color: #ffd740;
   border-radius: 24px;
   padding-left: 20px;
@@ -56,5 +125,15 @@ button {
   width: 100px;
   max-width: 100%;
   height: 48px;
+}
+.menu-spacer {
+  flex: 1 1 auto;
+}
+.danger {
+  background-color: #f44336;
+  color: white;
+}
+.white {
+  background-color: white;
 }
 </style>
