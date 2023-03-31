@@ -16,8 +16,8 @@
       <div>
         <button type="button" v-if="this.id.id == 0" @click="addPractitioner">Add</button>
         <div v-if="this.id.id != 0">
-          <button type="button">Save</button>
           <button class="danger" type="button" @click="deletePractitioner">Delete</button>
+          <button type="button" @click="editPractitioner">Save</button>
         </div>
         <span class="menu-spacer" />
         <button type="button" class="white" @click="goToList">To list</button>
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     goToList() {
-      this.$router.push("/practitioners");
+      this.$router.push("/practitioners").then(axios.get(this.url));
     },
     addPractitioner() {
       try {
@@ -75,7 +75,21 @@ export default {
     deletePractitioner() {
       console.log(this.id.id);
       axios.delete(this.url + this.id.id).then((response) => console.log(response));
-      console.log("user " + this.practitioner.displayName + " deleted!!!");
+      console.log("user " + this.practitioner.displayName + " deleted");
+      alert("user " + this.practitioner.displayName);
+      this.goToList();
+    },
+    editPractitioner() {
+      try {
+        const url = "https://localhost:7034/api/Practitioner/";
+        const data = { displayName: this.practitioner.displayName, discipline: this.practitioner.discipline };
+        const config = { "content-type": "application/json" };
+        axios.put(url + this.id.id, data, config).then((response) => console.log(response));
+
+        this.goToList();
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
   mounted() {
