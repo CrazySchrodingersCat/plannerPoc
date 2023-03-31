@@ -14,10 +14,10 @@
         </select>
       </p>
       <div>
-        <button type="button" v-if="this.id == 0" @click="addPractitioner">Add</button>
-        <div v-if="this.id != 0">
+        <button type="button" v-if="this.id.id == 0" @click="addPractitioner">Add</button>
+        <div v-if="this.id.id != 0">
           <button type="button">Save</button>
-          <button class="danger" type="button">Delete</button>
+          <button class="danger" type="button" @click="deletePractitioner">Delete</button>
         </div>
         <span class="menu-spacer" />
         <button type="button" class="white" @click="goToList">To list</button>
@@ -35,6 +35,8 @@ export default {
   data() {
     return {
       v$: useValidate(),
+      url: "https://localhost:7034/api/Practitioner/",
+      config: { "content-type": "application/json" },
       id: this.$route.params,
       practitioner: {
         displayName: "",
@@ -63,19 +65,23 @@ export default {
     getPractitioner(id) {
       try {
         // this.id="1E069300-3D27-1617-0B9A-B31173FF3F9F";
-        const url = "https://localhost:7034/api/Practitioner/";
-        const config = { "content-type": "application/json" };
-        axios.get(url + id, config).then((response)=>this.practitioner=response.data);
+        // const url = "https://localhost:7034/api/Practitioner/";
+        // const config = { "content-type": "application/json" };
+        axios.get(this.url + id, this.config).then((response) => (this.practitioner = response.data));
       } catch (error) {
         console.error(error);
       }
     },
+    deletePractitioner() {
+      console.log(this.id.id);
+      axios.delete(this.url + this.id.id).then((response) => console.log(response));
+      console.log("user " + this.practitioner.displayName + " deleted!!!");
+    },
   },
   mounted() {
-    console.log("+++");
-    console.log(this.id.id);
-    this.getPractitioner(this.id.id);
-    console.log(this.practitioner);
+    if (this.id.id != 0) {
+      this.getPractitioner(this.id.id);
+    }
   },
   validations() {
     return {
