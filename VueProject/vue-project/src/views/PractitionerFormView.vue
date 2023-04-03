@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h2>Practitioner</h2>
+    <h1>{{ this.$store.state.message }}</h1>
     <form>
       <p>
         <label>Name</label>
@@ -30,6 +31,7 @@
 import useValidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import axios from "axios";
+import { store } from "../store/index.ts";
 
 export default {
   data() {
@@ -42,20 +44,22 @@ export default {
         displayName: "",
         discipline: "",
       },
-      selected: null,
       disciplines: ["Fysiotherapeut", "Regiebehandelaar", "Psycholoog(LV)", "Psycholoog (CGT)", "Psycholoog (PS)"],
     };
   },
   methods: {
     goToList() {
-      this.$router.push("/practitioners").then(axios.get(this.url));
+      axios.get(this.url).then((resp) => {
+        this.$store.state.practitioners = resp.data;
+      });
+      this.$router.push("/practitioners");
+      // .then( axios.get(this.url).then((resp) => {
+      //   this.$store.state.practitioners = resp.data;
+      // }));
     },
     addPractitioner() {
       try {
-        const url = "https://localhost:7034/api/Practitioner";
-        const data = { displayName: this.practitioner.displayName, discipline: this.practitioner.discipline };
-        const config = { "content-type": "application/json" };
-        axios.post(url, data, config);
+        axios.post(this.url, this.practitioner, this.config);
 
         this.goToList();
       } catch (error) {
@@ -64,9 +68,6 @@ export default {
     },
     getPractitioner(id) {
       try {
-        // this.id="1E069300-3D27-1617-0B9A-B31173FF3F9F";
-        // const url = "https://localhost:7034/api/Practitioner/";
-        // const config = { "content-type": "application/json" };
         axios.get(this.url + id, this.config).then((response) => (this.practitioner = response.data));
       } catch (error) {
         console.error(error);
@@ -81,11 +82,7 @@ export default {
     },
     editPractitioner() {
       try {
-        const url = "https://localhost:7034/api/Practitioner/";
-        const data = { displayName: this.practitioner.displayName, discipline: this.practitioner.discipline };
-        const config = { "content-type": "application/json" };
-        axios.put(url + this.id.id, data, config).then((response) => console.log(response));
-
+        axios.put(this.url + this.id.id, this.practitioner, this.config).then((response) => console.log(response));
         this.goToList();
       } catch (error) {
         console.error(error);

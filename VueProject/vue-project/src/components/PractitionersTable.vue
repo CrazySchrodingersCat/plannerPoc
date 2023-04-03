@@ -7,14 +7,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr @click="goToDetails(item.id)" v-for="item in practitioners" :key="item.id">
+        <tr @click="goToDetails(item.id)" v-for="item in this.$store.state.practitioners" :key="item.id">
           <td v-for="field in fields" :key="field">{{ item[field] }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 export default {
@@ -26,12 +25,12 @@ export default {
     };
   },
   methods: {
-    getPractitioners() {
-      axios
+    async getPractitioners() {
+      await axios
         .get("https://localhost:7034/api/Practitioner")
         .then((resp) => {
-          this.practitioners = resp.data;
-          console.log(this.practitioners);
+          this.$store.state.practitioners = resp.data;
+          console.log(this.$store.state.practitioners);
         })
         .catch((err) => {
           console.log(err);
@@ -46,11 +45,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* table {
-  height: 500px;
-  display: -moz-groupbox;
-  padding-left: 0;
-} */
-</style>
