@@ -31,7 +31,7 @@
 import useValidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 import axios from "axios";
-import { store } from "../store/index.ts";
+// import { store } from "../store/index.ts";
 
 export default {
   data() {

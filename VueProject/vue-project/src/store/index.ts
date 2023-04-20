@@ -7,7 +7,11 @@ export default createStore({
     practitioner:{displayName:"", discipline:""},
     id:''
   },
-  getters: {},
+  getters: {
+    getAll(state){
+      return state.practitioners;
+    }
+  },
   mutations: {},
   actions: {},
   modules: {},

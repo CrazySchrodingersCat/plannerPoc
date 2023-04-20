@@ -1,12 +1,28 @@
-<mat-toolbar class="header">
-    <mat-toolbar-row >
-        
-            <div class="toggles">
-                <div class="time-toggle">
-                    
-                </div>
-                <div class="view-toggle"></div>
-            </div>   
-            <div class="user-piker"></div> 
-    </mat-toolbar-row>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="toggles">
+      <div class="time-toggle">
+        <button>Dag</button> <button>Week</button><button>Maand</button>
+      </div>
+      <div class="view-toggle">
+        <button><mat-icon>view_column</mat-icon></button>
+        <button><mat-icon>calendar_today</mat-icon></button>
+      </div>
+    </div>
+    <div class="user-piker" mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+      Add user
+        <!-- <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </mat-option>
+        </mat-select> -->
+
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
+<div class="flex-container">
+  <div><button class="add-column">+</button></div>
+  <div class="planning-column"><app-column></app-column></div>
+  <div class="planning-column"><app-column></app-column></div>
+</div>

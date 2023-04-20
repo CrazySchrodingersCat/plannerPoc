@@ -14,6 +14,7 @@ import { PractitionerDetailComponent } from './component/practitioner/practition
 import { PractitionerOverviewComponent } from './component/practitioner/practitioner-overview/practitioner-overview.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { ColumnComponent } from './component/plan/column/column.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     NavbarComponent,
     PlannerComponent,
     PractitionerDetailComponent,
-    PractitionerOverviewComponent    
+    PractitionerOverviewComponent,
+    ColumnComponent    
   ],
   imports: [
     BrowserModule,
