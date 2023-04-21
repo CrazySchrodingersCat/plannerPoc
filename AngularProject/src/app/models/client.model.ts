@@ -1,4 +1,4 @@
-export class Practitioner {
+export class Client {
   displayName: string;
   id?: string;
 

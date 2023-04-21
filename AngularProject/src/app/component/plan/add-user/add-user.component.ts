@@ -6,14 +6,13 @@ import { Router } from '@angular/router';
 import { Practitioner } from 'src/app/models/practitioner.model';
 import { PractitionerService } from 'src/app/services/practitioner.service';
 
-
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements AfterViewInit {
-  selectedUserType = 'Practitioner';
+  selectedUserType = '';
   list!: Practitioner[];
   displayedColumns: string[] = ['discipline', 'displayName'];
   dataSource = new MatTableDataSource<Practitioner>();
@@ -33,6 +32,8 @@ export class AddUserComponent implements AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.selectedUserType = 'practitioner';
+
     let practitionersFetch = this.practitionerService.getPractitioners();
     practitionersFetch.subscribe((practitioners: any) => {
       this.list = practitioners;
