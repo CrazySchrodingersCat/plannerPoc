@@ -9,20 +9,28 @@
         <button><mat-icon>calendar_today</mat-icon></button>
       </div>
     </div>
-    <div class="user-piker" mat-icon-button>
-      <mat-icon>account_circle</mat-icon>
-      Add user
-        <!-- <mat-select>
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{ food.viewValue }}
-          </mat-option>
-        </mat-select> -->
-
+    <div class="user-piker">
+      <button mat-button (click)="openDialog()">
+        <mat-icon>library_add</mat-icon>
+        Add user
+      </button>
     </div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="datepickerRow">
+    <mat-form-field class="datepicker" appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <!-- <mat-hint>dd-mm-yyyy</mat-hint> -->
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      > <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="flex-container">
-  <div><button class="add-column">+</button></div>
+  <!-- <div><button class="add-column">+</button></div> -->
   <div class="planning-column"><app-column></app-column></div>
   <div class="planning-column"><app-column></app-column></div>
 </div>

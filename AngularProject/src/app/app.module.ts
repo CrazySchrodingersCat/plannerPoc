@@ -15,6 +15,10 @@ import { PractitionerOverviewComponent } from './component/practitioner/practiti
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { ColumnComponent } from './component/plan/column/column.component';
+import { AddUserComponent } from './component/plan/add-user/add-user.component';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,8 @@ import { ColumnComponent } from './component/plan/column/column.component';
     PlannerComponent,
     PractitionerDetailComponent,
     PractitionerOverviewComponent,
-    ColumnComponent    
+    ColumnComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +43,11 @@ import { ColumnComponent } from './component/plan/column/column.component';
     RoutingModule,
     MatButtonModule,
     MatPaginatorModule,
+    MatNativeDateModule,
+    MatMomentDateModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

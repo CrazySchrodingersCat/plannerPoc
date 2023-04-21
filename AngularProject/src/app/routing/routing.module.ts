@@ -11,8 +11,8 @@ const routes: Routes = [
 
   { path: 'planner', component: PlannerComponent },
 
-  { path: '', redirectTo: 'practitioners', pathMatch: 'full' },
-  { path: '**', redirectTo: 'practitioners', pathMatch: 'full' },
+  { path: '', redirectTo: 'planner', pathMatch: 'full' },
+  { path: '**', redirectTo: 'planner', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -4,14 +4,7 @@ mat-toolbar-row {
   justify-content: flex-end;
   background-color: #ffffff;
 }
-/* .header-container > div {
-  background-color: #f1f1f1;
-  width: 100px;
-  margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-} */
+
 .toggles {
   display: flex;
   justify-content: flex-center;
@@ -66,15 +59,14 @@ mat-toolbar-row {
 .user-piker {
   box-sizing: border-box;
   align-items: center;
-  padding: 0;
-  width: 191px;
+  /* width: 150px; */
   height: 37px;
   border: 1px solid #e4e4e4;
   border-radius: 50px;
 }
-mat-icon {
+/* mat-icon {
   padding: 6px 6px;
-}
+} */
 
 .header {
   position: relative;
@@ -104,12 +96,25 @@ mat-icon {
   padding: 20px;
   font-size: 30px;
 }
-.add-column {
-  height: 850px;
+.planning-column {
+  height: 73vh;
   border-radius: 6px;
   padding: 6px;
   background-color: #f0f0f0;
 }
 .planning-column {
   background-color: #fafafa;
+}
+.datepickerRow {
+  background-color: #F6F6F7;  
+}
+.datepicker {
+  position: absolute;
+  left: 10%;
+  transform: translate(-50%, 0%);
+  padding-top: 24px;
+  /* border: 1px solid #e4e4e4;
+  border-radius: 50px;
+  padding-top: 10px; */
+
 }
