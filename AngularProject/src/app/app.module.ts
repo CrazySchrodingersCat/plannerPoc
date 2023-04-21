@@ -13,42 +13,47 @@ import { PlannerComponent } from './component/plan/planner/planner.component';
 import { PractitionerDetailComponent } from './component/practitioner/practitioner-detail/practitioner-detail.component';
 import { PractitionerOverviewComponent } from './component/practitioner/practitioner-overview/practitioner-overview.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { ColumnComponent } from './component/plan/column/column.component';
 import { AddUserComponent } from './component/plan/add-user/add-user.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from "@angular/material/select";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    PlannerComponent,
-    PractitionerDetailComponent,
-    PractitionerOverviewComponent,
-    ColumnComponent,
-    AddUserComponent,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AngularMaterialModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatToolbarModule,
-    MatTableModule,
-    RoutingModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatNativeDateModule,
-    MatMomentDateModule,
-    MatDialogModule
-  ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        PlannerComponent,
+        PractitionerDetailComponent,
+        PractitionerOverviewComponent,
+        ColumnComponent,
+        AddUserComponent,
+    ],
+    providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AngularMaterialModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatToolbarModule,
+        MatTableModule,
+        RoutingModule,
+        MatButtonModule,
+        MatPaginatorModule,
+        MatNativeDateModule,
+        MatMomentDateModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatInputModule,
+        MatOptionModule
+    ]
 })
 export class AppModule {}
