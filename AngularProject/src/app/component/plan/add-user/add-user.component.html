@@ -3,13 +3,18 @@
     <!-- <h4>Type of user</h4> -->
     <mat-form-field appearance="fill">
       <mat-label>Type of user</mat-label>
-      <mat-select (selectionChange)="userTypeChanged()" [(value)]="selectedUserType">
+      <mat-select
+        (selectionChange)="userTypeChanged()"
+        [(value)]="selectedUserType"
+      >
         <mat-option value="client">Client</mat-option>
-        <mat-option value="practitioner" selectedUserType>Practitioner</mat-option>
+        <mat-option value="practitioner" selectedUserType
+          >Practitioner</mat-option
+        >
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="filter">
       <mat-label>Filter(optional)</mat-label>
       <input
         matInput
@@ -18,11 +23,8 @@
         #input
       />
     </mat-form-field>
-    <button mat-fab extended color="primary">
-  <mat-icon>add_circle</mat-icon> Add agenda</button>
   </mat-toolbar-row>
 </mat-toolbar>
-
 
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" matSort>
@@ -39,16 +41,34 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selectUser(row.id)"
+      [ngClass]="{ selected: row === selectedUserId }"
+    ></tr>
 
     <!-- Row shown when there is no matching data. -->
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter</td>
     </tr>
   </table>
+  <!-- **** -->
+  <p>Selected user {{ selectedUserId }}</p>
+  <!-- <mat-toolbar>
+  <mat-toolbar-row> -->
+  <footer>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10]"
+      aria-label="Select page of users"
+    ></mat-paginator>
 
-  <mat-paginator
-    [pageSizeOptions]="[5, 10,15]"
-    aria-label="Select page of users"
-  ></mat-paginator>
+    <div class="button">
+      <button mat-fab extended color="primary">
+        <mat-icon>add_circle</mat-icon> Add agenda
+      </button>
+    </div>
+    <!-- </mat-toolbar-row>
+</mat-toolbar> -->
+  </footer>
 </div>

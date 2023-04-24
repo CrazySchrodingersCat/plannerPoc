@@ -16,6 +16,8 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 })
 export class AddUserComponent implements AfterViewInit {
   selectedUserType = 'practitioner';
+  // selectedUser!: IUser;
+  selectedUserId = '';
   practitionerList!: Practitioner[];
   clientList!: Client[];
   displayedColumns: string[] = ['discipline', 'displayName'];
@@ -40,13 +42,10 @@ export class AddUserComponent implements AfterViewInit {
     practitionersFetch.subscribe((practitioners: any) => {
       this.practitionerList = practitioners;
       this.dataSource.data = practitioners;
-      console.log(this.practitionerList);
     });
     this.clientService.getAllClients().subscribe((clients: any) => {
       this.clientList = clients;
-      console.log(this.practitionerList);
     });
-    console.log(this.selectedUserType);
   }
 
   applyFilter(event: Event) {
@@ -55,14 +54,16 @@ export class AddUserComponent implements AfterViewInit {
   }
   userTypeChanged() {
     if (this.selectedUserType === 'client') {
-      console.log(this.selectedUserType);
       this.displayedColumns = ['displayName'];
       this.dataSource.data = this.clientList;
     } else {
- 
       this.displayedColumns = ['discipline', 'displayName'];
       this.dataSource.data = this.practitionerList;
-      console.log(this.selectedUserType);
     }
+  }
+
+  selectUser(id: string) {
+    this.selectedUserId =
+      this.selectedUserId === '' || this.selectedUserId !== id ? id : '';
   }
 }

@@ -1,6 +1,24 @@
-mat-toolbar{
-    padding-top: 20px;
+mat-toolbar {
+  padding-top: 20px;
 }
-button{
-    padding-right: 20px;
+.button {
+  padding: 0 20px 10px 10px;
 }
+/* #f5f5f5; */
+/* div>.mat-mdc-paginator-container {
+    background-color: #f5f5f5;;
+} */
+.filter{
+    padding-left: 40%;
+}
+footer {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.selected{ 
+  background-color: #f1f1f1 !important;;
+  color: white !important;;
+  font-size: xx-large;
+ }
