@@ -1,4 +1,6 @@
-export class Practitioner{
+import { IUser } from "./IUser.model";
+
+export class Practitioner implements IUser{
     displayName:string;
     discipline:string;
     id?:string;

@@ -1,14 +1,9 @@
-import {
-  AfterViewInit,
-  Component,
-  DoCheck,
-  OnChanges,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { IUser } from 'src/app/models/IUser.model';
 import { Client } from 'src/app/models/client.model';
 import { Practitioner } from 'src/app/models/practitioner.model';
 import { ClientService } from 'src/app/services/client.service';
@@ -21,10 +16,10 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 })
 export class AddUserComponent implements AfterViewInit {
   selectedUserType = 'practitioner';
-  practitionerslist!: Practitioner[];
+  practitionerList!: Practitioner[];
   clientList!: Client[];
   displayedColumns: string[] = ['discipline', 'displayName'];
-  dataSource = new MatTableDataSource<Practitioner>();
+  dataSource = new MatTableDataSource<IUser>();
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -43,9 +38,13 @@ export class AddUserComponent implements AfterViewInit {
   ngOnInit(): void {
     let practitionersFetch = this.practitionerService.getPractitioners();
     practitionersFetch.subscribe((practitioners: any) => {
-      this.practitionerslist = practitioners;
+      this.practitionerList = practitioners;
       this.dataSource.data = practitioners;
-      console.log(this.practitionerslist);
+      console.log(this.practitionerList);
+    });
+    this.clientService.getAllClients().subscribe((clients: any) => {
+      this.clientList = clients;
+      console.log(this.practitionerList);
     });
     console.log(this.selectedUserType);
   }
@@ -58,18 +57,11 @@ export class AddUserComponent implements AfterViewInit {
     if (this.selectedUserType === 'client') {
       console.log(this.selectedUserType);
       this.displayedColumns = ['displayName'];
-      this.clientService.getAllClients().subscribe((clients: any) => {
-        this.practitionerslist = clients;
-        this.dataSource.data= clients;
-        console.log(this.practitionerslist);
-      });
-    }else{
-      let practitionersFetch = this.practitionerService.getPractitioners();
-      practitionersFetch.subscribe((practitioners: any) => {
-        this.practitionerslist = practitioners;
-        this.dataSource.data = practitioners;
-        console.log(this.practitionerslist);
-      });
+      this.dataSource.data = this.clientList;
+    } else {
+ 
+      this.displayedColumns = ['discipline', 'displayName'];
+      this.dataSource.data = this.practitionerList;
       console.log(this.selectedUserType);
     }
   }

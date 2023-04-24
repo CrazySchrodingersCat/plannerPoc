@@ -1,4 +1,6 @@
-export class Client {
+import {IUser} from './IUser.model';
+
+export class Client implements IUser{
   displayName: string;
   id?: string;
 
