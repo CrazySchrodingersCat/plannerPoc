@@ -16,12 +16,12 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 })
 export class AddUserComponent implements AfterViewInit {
   selectedUserType = 'practitioner';
-  // selectedUser!: IUser;
   selectedUserId = '';
   practitionerList!: Practitioner[];
   clientList!: Client[];
   displayedColumns: string[] = ['discipline', 'displayName'];
   dataSource = new MatTableDataSource<IUser>();
+  clickedRows = new Set<IUser>();
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

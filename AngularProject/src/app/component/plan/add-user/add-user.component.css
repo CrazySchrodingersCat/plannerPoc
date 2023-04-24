@@ -8,17 +8,26 @@ mat-toolbar {
 /* div>.mat-mdc-paginator-container {
     background-color: #f5f5f5;;
 } */
-.filter{
-    padding-left: 40%;
+.filter {
+  padding-left: 40%;
 }
 footer {
   display: flex;
   flex-direction: row;
-
 }
 
-.selected{ 
-  background-color: #f1f1f1 !important;;
-  color: white !important;;
+.selected {
+  background-color: #bda7e3 !important;
+  color: white !important;
   font-size: xx-large;
- }
+  font-weight: bold;
+}
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
