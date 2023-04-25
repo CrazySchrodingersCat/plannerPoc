@@ -2,12 +2,16 @@
   <mat-toolbar-row>
     <div class="user-label">
       <mat-icon>account_circle</mat-icon>
-      <span>{{ currentUser.displayName }} {{ userType }}</span>
+      <span>{{ currentUser.displayName }} </span> <span class="user-type">{{ userType }}</span>
     </div>
     <div class="buttons-right">
       <mat-icon>close</mat-icon> <mat-icon>more_vert</mat-icon>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="datum-week">{{ currentDate | date : 'EEEE, MMMM d, y'}}, week {{ currentDate | date : 'w'}}</div>
+<div class="datum-week">{{ currentDate | date : ' MMMM  y'}},  week {{ currentDate | date : 'w'}}</div>
+<div class="datum-dag">{{ currentDate | date : 'EEEE, d MMMM '}}</div>
 <div class="appointments"></div>
+<div class="hours-container">
+    <div></div>
+</div>

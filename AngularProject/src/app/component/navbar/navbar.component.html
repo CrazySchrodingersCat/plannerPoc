@@ -1,17 +1,39 @@
 <mat-toolbar>
-
-    <mat-toolbar-row>
-        <span>Planner App Test.V_0</span>
-        <span class="menu-spacer"></span>
-        <div fxShow="true" fxHide.lt-md>
-            <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-            <a [routerLink]="['/planner']" routerLinkActive="active">Planner</a>
-            <a [routerLink]="['/practitioners']" routerLinkActive="active">Practitioners</a>
-            <!-- <a [routerLink]="['/clients']">Clients</a> -->
-            <a [routerLink]="['/login']">Login</a>
-           
-            
-          </div>
-    </mat-toolbar-row>
-    
-  </mat-toolbar>
+  <mat-toolbar-row>
+    <div class="menu">
+      Planner App POC.V_1     
+    </div>
+    <div class="toggles">
+      <div class="time-toggle">
+        <button>Dag</button> <button>Week</button><button>Maand</button>
+      </div>
+      <div class="view-toggle">
+        <button><mat-icon>view_column</mat-icon></button>
+        <button><mat-icon>calendar_today</mat-icon></button>
+      </div>
+    </div>
+    <div fxShow="true" fxHide.lt-md>
+      <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+      <!-- <a [routerLink]="['/planner']" routerLinkActive="active">Planner</a>
+      <a [routerLink]="['/practitioners']" routerLinkActive="active"
+        >Practitioners</a
+      > -->
+      <!-- <a [routerLink]="['/clients']">Clients</a> -->
+       <button mat-button [matMenuTriggerFor]="menu">
+         <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <a [routerLink]="['/planner']" routerLinkActive="active">Planner</a>
+        </button>
+        <button mat-menu-item>
+          <a [routerLink]="['/practitioners']" routerLinkActive="active"
+            >Practitioners</a
+          >
+        </button>
+         <button mat-menu-item><a [routerLink]="['/login']">Login</a></button>
+      </mat-menu>
+      
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

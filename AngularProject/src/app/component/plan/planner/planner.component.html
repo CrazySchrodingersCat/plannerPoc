@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <div class="toggles">
+    <!-- <div class="toggles">
       <div class="time-toggle">
         <button>Dag</button> <button>Week</button><button>Maand</button>
       </div>
@@ -8,7 +8,7 @@
         <button><mat-icon>view_column</mat-icon></button>
         <button><mat-icon>calendar_today</mat-icon></button>
       </div>
-    </div>
+    </div> -->
     <div class="user-piker">
       <button mat-button (click)="openDialog()">
         <mat-icon>add_circle</mat-icon>
@@ -16,18 +16,18 @@
       </button>
     </div>
   </mat-toolbar-row>
-  <mat-toolbar-row class="datepickerRow">
+  <!-- <mat-toolbar-row class="datepickerRow">
     <mat-form-field class="datepicker" appearance="fill">
       <mat-label>Choose a date</mat-label>
       <input matInput [matDatepicker]="picker" />
-      <!-- <mat-hint>dd-mm-yyyy</mat-hint> -->
+      <mat-hint>dd-mm-yyyy</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
       > <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-  </mat-toolbar-row>
+  </mat-toolbar-row> -->
 </mat-toolbar>
 <div class="flex-container">
   <!-- <div><button class="add-column">+</button></div> -->

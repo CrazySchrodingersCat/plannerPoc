@@ -16,7 +16,8 @@ interface Food {
 export class PlannerComponent {
   selectedUsers: IUser[] = [];
   selectedUser: IUser = {
-    displayName: 'John Doe'
+    displayName: 'John Doe',
+    discipline:'fisio'
   };
   selectedDate: Date = new Date();
   constructor(public dialog: MatDialog) {}
