@@ -5,15 +5,23 @@
 mat-toolbar-row {
   /* height: 48px; */
   border-bottom: 1px solid #e4e4e4;
- 
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 /* .flex-container[_ngcontent-drv-c308] > div[_ngcontent-drv-c308] {
   margin: 10px;
 } */
-.buttons-right{
-    position: relative;
-   padding-right:0 ;
+.user-label {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: row;
 }
+.buttons-right {
+  position: relative;
+  padding-right: 0;
+}
+
 .datum-week {
   padding: 1% !important;
   font-family: Source Sans Pro;

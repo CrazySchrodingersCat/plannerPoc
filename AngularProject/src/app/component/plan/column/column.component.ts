@@ -10,5 +10,6 @@ export class ColumnComponent {
   @Input() currentDate = new Date();
   @Input() currentUser!: IUser;
   name = 'test user';
+  // const week = this.datepipe.transform(this.currentDate, 'w');
   @Input() userType = '';
 }
