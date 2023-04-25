@@ -1,36 +1,49 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <!-- <div class="toggles">
-      <div class="time-toggle">
-        <button>Dag</button> <button>Week</button><button>Maand</button>
+<mat-drawer-container class="flex-container">
+  <mat-drawer class="side-bar" mode="side" opened>
+    <mat-card class="calendar-card">
+      <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+    </mat-card>
+    <!-- <p>Selected date: {{selectedDate | date:'d MMMM YYYY'}}</p> -->
+    <div class="agendas-container">
+      <p>Aganda's</p>
+      <div class="user-piker">
+        <button mat-button (click)="openDialog()">
+          <mat-icon>add_circle</mat-icon>
+          Add user
+        </button>
       </div>
-      <div class="view-toggle">
-        <button><mat-icon>view_column</mat-icon></button>
-        <button><mat-icon>calendar_today</mat-icon></button>
-      </div>
-    </div> -->
-    <div class="user-piker">
-      <button mat-button (click)="openDialog()">
-        <mat-icon>add_circle</mat-icon>
-        Add user
-      </button>
     </div>
-  </mat-toolbar-row>
-  <!-- <mat-toolbar-row class="datepickerRow">
-    <mat-form-field class="datepicker" appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" />
-      <mat-hint>dd-mm-yyyy</mat-hint>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-      > <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-  </mat-toolbar-row> -->
-</mat-toolbar>
-<div class="flex-container">
-  <!-- <div><button class="add-column">+</button></div> -->
-  <div class="planning-column"><app-column [currentDate] = 'selectedDate' [currentUser]="selectedUser"></app-column></div>
-  <!-- <div class="planning-column"><app-column></app-column></div> -->
-</div>
+  </mat-drawer>
+  <mat-drawer-content class="columns-flex-container">
+    <div class="planning-column">
+      <app-column
+        [currentDate]="selectedDate"
+        [currentUser]="selectedUser"
+      ></app-column>
+    </div>
+    <div class="planning-column">
+      <app-column
+        [currentDate]="selectedDate"
+        [currentUser]="selectedUser"
+      ></app-column>
+    </div>
+    <div class="planning-column">
+      <app-column
+        [currentDate]="selectedDate"
+        [currentUser]="selectedUser"
+      ></app-column>
+    </div>
+    <div class="planning-column">
+      <app-column
+        [currentDate]="selectedDate"
+        [currentUser]="selectedUser"
+      ></app-column>
+    </div>
+    <div class="planning-column">
+      <app-column
+        [currentDate]="selectedDate"
+        [currentUser]="selectedUser"
+      ></app-column>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

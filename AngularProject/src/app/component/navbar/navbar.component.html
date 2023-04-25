@@ -1,9 +1,7 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <div class="menu">
-      Planner App POC.V_1     
-    </div>
-    <div class="toggles">
+    <div class="menu">Planner App POC.V_1</div>
+    <div *ngIf="isPlanning" class="toggles">
       <div class="time-toggle">
         <button>Dag</button> <button>Week</button><button>Maand</button>
       </div>
@@ -19,8 +17,8 @@
         >Practitioners</a
       > -->
       <!-- <a [routerLink]="['/clients']">Clients</a> -->
-       <button mat-button [matMenuTriggerFor]="menu">
-         <mat-icon>more_vert</mat-icon>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
@@ -31,9 +29,8 @@
             >Practitioners</a
           >
         </button>
-         <button mat-menu-item><a [routerLink]="['/login']">Login</a></button>
+        <button mat-menu-item><a [routerLink]="['/login']">Login</a></button>
       </mat-menu>
-      
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
