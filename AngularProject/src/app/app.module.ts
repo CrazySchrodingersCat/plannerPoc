@@ -21,6 +21,8 @@ import { MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule } from '@angular/
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
     declarations: [
@@ -53,7 +55,8 @@ import { MatInputModule } from "@angular/material/input";
         MatDialogModule,
         MatSelectModule,
         MatInputModule,
-        MatOptionModule
+        MatOptionModule,
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
     ]
 })
 export class AppModule {}

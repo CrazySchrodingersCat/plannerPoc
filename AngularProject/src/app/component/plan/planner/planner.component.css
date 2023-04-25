@@ -89,17 +89,15 @@ mat-toolbar-row {
 }
 .flex-container {
   display: flex;
+  padding-left: 0.5%;
 }
 
 .flex-container > div {
-  margin: 10px;
-  padding: 20px;
-  font-size: 30px;
+  margin: 1% 0.5%;
 }
 .planning-column {
   height: 73vh;
   border-radius: 6px;
-  padding: 6px;
   background-color: #f0f0f0;
 }
 .planning-column {
@@ -113,6 +111,7 @@ mat-toolbar-row {
   left: 10%;
   transform: translate(-50%, 0%);
   padding-top: 24px;
+
   /* border: 1px solid #e4e4e4;
   border-radius: 50px;
   padding-top: 10px; */

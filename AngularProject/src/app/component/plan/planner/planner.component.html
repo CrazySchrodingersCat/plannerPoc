@@ -31,6 +31,6 @@
 </mat-toolbar>
 <div class="flex-container">
   <!-- <div><button class="add-column">+</button></div> -->
-  <div class="planning-column"><app-column></app-column></div>
-  <div class="planning-column"><app-column></app-column></div>
+  <div class="planning-column"><app-column [currentDate] = 'selectedDate' [currentUser]="selectedUser"></app-column></div>
+  <!-- <div class="planning-column"><app-column></app-column></div> -->
 </div>
