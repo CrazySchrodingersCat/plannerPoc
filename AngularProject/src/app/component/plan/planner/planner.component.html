@@ -39,6 +39,7 @@
         *ngFor="let user of selectedUsers"
         [currentDate]="selectedDate"
         [currentUser]="user"
+        (delete)="deleteFromList($event)"
       ></app-column>
     </div>
   </mat-drawer-content>

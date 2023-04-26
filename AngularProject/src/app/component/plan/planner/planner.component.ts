@@ -13,7 +13,7 @@ export class PlannerComponent {
   selectedUsers: IUser[] = [];
   selectedUser: IUser = {
     displayName: 'John Doe',
-    discipline:'fisio'
+    discipline: 'fisio',
   };
   selectedDate: Date = new Date();
   constructor(public dialog: MatDialog) {}
@@ -21,6 +21,10 @@ export class PlannerComponent {
   //  ngOnInit(): void {
   //   console.log(this.selectedUsers);
   //  }
+
+  deleteFromList(user: IUser) {
+    this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);

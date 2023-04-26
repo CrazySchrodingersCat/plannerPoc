@@ -1,8 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IUser } from 'src/app/models/IUser.model';
-import { Client } from 'src/app/models/client.model';
-import { Practitioner } from 'src/app/models/practitioner.model';
 
 @Component({
   selector: 'app-column',
@@ -12,6 +9,7 @@ import { Practitioner } from 'src/app/models/practitioner.model';
 export class ColumnComponent {
   @Input() currentDate = new Date();
   @Input() currentUser!: IUser;
+  @Output() delete: EventEmitter<IUser> = new EventEmitter();
   name = 'test user';
   // const week = this.datepipe.transform(this.currentDate, 'w');
   userType = '';
@@ -21,5 +19,9 @@ export class ColumnComponent {
       this.currentUser.discipline === ''
         ? 'client'
         : this.currentUser.discipline!;
+  }
+  closeMe() {
+     console.log('close clicked');
+     this.delete.emit(this.currentUser);
   }
 }
