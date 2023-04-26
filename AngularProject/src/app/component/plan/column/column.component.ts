@@ -10,8 +10,7 @@ export class ColumnComponent {
   @Input() currentDate = new Date();
   @Input() currentUser!: IUser;
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
-  name = 'test user';
-  // const week = this.datepipe.transform(this.currentDate, 'w');
+
   userType = '';
 
   ngOnInit(): void {

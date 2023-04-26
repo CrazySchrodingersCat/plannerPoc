@@ -18,7 +18,7 @@ mat-toolbar-row {
 }
 .user-type {
   background: #eff6ff;
-  color:#1D4ED8 ;
+  color: #1d4ed8;
   border: 1px solid #dbeafe;
   height: 24px;
   margin: 1px;
@@ -82,4 +82,26 @@ mat-toolbar-row {
   border: none;
   padding: 0;
   background-color: #ffffff;
+}
+.mat-divider {
+  margin: 0 20px;
+}
+.grid-box {
+  display: grid;
+  height: 87%;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(12, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+/* .hour{
+  height: 10%;
+
+} */
+.hour-number {
+  position: relative;
+  bottom: -10px;
+  padding: 0 6px;
+  font-weight: 300;
+  font-size: 12px;
 }

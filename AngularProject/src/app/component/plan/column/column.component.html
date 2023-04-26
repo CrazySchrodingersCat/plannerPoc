@@ -5,12 +5,12 @@
         {{ currentUser.displayName | slice : 0 : 1
         }}{{ currentUser.displayName.split(" ")[1] | slice : 0 : 1 }}
       </p>
-      <div>{{ currentUser.displayName }} </div>
+      <div>{{ currentUser.displayName }}</div>
       <div *ngIf="currentUser.discipline; else client" class="user-type">
-        {{ userType | lowercase }}</div
-      >
+        {{ userType | lowercase }}
+      </div>
       <ng-template #client>
-        <div class="user-type">Client</div>
+        <div class="user-type">client</div>
       </ng-template>
     </div>
     <div class="buttons-right">
@@ -23,8 +23,15 @@
   {{ currentDate | date : " MMMM  y" }}, week {{ currentDate | date : "w" }}
 </div> -->
 <div class="datum-dag">{{ currentDate | date : "EEEE d MMMM " }}</div>
-<mat-divider [ngStyle]="{ margin: '0 16px' }"></mat-divider>
-<div class="appointments"></div>
+<mat-divider></mat-divider>
+<div class="grid-box">
+  <div
+    class="hour"
+    *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]"
+  >
+    <div class="hour-number">{{ hour }}</div> <mat-divider></mat-divider>
+  </div>
+</div>
 <div class="hours-container">
   <div></div>
 </div>
