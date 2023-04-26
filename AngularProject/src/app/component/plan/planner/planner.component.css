@@ -100,9 +100,13 @@ mat-toolbar-row {
 .planning-columns-container {
   height: calc(97vh - 64px);
   display: flex;
-  /* border-radius: 6px;
+  gap: 1%;
+  
+}
+app-column{
+  border-radius: 6px;
   background-color: white;
-  border: 1px solid #e4e4e4; */
+  border: 1px solid #e4e4e4;
 }
 
 .columns-flex-container {
