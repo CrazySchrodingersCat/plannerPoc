@@ -11,16 +11,21 @@ import { IUser } from 'src/app/models/IUser.model';
 })
 export class PlannerComponent {
   selectedUsers: IUser[] = [];
-  selectedUser: IUser = {
+  testUser: IUser = {
     displayName: 'John Doe',
-    discipline: 'fisio',
+    discipline: 'Fysiotherapeut',
+    id:'1111'
   };
   selectedDate: Date = new Date();
   constructor(public dialog: MatDialog) {}
 
-  //  ngOnInit(): void {
-  //   console.log(this.selectedUsers);
-  //  }
+  ngOnInit(): void {
+    this.selectedUsers.push(this.testUser);
+    this.selectedUsers.push( {
+    displayName: 'Anna Smith',
+    id:'2222'});
+  };
+  
 
   deleteFromList(user: IUser) {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
@@ -30,6 +35,7 @@ export class PlannerComponent {
     const dialogRef = this.dialog.open(AddUserComponent);
     dialogRef.afterClosed().subscribe((newUser) => {
       this.selectedUsers.push(newUser);
+      console.log(this.selectedUsers);
     });
   }
 }
