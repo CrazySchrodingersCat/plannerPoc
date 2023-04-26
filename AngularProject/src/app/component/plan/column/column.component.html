@@ -2,21 +2,28 @@
   <mat-toolbar-row>
     <div class="user-label">
       <p class="avatar">
-            {{ currentUser.displayName | slice : 0 : 1
-            }}{{ currentUser.displayName.split(" ")[1] | slice : 0 : 1 }}
-          </p>
-      <span>{{ currentUser.displayName }} </span>
-      <span class="user-type"> {{ userType | lowercase }}</span>
+        {{ currentUser.displayName | slice : 0 : 1
+        }}{{ currentUser.displayName.split(" ")[1] | slice : 0 : 1 }}
+      </p>
+      <div>{{ currentUser.displayName }} </div>
+      <div *ngIf="currentUser.discipline; else client" class="user-type">
+        {{ userType | lowercase }}</div
+      >
+      <ng-template #client>
+        <div class="user-type">Client</div>
+      </ng-template>
     </div>
     <div class="buttons-right">
-      <button (click)="closeMe()"><mat-icon>close</mat-icon></button> <mat-icon>more_vert</mat-icon>
+      <button (click)="closeMe()"><mat-icon>close</mat-icon></button>
+      <mat-icon>more_vert</mat-icon>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <!-- <div class="datum-week">
   {{ currentDate | date : " MMMM  y" }}, week {{ currentDate | date : "w" }}
 </div> -->
-<div class="datum-dag">{{ currentDate | date : "EEEE, d MMMM " }}</div>
+<div class="datum-dag">{{ currentDate | date : "EEEE d MMMM " }}</div>
+<mat-divider [ngStyle]="{ margin: '0 16px' }"></mat-divider>
 <div class="appointments"></div>
 <div class="hours-container">
   <div></div>

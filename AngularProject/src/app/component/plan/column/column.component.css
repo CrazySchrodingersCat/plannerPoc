@@ -12,13 +12,14 @@ mat-toolbar-row {
   align-self: center;
   flex-direction: row;
   align-items: stretch;
-   font-size: 14px;
+  font-size: 14px;
   font-weight: 600;
   gap: 2px;
 }
 .user-type {
-  background: linear-gradient(0deg, #dbeafe, #dbeafe),
-    linear-gradient(0deg, #eff6ff, #f1f5fa);
+  background: #eff6ff;
+  color:#1D4ED8 ;
+  border: 1px solid #dbeafe;
   height: 24px;
   margin: 1px;
   border-radius: 50px;
@@ -29,10 +30,10 @@ mat-toolbar-row {
   text-align: center;
   align-self: center;
   display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-padding: 3px 12px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 12px;
 }
 .buttons-right {
   display: flex;
@@ -51,8 +52,8 @@ padding: 3px 12px;
 .datum-dag {
   height: 24px;
   left: 26px;
-  top: 8px;
-  padding-left: 16px !important;
+  top: 16px;
+  padding: 20px 16px 2px !important;
 
   /* Body / Semibold */
 
@@ -75,9 +76,9 @@ padding: 3px 12px;
   background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%);
   font-weight: 600;
   font-size: 12px;
-  color:#ffffff;
+  color: #ffffff;
 }
-.buttons-right>button {
+.buttons-right > button {
   border: none;
   padding: 0;
   background-color: #ffffff;
