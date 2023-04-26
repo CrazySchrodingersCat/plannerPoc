@@ -11,6 +11,7 @@ mat-toolbar-row {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  background: #ffffff;
 }
 .flex-container {
   display: flex;
@@ -39,6 +40,13 @@ mat-toolbar-row {
   border-radius: 50px;
 }
 .time-toggle > button {
+  /* background-color: white; */
+  width: 30%;
+  height: 30px;
+  border: 1px solid #e4e4e4;
+  border-radius: 50px;
+}
+.time-toggle > .selectedButton {
   background-color: white;
   width: 30%;
   height: 30px;

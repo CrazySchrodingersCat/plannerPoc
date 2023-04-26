@@ -14,5 +14,13 @@ export class NavbarComponent {
       this.url = this.router.url;
     });
   }
-
+  dagToggeleClicked(event: any) {
+    event.target.classList.toggle('selectedButton');
+  }
+  weekToggeleClicked(event: any) {
+    event.target.classList.toggle('selectedButton');
+  }
+  monthToggeleClicked(event: any) {
+    event.target.classList.toggle('selectedButton');
+  }
 }

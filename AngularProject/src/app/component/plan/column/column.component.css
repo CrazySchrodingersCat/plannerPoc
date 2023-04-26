@@ -33,7 +33,7 @@ mat-toolbar-row {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 3px 12px;
+  padding: 0px 8px;
 }
 .buttons-right {
   display: flex;
