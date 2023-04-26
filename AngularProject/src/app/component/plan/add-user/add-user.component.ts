@@ -2,7 +2,6 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { IUser } from 'src/app/models/IUser.model';
 import { Client } from 'src/app/models/client.model';
 import { Practitioner } from 'src/app/models/practitioner.model';
@@ -17,6 +16,7 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 export class AddUserComponent implements AfterViewInit {
   selectedUserType = 'practitioner';
   selectedUserId = '';
+  isDisabled = true;
   practitionerList!: Practitioner[];
   clientList!: Client[];
   displayedColumns: string[] = ['discipline', 'displayName'];
@@ -33,8 +33,7 @@ export class AddUserComponent implements AfterViewInit {
 
   constructor(
     private practitionerService: PractitionerService,
-    private clientService: ClientService,
-    private router: Router
+    private clientService: ClientService
   ) {}
 
   ngOnInit(): void {
@@ -65,5 +64,6 @@ export class AddUserComponent implements AfterViewInit {
   selectUser(id: string) {
     this.selectedUserId =
       this.selectedUserId === '' || this.selectedUserId !== id ? id : '';
+    this.isDisabled = this.selectedUserId !== '' ? false : true;
   }
 }

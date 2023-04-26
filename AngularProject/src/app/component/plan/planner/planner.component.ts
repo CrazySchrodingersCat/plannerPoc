@@ -3,10 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { IUser } from 'src/app/models/IUser.model';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-planner',
@@ -22,11 +18,16 @@ export class PlannerComponent {
   selectedDate: Date = new Date();
   constructor(public dialog: MatDialog) {}
 
+   ngOnInit(): void {
+    console.log(this.selectedUsers);
+   }
+
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+    dialogRef.afterClosed().subscribe((newUser) => {
+      console.log(`Dialog result: ${newUser}`);
+      this.selectedUsers.push(newUser);
     });
   }
 }

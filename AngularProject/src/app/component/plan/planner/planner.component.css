@@ -98,12 +98,10 @@ border-radius: 6px;
 }
 
 .planning-column {
-  height: calc(96vh - 64px);
+  height: calc(97vh - 64px);
   border-radius: 6px;
   background-color: white;
   border: 1px solid #e4e4e4;
-  border-radius: 6px;
-  padding: 8px 12px;
 }
 
 .columns-flex-container {
@@ -117,4 +115,17 @@ border-radius: 6px;
   left: 4px;
   padding: 5px;
   height: 50%;
+}
+.user-list{
+  position: relative;
+  top: 60px;
+}
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height:24px;
+  width: 24px;
+  background: linear-gradient(315deg, #6DED91 0%, #009F1A 100%);
 }

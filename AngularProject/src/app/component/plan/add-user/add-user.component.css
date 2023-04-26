@@ -2,12 +2,11 @@ mat-toolbar {
   padding-top: 20px;
 }
 .button {
-  padding: 0 20px 10px 10px;
+  padding: 0 10px 0 10px;
+  border: 1px solid #e4e4e4;
+  border-radius: 6px;
 }
-/* #f5f5f5; */
-/* div>.mat-mdc-paginator-container {
-    background-color: #f5f5f5;;
-} */
+
 .filter {
   padding-left: 40%;
 }
@@ -17,7 +16,7 @@ footer {
 }
 
 .selected {
-  background-color: #bda7e3 !important;
+  background-color: #d9c8f4 !important;
   color: white !important;
   font-size: xx-large;
   font-weight: bold;

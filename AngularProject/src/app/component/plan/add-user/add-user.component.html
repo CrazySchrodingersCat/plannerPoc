@@ -62,10 +62,19 @@
       aria-label="Select page of users"
     ></mat-paginator>
 
-    <div class="button">
+    <mat-dialog-actions align="end">
+      <button class="button" mat-button mat-dialog-close>
+        <mat-icon>close</mat-icon>Cancel
+      </button>
+      <button mat-button class="button" [disabled]="isDisabled" color="primary" [mat-dialog-close]="selectedUserId" cdkFocusInitial>
+        <mat-icon>add_circle</mat-icon> Add agenda
+      </button>
+    </mat-dialog-actions>
+
+    <!-- <div class="button">
       <button mat-fab extended color="primary">
         <mat-icon>add_circle</mat-icon> Add agenda
       </button>
-    </div>
+    </div> -->
   </footer>
 </div>
