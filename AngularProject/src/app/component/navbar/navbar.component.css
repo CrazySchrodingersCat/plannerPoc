@@ -1,11 +1,10 @@
 .menu {
   flex: 1 1 auto;
 }
-/* mat-toolbar-row, */
-a {
+/* a {
   color: #3b5736;
   padding: 14px 18px 5px;
-}
+} */
 mat-toolbar-row {
   /* height: 48px; */
   border-bottom: 1px solid #e4e4e4;
@@ -13,12 +12,19 @@ mat-toolbar-row {
   flex-direction: row;
   justify-content: flex-end;
 }
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .toggles {
   display: flex;
   justify-content: flex-center;
   flex-direction: row;
   position: absolute;
   left: 50%;
+  top: 13px;
+  z-index: 99;
   transform: translate(-50%, 0%);
   width: 428px;
   height: 37px;
@@ -63,7 +69,4 @@ mat-toolbar-row {
   background: #f6f6f7;
   border: 1px solid #e4e4e4;
   border-radius: 50px;
-}
-.menu{
-
 }

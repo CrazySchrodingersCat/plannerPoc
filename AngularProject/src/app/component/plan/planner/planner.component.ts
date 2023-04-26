@@ -18,15 +18,13 @@ export class PlannerComponent {
   selectedDate: Date = new Date();
   constructor(public dialog: MatDialog) {}
 
-   ngOnInit(): void {
-    console.log(this.selectedUsers);
-   }
+  //  ngOnInit(): void {
+  //   console.log(this.selectedUsers);
+  //  }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);
-
     dialogRef.afterClosed().subscribe((newUser) => {
-      console.log(`Dialog result: ${newUser}`);
       this.selectedUsers.push(newUser);
     });
   }

@@ -1,14 +1,16 @@
 <mat-toolbar>
   <mat-toolbar-row>
     <div class="menu">Planner App POC.V_1</div>
-    <div *ngIf="isPlanning" class="toggles">
-      <div class="time-toggle">
-        <button>Dag</button> <button>Week</button><button>Maand</button>
-      </div>
-      <div class="view-toggle">
-        <button><mat-icon>view_column</mat-icon></button>
-        <button><mat-icon>calendar_today</mat-icon></button>
-      </div>
+    <div [ngSwitch]="url" >
+      <span class="toggles"  *ngSwitchCase="'/planner'">
+        <div class="time-toggle">
+          <button>Dag</button> <button>Week</button><button>Maand</button>
+        </div>
+        <div class="view-toggle">
+          <button><mat-icon>view_column</mat-icon></button>
+          <button><mat-icon>calendar_today</mat-icon></button>
+        </div>
+      </span>
     </div>
     <div fxShow="true" fxHide.lt-md>
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->

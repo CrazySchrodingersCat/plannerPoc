@@ -13,42 +13,32 @@
         </button>
       </div>
       <div class="user-list">
-        <div *ngFor="let user of selectedUsers">
-          <div class="avatar">PP</div>
-          {{user}}
+        <div class="label" *ngFor="let user of selectedUsers">
+          <p class="avatar">
+            {{ user.displayName | slice : 0 : 1
+            }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
+          </p>
+          <div class="user-vert-flex">
+            {{ user.displayName }}
+
+            <div *ngIf="user.discipline; else client" class="user-type">
+              {{ user.discipline }}
+            </div>
+            <ng-template #client>
+              <div class="user-type">Client</div>
+            </ng-template>
+            <!-- <mat-icon>remove_red_eye</mat-icon> -->
+          </div>
         </div>
       </div>
     </div>
   </mat-drawer>
   <mat-drawer-content class="columns-flex-container">
-    <div class="planning-column">
+    <div class="planning-columns-container">
       <app-column
+        *ngFor="let user of selectedUsers"
         [currentDate]="selectedDate"
-        [currentUser]="selectedUser"
-      ></app-column>
-    </div>
-    <div class="planning-column">
-      <app-column
-        [currentDate]="selectedDate"
-        [currentUser]="selectedUser"
-      ></app-column>
-    </div>
-    <div class="planning-column">
-      <app-column
-        [currentDate]="selectedDate"
-        [currentUser]="selectedUser"
-      ></app-column>
-    </div>
-    <div class="planning-column">
-      <app-column
-        [currentDate]="selectedDate"
-        [currentUser]="selectedUser"
-      ></app-column>
-    </div>
-    <div class="planning-column">
-      <app-column
-        [currentDate]="selectedDate"
-        [currentUser]="selectedUser"
+        [currentUser]="user"
       ></app-column>
     </div>
   </mat-drawer-content>

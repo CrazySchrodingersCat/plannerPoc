@@ -15,7 +15,8 @@ import { PractitionerService } from 'src/app/services/practitioner.service';
 })
 export class AddUserComponent implements AfterViewInit {
   selectedUserType = 'practitioner';
-  selectedUserId = '';
+  selectedUserId: any = '';
+  selectedUser: any = null;
   isDisabled = true;
   practitionerList!: Practitioner[];
   clientList!: Client[];
@@ -61,9 +62,13 @@ export class AddUserComponent implements AfterViewInit {
     }
   }
 
-  selectUser(id: string) {
+  selectUser(user: IUser) {
+    this.selectedUser =
+      this.selectedUserId === '' || this.selectedUser !== user ? user : null;
     this.selectedUserId =
-      this.selectedUserId === '' || this.selectedUserId !== id ? id : '';
+      this.selectedUserId === '' || this.selectedUserId !== user.id
+        ? user.id
+        : '';
     this.isDisabled = this.selectedUserId !== '' ? false : true;
   }
 }
