@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.AppLogic
@@ -30,6 +31,11 @@ namespace API.AppLogic
             return await _context.AgendaItems.Where(item => item.PractitionerId == id).ToListAsync();
         }
 
+        public async Task<List<AgendaItem>?> GetByDateForClientAsync(string id, DateTime date)
+        {
+            return await _context.AgendaItems.Where(item => item.ClientId == id && item.Date == date).ToListAsync();
+        }
+
 
         public async Task<List<AgendaItem>?> GetByPeriodeForClientAsync(string id, DateTime fromDate, DateTime tillDate)
         {
@@ -43,6 +49,9 @@ namespace API.AppLogic
                 .Where(item => item.PractitionerId == id && item.Date >= fromDate && item.Date <= tillDate).ToListAsync();
         }
 
-      
+        public async Task<List<AgendaItem>?> GetByDateForPractitionerAsync(string id, DateTime date)
+        {
+            return await _context.AgendaItems.Where(item => item.PractitionerId == id && item.Date == date).ToListAsync();
+        }
     }
 }

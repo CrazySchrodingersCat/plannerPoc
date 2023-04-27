@@ -49,6 +49,22 @@ namespace API.Controllers
             return appointments == null ? NotFound() : Ok(appointments);
         }
 
+        //[Route("/Client")]
+        [HttpGet("/Client/{id}/Date/{dateInput}")]
+        public async Task<IActionResult> GetAppointmentsByClientIdForDate(string id, string dateInput)
+        {
+            var appointments = await _agendaService.GetDateForClientAsync(id, DateTime.Parse(dateInput));
+            return appointments == null ? NotFound() : Ok(appointments);
+        }
+        //[Route("/Practitioner")]
+        [HttpGet("/Practitioner/{id}/Date/{dateInput}")]
+        public async Task<IActionResult> GetAppointmentsByPractitionerIdForDate(string id, string dateInput)
+        {
+            
+            var appointments = await _agendaService.GetDateForClientAsync(id, DateTime.Parse(dateInput));
+            return appointments == null ? NotFound() : Ok(appointments);
+        }
+
         // POST api/<AgendaController>
         //[HttpPost]
         //public void Post([FromBody] string value)

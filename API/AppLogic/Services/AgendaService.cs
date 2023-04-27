@@ -39,6 +39,13 @@ namespace API.AppLogic.Services
             return await _agendaRepository.GetByPeriodeForClientAsync(id, from, till);
         }
 
-
+        public async Task<List<AgendaItem>?> GetDateForClientAsync(string id, DateTime date)
+        {
+            return await _agendaRepository.GetByDateForClientAsync(id,date);
+        }
+        public async Task<List<AgendaItem>?> GetDateForPractitionerAsync(string id, DateTime date)
+        {
+            return await _agendaRepository.GetByDateForPractitionerAsync(id, date);
+        }
     }
 }
