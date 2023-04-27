@@ -4,7 +4,7 @@
     <div [ngSwitch]="url" >
       <span class="toggles"  *ngSwitchCase="'/planner'">
         <div class="time-toggle">
-          <button (click)="dagToggeleClicked($event)">Dag</button> 
+          <button class="dayToggle" class="selectedButton" (click)="dagToggeleClicked($event)">Dag</button> 
           <button (click)="weekToggeleClicked($event)">Week</button>
           <button (click)="monthToggeleClicked($event)">Maand</button>
         </div>
