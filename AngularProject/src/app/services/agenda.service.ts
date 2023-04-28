@@ -15,7 +15,7 @@ export class AgendaService {
   }
   getAgendaForPractitionerByDate(id: string, date: string) {
     return this.http.get<AgendaItem[]>(
-      environment.apiUrl + '/Practitioner/' + id + '/Date' + date
+      environment.apiUrl + '/Practitioner/' + id + '/Date/' + date
     );
   }
 }

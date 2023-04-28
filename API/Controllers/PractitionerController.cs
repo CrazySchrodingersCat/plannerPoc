@@ -34,7 +34,7 @@ namespace API.Controllers
             return practitioner == null ? NotFound() : Ok(practitioner);
         }
         
-        [HttpGet("/Discipline/{discipline}")]
+        [HttpGet("Discipline/{discipline}")]
         public async Task<IActionResult> GetByDiscipline(string discipline)
         {
             var list = await _service.GetPractitionersByDisciplineAsync(discipline);

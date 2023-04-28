@@ -7,7 +7,7 @@ using System.Collections.Concurrent;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class AgendaController : ControllerBase
     {
@@ -20,14 +20,7 @@ namespace API.Controllers
             _logger = logger;
             _agendaService = service;
         }
-        //// GET: api/<AgendaController>
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var items = await _agendaService.GetAll();
-        //    return items == null ? NotFound() : Ok(items);
-        //}
-
+    
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAppointmentById(string id)
         {
@@ -35,14 +28,14 @@ namespace API.Controllers
             return appointment == null ? NotFound() : Ok(appointment);
         }
         //[Route("/Client")]
-        [HttpGet("/Client/{id}/Periode/{from}/{till}")]
+        [HttpGet("Client/{id}/Periode/{from}/{till}")]
         public async Task<IActionResult> GetAppointmentsByClientIdForPeriode(string id, DateTime from, DateTime till)
         {
             var appointments = await _agendaService.GetPeriodeForClientAsync(id, from, till);
             return appointments == null ? NotFound() : Ok(appointments);
         }
         //[Route("/Practitioner")]
-        [HttpGet("/Practitioner/{id}/Periode/{from}/{till}")]
+        [HttpGet("Practitioner/{id}/Periode/{from}/{till}")]
         public async Task<IActionResult> GetAppointmentsByPractitionerIdForPeriode(string id, DateTime from, DateTime till)
         {
             var appointments = await _agendaService.GetPeriodeForPractitionerAsync(id, from, till);
@@ -50,18 +43,18 @@ namespace API.Controllers
         }
 
         //[Route("/Client")]
-        [HttpGet("/Client/{id}/Date/{dateInput}")]
+        [HttpGet("Client/{id}/Date/{dateInput}")]
         public async Task<IActionResult> GetAppointmentsByClientIdForDate(string id, string dateInput)
         {
             var appointments = await _agendaService.GetDateForClientAsync(id, DateTime.Parse(dateInput));
             return appointments == null ? NotFound() : Ok(appointments);
         }
         //[Route("/Practitioner")]
-        [HttpGet("/Practitioner/{id}/Date/{dateInput}")]
+        [HttpGet("Practitioner/{id}/Date/{dateInput}")]
         public async Task<IActionResult> GetAppointmentsByPractitionerIdForDate(string id, string dateInput)
         {
             
-            var appointments = await _agendaService.GetDateForClientAsync(id, DateTime.Parse(dateInput));
+            var appointments = await _agendaService.GetDateForPractitionerAsync(id, DateTime.Parse(dateInput));
             return appointments == null ? NotFound() : Ok(appointments);
         }
 
