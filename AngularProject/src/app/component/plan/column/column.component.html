@@ -25,6 +25,10 @@
 <div class="datum-dag">{{ currentDate | date : "EEEE d MMMM " }}</div>
 <mat-divider></mat-divider>
 <div class="grid-box">
+  <!-- <div *ngIf="appointmentsList.length > 0" class="appointment">test</div> -->
+  <ng-container *ngIf="appointmentsList.length>0">
+  <div> This element is only shown if the list is not empty </div>
+</ng-container>
   <div
     class="hour"
     *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]"

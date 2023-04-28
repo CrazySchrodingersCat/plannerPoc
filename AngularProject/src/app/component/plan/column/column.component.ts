@@ -21,6 +21,7 @@ export class ColumnComponent implements OnChanges {
   @Input() currentUser!: IUser;
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
+  hasAppointments: boolean = false;
   id: string = '';
   // date = this.currentDate.toLocaleDateString();
 
@@ -33,8 +34,6 @@ export class ColumnComponent implements OnChanges {
       : 'client';
     console.log(this.userType);
     this.getAppointments();
-
-   
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -54,28 +53,37 @@ export class ColumnComponent implements OnChanges {
     this.delete.emit(this.currentUser);
   }
   getAppointments() {
-     const userId = this.currentUser.id!;
-     const dateStr = new Date(this.currentDate).toLocaleDateString();
+    this.appointmentsList = [];
+    const userId = this.currentUser.id!;
+    const dateStr = new Date(this.currentDate).toLocaleDateString();
 
-     const appointmentsFetch =
-       this.userType === 'client'
-         ? this.agendaService.getAgendaForClientByDate(userId, dateStr)
-         : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
+    const appointmentsFetch =
+      this.userType === 'client'
+        ? this.agendaService.getAgendaForClientByDate(userId, dateStr)
+        : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
 
-     appointmentsFetch
-       .pipe(
-         map((response: any) => {
-           if (response.status === 404) {
-             throw new Error('Not found');
-           }
-           return response;
-         })
-       )
-       .subscribe((appointments: any) => {
-         this.appointmentsList.push(appointments);
-         console.log(this.appointmentsList);
-       });
-
+    appointmentsFetch
+      .pipe(
+        map((response: any) => {
+          if (response.status === 404) {
+            throw new Error('Not found');
+          }
+          return response;
+        })
+      )
+      .subscribe((appointments: any) => {
+        this.appointmentsList = appointments;
+        console.log(
+          'List for ',
+          this.currentUser.displayName,
+          this.appointmentsList
+        );
+        console.log(
+          'appointmentsList.lenght for ',
+          this.currentUser.displayName,
+          this.appointmentsList.length
+        );
+        this.hasAppointments = this.appointmentsList.length > 0;
+      });
   }
-
 }

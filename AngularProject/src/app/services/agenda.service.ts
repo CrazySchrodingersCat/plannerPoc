@@ -10,7 +10,7 @@ export class AgendaService {
   constructor(private http: HttpClient) {}
   getAgendaForClientByDate(id: string, date: string) {
     return this.http.get<AgendaItem[]>(
-      environment.apiUrl + '/Client/' + id + '/Date' + date
+      environment.apiUrl + '/Client/' + id + '/Date/' + date
     );
   }
   getAgendaForPractitionerByDate(id: string, date: string) {
