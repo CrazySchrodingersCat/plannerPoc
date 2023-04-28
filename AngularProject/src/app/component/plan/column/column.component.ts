@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { th } from 'date-fns/locale';
+import { map } from 'rxjs';
 import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { AgendaService } from 'src/app/services/agenda.service';
@@ -20,20 +20,32 @@ export class ColumnComponent {
   constructor(private agendaService: AgendaService) {}
 
   ngOnInit(): void {
-    this.userType =
-      this.currentUser.discipline === undefined
-        ? 'client'
-        : this.currentUser.discipline!;
+    this.userType = this.currentUser.discipline
+      ? this.currentUser.discipline
+      : 'client';
     console.log(this.userType);
-    this.id = this.currentUser.id!;
-    let appointmentsFetch = this.agendaService.getAgendaForPractitionerByDate(
-      this.id,
-      new Date(this.currentDate).toLocaleDateString()
-    );
-    appointmentsFetch.subscribe((appointments: any) => {
-      this.appointmentsList.push(appointments);
-      console.log(this.appointmentsList);
-    });
+
+    const userId = this.currentUser.id!;
+    const dateStr = new Date(this.currentDate).toLocaleDateString();
+
+    const appointmentsFetch =
+      this.userType === 'client'
+        ? this.agendaService.getAgendaForClientByDate(userId, dateStr)
+        : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
+
+    appointmentsFetch
+      .pipe(
+        map((response: any) => {
+          if (response.status === 404) {
+            throw new Error('Not found');
+          }
+          return response;
+        })
+      )
+      .subscribe((appointments: any) => {
+        this.appointmentsList.push(appointments);
+        console.log(this.appointmentsList);
+      });
   }
   closeMe() {
     console.log('close clicked');
