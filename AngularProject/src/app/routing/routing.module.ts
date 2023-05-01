@@ -8,7 +8,6 @@ const routes: Routes = [
   { path: 'practitioners', component: PractitionerOverviewComponent },
   { path: 'practitioners/:id', component: PractitionerDetailComponent },
 
-
   { path: 'planner', component: PlannerComponent },
 
   { path: '', redirectTo: 'planner', pathMatch: 'full' },

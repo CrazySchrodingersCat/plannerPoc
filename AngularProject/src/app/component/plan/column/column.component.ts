@@ -21,9 +21,8 @@ export class ColumnComponent implements OnChanges {
   @Input() currentUser!: IUser;
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
-  hasAppointments: boolean = false;
   id: string = '';
-  // date = this.currentDate.toLocaleDateString();
+
 
   userType = '';
   constructor(private agendaService: AgendaService) {}
@@ -72,18 +71,7 @@ export class ColumnComponent implements OnChanges {
         })
       )
       .subscribe((appointments: any) => {
-        this.appointmentsList = appointments;
-        console.log(
-          'List for ',
-          this.currentUser.displayName,
-          this.appointmentsList
-        );
-        console.log(
-          'appointmentsList.lenght for ',
-          this.currentUser.displayName,
-          this.appointmentsList.length
-        );
-        this.hasAppointments = this.appointmentsList.length > 0;
+        this.appointmentsList = appointments;     
       });
   }
 }
