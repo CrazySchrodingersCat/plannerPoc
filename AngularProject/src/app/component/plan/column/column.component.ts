@@ -23,6 +23,12 @@ export class ColumnComponent implements OnChanges {
   appointmentsList: AgendaItem[] = [];
   id: string = '';
 
+  //css parameters for ngStyle
+  time = 2;
+  height = `${this.time * 58.58}px`;
+  startTime = 10;
+  top = `${(this.startTime - 7)*58.58 + 151}px`;
+  
 
   userType = '';
   constructor(private agendaService: AgendaService) {}
@@ -71,7 +77,7 @@ export class ColumnComponent implements OnChanges {
         })
       )
       .subscribe((appointments: any) => {
-        this.appointmentsList = appointments;     
+        this.appointmentsList = appointments;
       });
   }
 }

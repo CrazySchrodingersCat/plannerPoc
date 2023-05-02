@@ -49,7 +49,7 @@ mat-toolbar-row {
 .planning-columns-container {
   height: calc(97vh - 64px);
   display: flex;
-  gap: 1%;
+  gap: 5px;
 }
 app-column {
   width: 360px;

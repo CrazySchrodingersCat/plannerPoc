@@ -103,11 +103,11 @@ mat-toolbar-row {
   background-color: #ffffff;
 }
 .mat-divider {
-  margin: 0 ;
+  margin: 0;
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 10fr;
+  grid-template-columns: 1fr 10fr;
   height: calc(100% - 170px);
   padding: 40px 16px 12px;
 }
@@ -118,19 +118,18 @@ mat-toolbar-row {
   height: 100%;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(12, 1fr);
-
 }
-.grid-box-little-divider {
+/* .grid-box-little-divider {
   grid-column: 2 / 3;
   display: grid;
   height: 100%;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(12, 1fr);
 
-}
+} */
 
 .grid-box {
-  grid-column: 3 / 4;
+  grid-column: 2/3;
   display: grid;
   height: 100%;
   grid-template-columns: 1fr;
@@ -141,8 +140,22 @@ mat-toolbar-row {
   position: relative;
   top: -10px;
 }
-/* .hour-number {
+.app-call {
+  padding: 20px;
+  text-align: center;
+}
+.app {
+  background-color: #00ff374f;
+  position: absolute;
+  /* top: 146px; */
+  width: 275px;
+  border-radius: 6px;
+  z-index: 1;
+  padding: 0 5px;
+  
+}
+.appInfo{
   position: relative;
-  font-weight: 300;
-  font-size: 12px;
-} */
+  left: 54; 
+  margin: 10px; 
+}

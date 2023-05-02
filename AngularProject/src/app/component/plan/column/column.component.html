@@ -22,7 +22,8 @@
 <!-- <div class="datum-week">
   {{ currentDate | date : " MMMM  y" }}, week {{ currentDate | date : "w" }}
 </div> -->
-<div class="datum-dag">{{ currentDate | date : "EEEE d MMMM " }}
+<div class="datum-dag">
+  {{ currentDate | date : "EEEE d MMMM " }}
   <mat-divider></mat-divider>
 </div>
 
@@ -30,23 +31,29 @@
   <div class="grid-box-hours">
     <div
       class="timestamp"
-      *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19]"
+      *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
     >
       <div>{{ hour }}</div>
     </div>
   </div>
-  <div class="grid-box-little-divider" > 
+  <!-- <div class="grid-box-little-divider" > 
      <div *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19]">     
       <mat-divider></mat-divider>
     </div>
-  </div>
+  </div> -->
   <div class="grid-box">
-    <!-- <ng-container *ngIf="appointmentsList.length > 0">
-      <div *ngFor="let app of appointmentsList" class="appointment">
-        <div>Intake gesprek met {{ app.startTime }} - {{ app.endTime }}</div>
+    <ng-container *ngIf="appointmentsList.length > 0">
+      <div [ngStyle]="{ 'height': height, 'top': top }" class="app" *ngFor="let app of appointmentsList">
+        <div  class="appInfo">
+          Intake gesprek met ... 
+           {{ app.startTime }} - {{ app.endTime }}
+        </div>
       </div>
-    </ng-container> -->
-    <div *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19]">
+    </ng-container>
+    <div
+      class="app-cell"
+      *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
+    >
       <mat-divider></mat-divider>
     </div>
   </div>
