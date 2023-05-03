@@ -1,22 +1,25 @@
+import { Client } from "./client.model";
+import { Practitioner } from "./practitioner.model";
+
 export class AgendaItem {
   id?: string;
-  clientId: string;
-  practitionerId: string;
+  client: Client;
+  practitioner: Practitioner;
   date: Date;
   startTime: Date;
   endTime: Date;
 
   constructor(
-    clientId: string,
-    practitionerId: string,
+    client: Client,
+    practitioner: Practitioner,
     date: Date,
     startTime: Date,
     endTime: Date,
     id?: string
   ) {
     this.id = id;
-    this.clientId = clientId;
-    this.practitionerId = practitionerId;
+    this.client = client;
+    this.practitioner = practitioner;
     this.date = date;
     this.startTime = startTime;
     this.endTime = endTime;
