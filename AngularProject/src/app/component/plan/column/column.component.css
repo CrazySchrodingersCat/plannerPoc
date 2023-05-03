@@ -145,10 +145,18 @@ mat-toolbar-row {
   text-align: center;
 }
 .app {
-  background-color: #00ff374f;
+  background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%);
   position: absolute;
   width: 275px;
   border-radius: 6px;
   z-index: 1;
   padding: 0 5px;  
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+  
+}
+.app>div {
+  margin: 8px;
+  color: #ffffff;
 }

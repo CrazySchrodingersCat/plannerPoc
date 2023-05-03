@@ -52,13 +52,15 @@
       </app-appointment> -->
 
       <div
-        [ngStyle]="{ 'height': time * 58.58 +'px', top: top }"
+        [ngStyle]="{ height: app.duration * 58.58 + 'px', top: (app.start-7)*58.58 + 151 + 'px' }"
         class="app"
         *ngFor="let app of appointmentsList"
       >
         <div class="appInfo">
-          Intake gesprek met ... username
-          {{ app.startTime | userPipe: app.endTime }}
+          Intake gesprek met {{ app.client.displayName }}
+          <div>
+            <span>Tijdsduur: {{ app.startTime | userPipe : app.endTime }}</span>
+          </div>
 
           <div>{{ app.startTime }} - {{ app.endTime }}</div>
         </div>
