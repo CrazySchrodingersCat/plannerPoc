@@ -43,10 +43,24 @@
   </div> -->
   <div class="grid-box">
     <ng-container *ngIf="appointmentsList.length > 0">
-      <div [ngStyle]="{ 'height': height, 'top': top }" class="app" *ngFor="let app of appointmentsList">
-        <div  class="appInfo">
-          Intake gesprek met ... 
-           {{ app.startTime }} - {{ app.endTime }}
+      <!-- <app-appointment
+        class="app"
+        *ngFor="let app of appointmentsList"
+        [start]="app.startTime"
+        [end]="app.endTime"
+      >
+      </app-appointment> -->
+
+      <div
+        [ngStyle]="{ 'height': time * 58.58 +'px', top: top }"
+        class="app"
+        *ngFor="let app of appointmentsList"
+      >
+        <div class="appInfo">
+          Intake gesprek met ... username
+          {{ app.startTime | userPipe: app.endTime }}
+
+          <div>{{ app.startTime }} - {{ app.endTime }}</div>
         </div>
       </div>
     </ng-container>

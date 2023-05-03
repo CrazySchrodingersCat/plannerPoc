@@ -5,16 +5,16 @@ namespace API.AppLogic.Services
     public class AgendaService
     {
         private readonly IAgendaRepository _agendaRepository;
+        private readonly IClientRepository _clientRepository;
+        private readonly IPractitionerRepository _practitionerRepository;
 
-        public AgendaService(IAgendaRepository repository)
+        public AgendaService(IAgendaRepository agendaRepo, IClientRepository clientRepo, IPractitionerRepository practitionerRepo)
         {
-            _agendaRepository = repository;
-        }
+            _agendaRepository = agendaRepo;
+            _clientRepository = clientRepo;
+            _practitionerRepository = practitionerRepo;
 
-        //public async Task<List<AgendaItem>> GetAll()
-        //{
-        //    return await _agendaRepository.GetAllAsync();
-        //}
+        }
 
         public async Task<AgendaItem?> GetById(string id)
         {
@@ -39,13 +39,47 @@ namespace API.AppLogic.Services
             return await _agendaRepository.GetByPeriodeForClientAsync(id, from, till);
         }
 
-        public async Task<List<AgendaItem>?> GetDateForClientAsync(string id, DateTime date)
+        public async Task<List<AgendaItemDTO>?> GetDateForClientAsync(string id, DateTime date)
         {
-            return await _agendaRepository.GetByDateForClientAsync(id,date);
+            var agendaItems = await _agendaRepository.GetByDateForClientAsync(id, date);
+
+            return await ConvertToDTOList(agendaItems);
         }
-        public async Task<List<AgendaItem>?> GetDateForPractitionerAsync(string id, DateTime date)
+
+
+        public async Task<List<AgendaItemDTO>?> GetDateForPractitionerAsync(string id, DateTime date)
         {
-            return await _agendaRepository.GetByDateForPractitionerAsync(id, date);
+            var agendaItems = await _agendaRepository.GetByDateForPractitionerAsync(id, date);
+            return await ConvertToDTOList(agendaItems);
         }
+
+
+        private async Task<List<AgendaItemDTO>?> ConvertToDTOList(List<AgendaItem>? agendaItems)
+        {
+            List<AgendaItemDTO> agendaItemDTOs = new List<AgendaItemDTO>();
+            if (agendaItems != null)
+            {
+                foreach (var agendaItem in agendaItems)
+                {
+                    var practitioner = await _practitionerRepository.GetByIdAsync(agendaItem.PractitionerId);
+                    var client = await _clientRepository.GetByIdAsync(agendaItem.ClientId);
+
+                    var agendaItemDTO = new AgendaItemDTO
+                    {
+                        Id = agendaItem.Id,
+                        Practitioner = practitioner,
+                        Client = client,
+                        Date = agendaItem.Date,
+                        StartTime = agendaItem.StartTime,
+                        EndTime = agendaItem.EndTime
+                    };
+
+                    agendaItemDTOs.Add(agendaItemDTO);
+                }
+            }
+
+            return agendaItemDTOs;
+        }
+
     }
 }
