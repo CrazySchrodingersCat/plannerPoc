@@ -13,7 +13,10 @@
       </div>
       <div class="user-list">
         <div class="label" *ngFor="let user of selectedUsers">
-          <p class="avatar">
+          <p [ngStyle]="{
+          'background-color': 'var(--color-1)'         
+        }"
+         class="avatar">
             {{ user.displayName | slice : 0 : 1
             }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
           </p>
@@ -30,6 +33,14 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="legenda">
+      <div class="test1"> Client</div>
+      <div class="test2"> Psycholoog (PS)</div>      
+      <div class="test3"> Psycholoog(LV) </div>
+      <div class="test4"> Psycholoog (CGT)</div>
+      <div class="test5"> RegieRegiebehandelaar</div>
+      <div class="test6"> Fysiotherapeut</div>
     </div>
   </mat-drawer>
   <mat-drawer-content class="columns-flex-container">
