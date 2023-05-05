@@ -49,6 +49,7 @@ export class ColumnComponent implements OnChanges {
       ) {
         console.log('Current date has changed');
         this.getAppointments();
+    
       }
     }
     this.previousDate = this.currentDate;
@@ -78,6 +79,8 @@ export class ColumnComponent implements OnChanges {
       )
       .subscribe((appointments: any) => {
         this.appointmentsList = appointments;
+        console.log(this.appointmentsList);
       });
+          
   }
 }

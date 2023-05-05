@@ -1,10 +1,12 @@
 <mat-toolbar>
-  <mat-toolbar-row>
+  <mat-toolbar-row [ngStyle]="{
+          'background-color': 'var(--color-' + currentUser.userType + ')'        
+        }">
     <div class="user-label">
-      <p class="avatar">
+      <!-- <p  class="avatar">
         {{ currentUser.displayName | slice : 0 : 1
         }}{{ currentUser.displayName.split(" ")[1] | slice : 0 : 1 }}
-      </p>
+      </p> -->
       <div>{{ currentUser.displayName }}</div>
       <div *ngIf="currentUser.discipline; else client" class="user-type">
         {{ userType | lowercase }}
@@ -54,7 +56,8 @@
       <div
         [ngStyle]="{
           height: app.duration * 58.58 + 'px',
-          top: (app.start - 7) * 58.58 + 151 + 'px'
+          top: (app.start - 7) * 58.58 + 151 + 'px',
+          'background-color': currentUser.userType === 'client' ? 'var(--color-' + app.practitioner.userType + ')' : 'var(--color-' + app.client.userType + ')'    
         }"
         class="app"
         *ngFor="let app of appointmentsList"
@@ -62,11 +65,12 @@
         <div class="appInfo">
           <div>
             Intake gesprek met
-            <span *ngIf="userType == 'client'; else otherUser">{{app.practitioner.displayName}}</span>
+            <span *ngIf="userType == 'client'; else otherUser">{{app.practitioner.displayName}}, {{app.practitioner.discipline}}</span>
             <ng-template #otherUser>{{app.client.displayName}}</ng-template>
             <!-- <span *ngIf="userType == 'client'">{{app.practitioner.displayName}}</span> -->
 
           </div>
+        
 
           <div>{{ app.startTime }} - {{ app.endTime }}</div>
         </div>
