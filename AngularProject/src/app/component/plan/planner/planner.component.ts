@@ -16,6 +16,7 @@ export class PlannerComponent {
   testUser: IUser = {
     displayName: 'Gabriel Matthews',
     discipline: 'Fysiotherapeut',
+    userType: 'Fysiotherapeut',
     id: 'C3E9184E-6BAF-4F76-3EB1-746811FD2051',
   };
   selectedDate: Date = new Date();
@@ -26,8 +27,10 @@ export class PlannerComponent {
     this.selectedUsers.push(this.testUser);
     this.selectedUsers.push({
       displayName: 'Gabriella Washington',
+      userType: 'client',
       id: '9D2461E2-5F3C-3D1B-4907-CA52756A26C9',
     });
+    console.log(this.selectedUsers);
   }
 
   deleteFromList(user: IUser) {

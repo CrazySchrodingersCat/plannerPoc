@@ -4,7 +4,7 @@ enum UserType {
   PS = 'Psycholoog (PS)',
   LV = 'Psycholoog(LV)',
   CGT = 'Psycholoog (CGT)',
-  Regie = 'RegieRegiebehandelaar',
+  Regie = 'Regiebehandelaar',
 }
 
 const UserTypeColor = {

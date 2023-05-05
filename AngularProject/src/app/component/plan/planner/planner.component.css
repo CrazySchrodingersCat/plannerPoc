@@ -113,7 +113,7 @@ ng-template {
   text-align: center;
 }
 .test1{
-  background-color: var(--color-1);
+  background-color: var(--color-client);
 }
 .test2{
   background-color: var(--color-2);	
@@ -125,11 +125,11 @@ ng-template {
   background-color: var(--color-4);;
 }
 .test5{
- background-color: var(--color-5);
+ background-color: var(--color-Regiebehandelaar);
 }
 .test6{  
-   background-color: var(--color-6);
+   background-color: var(--color-Fysiotherapeut);
 }
-.test7{  
-   background-color: var(--color-7);
-}
+/* .test7{  
+   background-color: var(--color-Fysiotherapeut);
+} */

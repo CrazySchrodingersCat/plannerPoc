@@ -15,10 +15,10 @@ body {
   background-color: #fafafa;
 }
 :root {
-  --color-1: #b5d2b4; /* ach gray */
+  --color-client: #b5d2b4; /* ach gray */
   --color-2: #d9a0a0; /* mimi pink */
   --color-3: #efb9cb; /* orchid pink */
   --color-4: #E6ADEC; /* plum web */
-  --color-5: #C287E8; /* lavander floral */
-  --color-6: #807182; /* roze */
+  --color-Regiebehandelaar: #C287E8; /* lavander floral */
+  --color-Fysiotherapeut: #807182; /* roze */
 }

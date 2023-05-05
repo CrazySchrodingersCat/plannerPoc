@@ -14,7 +14,7 @@
       <div class="user-list">
         <div class="label" *ngFor="let user of selectedUsers">
           <p [ngStyle]="{
-          'background-color': 'var(--color-1)'         
+          'background-color': 'var(--color-' + user.userType + ')'        
         }"
          class="avatar">
             {{ user.displayName | slice : 0 : 1

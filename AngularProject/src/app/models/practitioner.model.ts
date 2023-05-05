@@ -11,6 +11,6 @@ export class Practitioner implements IUser{
         this.displayName = displayName;
         this.discipline =   discipline;
         this.id= id;
-        this.userType = 'practitioner';
+        this.userType = discipline;
     }
 }
