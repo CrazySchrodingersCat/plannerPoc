@@ -53,7 +53,16 @@ namespace API.AppLogic.Services
             return await ConvertToDTOList(agendaItems);
         }
 
-
+        public async Task<List<AgendaItemDTO>?> GetWeekForClientAsync(string id, DateTime date)
+        {
+            var agendaItems = await _agendaRepository.GetWeekForClientAsync(id, date);
+            return await ConvertToDTOList(agendaItems);
+        }
+        public async Task<List<AgendaItemDTO>?> GetWeekForPractitionerAsync(string id, DateTime date)
+        {
+            var agendaItems = await _agendaRepository.GetWeekForPractitionerAsync(id, date);
+            return await ConvertToDTOList(agendaItems);
+        }
         private async Task<List<AgendaItemDTO>?> ConvertToDTOList(List<AgendaItem>? agendaItems)
         {
             List<AgendaItemDTO> agendaItemDTOs = new List<AgendaItemDTO>();
@@ -80,6 +89,5 @@ namespace API.AppLogic.Services
 
             return agendaItemDTOs;
         }
-
     }
 }

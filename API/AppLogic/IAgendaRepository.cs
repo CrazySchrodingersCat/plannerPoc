@@ -13,5 +13,7 @@ namespace API.AppLogic
         Task<List<AgendaItem>?> GetByPeriodeForClientAsync(string id, DateTime fromDate, DateTime tillDate);
         Task<List<AgendaItem>?> GetByDateForClientAsync(string id, DateTime date);
         Task<List<AgendaItem>?> GetByDateForPractitionerAsync(string id, DateTime date);
+        Task<List<AgendaItem>?> GetWeekForPractitionerAsync(string id, DateTime date);
+        Task<List<AgendaItem>?> GetWeekForClientAsync(string id, DateTime date);
     }
 }
