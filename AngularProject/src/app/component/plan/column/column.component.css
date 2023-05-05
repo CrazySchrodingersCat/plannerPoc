@@ -139,6 +139,7 @@ mat-toolbar-row {
 .timestamp {
   position: relative;
   top: -10px;
+  /* height: 58.58px; */
 }
 .app-call {
   padding: 20px;

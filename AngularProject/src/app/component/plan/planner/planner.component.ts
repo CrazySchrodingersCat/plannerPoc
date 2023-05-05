@@ -14,18 +14,18 @@ export class PlannerComponent {
   selectedUsers: IUser[] = [];
   appointmentsList: AgendaItem[] = [];
   testUser: IUser = {
-    displayName: 'John Doe',
+    displayName: 'Gabriel Matthews',
     discipline: 'Fysiotherapeut',
     id: 'C3E9184E-6BAF-4F76-3EB1-746811FD2051',
   };
   selectedDate: Date = new Date();
-  
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.selectedUsers.push(this.testUser);
     this.selectedUsers.push({
-      displayName: 'Anna Smith',
+      displayName: 'Gabriella Washington',
       id: '9D2461E2-5F3C-3D1B-4907-CA52756A26C9',
     });
   }
