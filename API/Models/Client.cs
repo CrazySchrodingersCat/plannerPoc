@@ -8,4 +8,5 @@ public partial class Client
     public string Id { get; set; } = null!;
 
     public string? DisplayName { get; set; }
+    public string UserType { get;  } = "client";
 }

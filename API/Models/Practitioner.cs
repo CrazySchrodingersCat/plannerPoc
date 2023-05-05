@@ -5,20 +5,18 @@ namespace API.Models;
 
 public partial class Practitioner
 {
-    public string Id { get; set; } = null!;
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
     public string? DisplayName { get; set; }
 
     public string? Discipline { get; set; }
+    public string UserType { get; } = "practitioner";
 
     public Practitioner(string displayName, string discipline )
     {
-        Id = Guid.NewGuid().ToString();
         DisplayName = displayName;
         Discipline = discipline;
     }
 
-    //public enum Discipline
-    //{
-    //}
+   
 }
