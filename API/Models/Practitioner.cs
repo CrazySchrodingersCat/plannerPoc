@@ -10,13 +10,33 @@ public partial class Practitioner
     public string? DisplayName { get; set; }
 
     public string? Discipline { get; set; }
-    public string UserType { get; }
+    public UserType UserType { get; }
 
     public Practitioner(string displayName, string discipline )
     {
         DisplayName = displayName;
         Discipline = discipline;
-        UserType = discipline;
+        switch (discipline)
+        {
+            //case "Fysiotherapeut":
+            //    UserType = UserType.Fysio;
+            //    break;
+            case "Psycholoog (PS)":
+                UserType = UserType.PS;
+                break;
+            case "Psycholoog(LV)":
+                UserType = UserType.LV;
+                break;
+            case "Psycholoog (CGD)":
+                UserType = UserType.CGT;
+                break;
+            case "Regiebehandelaar":
+                UserType = UserType.Regie;
+                break;
+            default:
+                UserType = UserType.Fysio;
+                break;
+        }
     }
 
    

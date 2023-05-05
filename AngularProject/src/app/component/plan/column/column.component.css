@@ -4,8 +4,12 @@ mat-toolbar-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  color: white;
 }
+/* mat-toolbar-row > button {
+  color: white;;
+} */
 
 .user-label {
   display: flex;
