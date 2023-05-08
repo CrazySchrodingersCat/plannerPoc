@@ -27,7 +27,7 @@ public partial class Practitioner
             case "Psycholoog(LV)":
                 UserType = UserType.LV;
                 break;
-            case "Psycholoog (CGD)":
+            case "Psycholoog (CGT)":
                 UserType = UserType.CGT;
                 break;
             case "Regiebehandelaar":

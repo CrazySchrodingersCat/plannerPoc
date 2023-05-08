@@ -2,24 +2,25 @@
   <mat-toolbar-row>
     <!-- <h4>Type of user</h4> -->
     <mat-form-field appearance="fill">
-      <mat-label>Type of user</mat-label>
-      <mat-select
+      <!-- <mat-label>Type of user</mat-label> -->
+      <mat-select 
         (selectionChange)="userTypeChanged()"
         [(value)]="selectedUserType"
-      >
-        <mat-option value="client">Client</mat-option>
+        
+      > 
+        <mat-option value="client"> <mat-icon>group</mat-icon> Client</mat-option>
         <mat-option value="practitioner" selectedUserType
-          >Practitioner</mat-option
+          ><mat-icon>group</mat-icon>Balandelaar</mat-option
         >
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="filter">
-      <mat-label>Filter(optional)</mat-label>
+      <mat-label>  <mat-icon>search</mat-icon> Filter</mat-label>
       <input
         matInput
         (keyup)="applyFilter($event)"
-        placeholder="Ex. Fysio or Tramp"
+        placeholder="Bvb. Fysio or Tramp"
         #input
       />
     </mat-form-field>
@@ -64,7 +65,7 @@
 
     <mat-dialog-actions align="end">
       <button class="button" mat-button mat-dialog-close>
-        <mat-icon>close</mat-icon>Cancel
+        <mat-icon>close</mat-icon>Annuleren
       </button>
       <button mat-button class="button" [disabled]="isDisabled" color="primary" [mat-dialog-close]="selectedUser" cdkFocusInitial>
         <mat-icon>add_circle</mat-icon> Agenda toevoegen

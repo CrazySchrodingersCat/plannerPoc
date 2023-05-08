@@ -89,12 +89,12 @@ app-column {
   margin-right: 6px;
   position: relative;
 }
-.label {
+.selectedUsers {
   display: flex;
   align-self: center;
   flex-direction: row;
 }
-.label > div {
+.sekectedUsers > div {
   padding-left: 2px;
   align-content: center;
   font-weight: 600;
@@ -113,22 +113,22 @@ ng-template {
   text-align: center;
 }
 .test1{
-  background-color: var(--color-client);
+  background-color: var(--color-0);
 }
 .test2{
-  background-color: var(--color-2);	
+  background-color: var(--color-1);	
 }
 .test3{
-  background-color: var(--color-3);
+  background-color: var(--color-2);
 }
 .test4{  
-  background-color: var(--color-4);;
+  background-color: var(--color-3);;
 }
 .test5{
- background-color: var(--color-Regiebehandelaar);
+ background-color: var(--color-4);
 }
 .test6{  
-   background-color: var(--color-Fysiotherapeut);
+   background-color: var(--color-5);
 }
 /* .test7{  
    background-color: var(--color-Fysiotherapeut);

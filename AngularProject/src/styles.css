@@ -15,10 +15,10 @@ body {
   background-color: #fafafa;
 }
 :root {
-  --color-client: #b5d2b4; /* ach gray */
-  --color-2: #d9a0a0; /* mimi pink */
-  --color-3: #efb9cb; /* orchid pink */
-  --color-4: #E6ADEC; /* plum web */
-  --color-Regiebehandelaar: #C287E8; /* lavander floral */
-  --color-Fysiotherapeut: #807182; /* roze */
+  --color-0: #b5d2b4; /* ach gray */
+  --color-1: #d9a0a0; /* mimi pink */
+  --color-2: #efb9cb; /* orchid pink */
+  --color-3: #E6ADEC; /* plum web */
+  --color-4: #C287E8; /* lavander floral */
+  --color-5: #807182; /* roze */
 }

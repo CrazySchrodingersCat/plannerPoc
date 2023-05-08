@@ -11,8 +11,9 @@
           Agenda toevoegen
         </button>
       </div>
-      <div class="user-list">
-        <div class="label" *ngFor="let user of selectedUsers">
+      <div class="user-list" cdkDropList   >
+        <!-- (cdkDropListDropped)="drop($event)" -->
+        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" >
           <p [ngStyle]="{
           'background-color': 'var(--color-' + user.userType + ')'        
         }"
@@ -34,6 +35,7 @@
         </div>
       </div>
     </div>
+
     <div class="legenda">
       <div class="test1"> Client</div>
       <div class="test2"> Psycholoog (PS)</div>      

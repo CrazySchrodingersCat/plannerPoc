@@ -71,9 +71,9 @@
           height: app.duration * 58.58 + 'px',
           top: (app.start - 7) * 58.58 + 151 + 'px',
           'background-color':
-            currentUser.userType === 'client'
+            currentUser.userType == '0'
               ? 'var(--color-' + app.practitioner.userType + ')'
-              : 'var(--color-' + app.client.userType + ')'
+              : 'var(--color-0)'
         }"
         class="app"
         *ngFor="let app of appointmentsList"
@@ -81,11 +81,11 @@
         <div class="appInfo">
           <div>
             Intake gesprek met
-            <span *ngIf="userType == 'client'; else otherUser"
+            <span *ngIf="userType == 'client'; else practitioner"
               >{{ app.practitioner.displayName }},
               {{ app.practitioner.discipline }}</span
             >
-            <ng-template #otherUser>{{ app.client.displayName }}</ng-template>
+            <ng-template #practitioner>{{ app.client.displayName }}</ng-template>
             <!-- <span *ngIf="userType == 'client'">{{app.practitioner.displayName}}</span> -->
           </div>
 
