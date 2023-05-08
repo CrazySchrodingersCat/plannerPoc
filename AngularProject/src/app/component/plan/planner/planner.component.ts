@@ -60,8 +60,11 @@ export class PlannerComponent {
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);
     dialogRef.afterClosed().subscribe((newUser) => {
-      this.selectedUsers.push(newUser);
-      console.log(this.selectedUsers);
+      if(newUser !==''){
+         this.selectedUsers.push(newUser);
+         console.log(this.selectedUsers);
+      }
+     
     });
   }
 }

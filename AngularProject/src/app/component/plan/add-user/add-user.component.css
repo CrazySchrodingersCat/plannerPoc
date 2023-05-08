@@ -6,6 +6,15 @@ mat-toolbar {
   border: 1px solid #e4e4e4;
   border-radius: 6px;
 }
+header {
+  display: flex;
+  flex-direction: row;
+  padding: 0 16px;
+}
+header > button {
+  align-self: flex-end;
+  border: none;
+}
 
 .filter {
   padding-left: 40%;
