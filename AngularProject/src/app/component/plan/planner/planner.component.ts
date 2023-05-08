@@ -28,12 +28,14 @@ export class PlannerComponent {
       id: '9D2461E2-5F3C-3D1B-4907-CA52756A26C9',
       displayName: 'Gabriella Washington',
       userType: '0',
+      isHidden: false,
     },
     {
       id: 'C3E9184E-6BAF-4F76-3EB1-746811FD2051',
       displayName: 'Gabriel Matthews',
       discipline: 'Fysiotherapeut',
       userType: '5',
+      isHidden: false,
     },
   ];
   appointmentsList: AgendaItem[] = [];
@@ -47,24 +49,22 @@ export class PlannerComponent {
   }
   drop(event: CdkDragDrop<string[]>) {
     // const dropEvent = event as CdkDragDrop<IUser[]>;
-    moveItemInArray(
-      this.movies,
-      event.previousIndex,
-      event.currentIndex
-    );
+    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
   deleteFromList(user: IUser) {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
+  }
+  hideUser(user: IUser) {
+    user.isHidden = !user.isHidden;
   }
 
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);
     dialogRef.afterClosed().subscribe((newUser) => {
-      if(newUser !==''){
-         this.selectedUsers.push(newUser);
-         console.log(this.selectedUsers);
+      if (newUser !== '') {
+        this.selectedUsers.push(newUser);
+        console.log(this.selectedUsers);
       }
-     
     });
   }
 }

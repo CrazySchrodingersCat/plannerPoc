@@ -81,25 +81,44 @@ app-column {
   border-radius: 50%;
   height: 24px;
   width: 24px;
- /* background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%);  */
+  /* background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%);  */
   font-weight: 600;
-  font-size: 12px;
+  /* font-size: 12px; */
   color: #ffffff;
   bottom: -4px;
   margin-right: 6px;
   position: relative;
+  font-size: xx-small;
 }
 .selectedUsers {
   display: flex;
-  align-self: center;
   flex-direction: row;
 }
-.sekectedUsers > div {
-  padding-left: 2px;
-  align-content: center;
-  font-weight: 600;
-  font-size: 14px;
+.selectedUsers > div {
+  display: flex;
+  padding: 0 2px 0 0;
+  font-weight: 500;
+  font-size: 12px;
 }
+.user-vert-flex{
+  display: flex;
+  flex-direction: column;
+}
+.selectedUsers > div>button {   
+  color: #ccccce;
+  background-color: #ffffff;
+  border: none !important;
+  padding: 0;
+}
+mat-icon{
+font-size: medium !important;
+}
+.icons{
+  align-self: end;
+  padding: 0;
+
+}
+
 .user-type,
 ng-template {
   position: relative;
@@ -108,27 +127,27 @@ ng-template {
   font-size: 12px;
   color: rgb(150, 150, 150);
 }
-.legenda{
+.legenda {
   color: white !important;
   text-align: center;
 }
-.test1{
+.test1 {
   background-color: var(--color-0);
 }
-.test2{
-  background-color: var(--color-1);	
+.test2 {
+  background-color: var(--color-1);
 }
-.test3{
+.test3 {
   background-color: var(--color-2);
 }
-.test4{  
-  background-color: var(--color-3);;
+.test4 {
+  background-color: var(--color-3);
 }
-.test5{
- background-color: var(--color-4);
+.test5 {
+  background-color: var(--color-4);
 }
-.test6{  
-   background-color: var(--color-5);
+.test6 {
+  background-color: var(--color-5);
 }
 /* .test7{  
    background-color: var(--color-Fysiotherapeut);

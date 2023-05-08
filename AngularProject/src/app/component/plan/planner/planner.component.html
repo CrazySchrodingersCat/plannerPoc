@@ -14,12 +14,11 @@
       <div class="user-list" cdkDropList   >
         <!-- (cdkDropListDropped)="drop($event)" -->
         <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" >
-          <p [ngStyle]="{
-          'background-color': 'var(--color-' + user.userType + ')'        
-        }"
-         class="avatar">
-            {{ user.displayName | slice : 0 : 1
-            }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
+         
+    <!-- user details -->
+  
+          <p [ngStyle]="{'background-color': 'var(--color-' + user.userType + ')' }"
+         class="avatar"> {{ user.displayName | slice : 0 : 1 }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
           </p>
           <div class="user-vert-flex">
             {{ user.displayName }}
@@ -30,7 +29,14 @@
             <ng-template #client>
               <div class="user-type">Client</div>
             </ng-template>
-            <!-- <mat-icon>remove_red_eye</mat-icon> -->
+            
+          </div>
+          <div class="icons">
+            <button (click)="hideUser(user)">
+              <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
+              <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
+            </button>
+            <button (click)="deleteFromList(user)"><mat-icon>close</mat-icon></button>
           </div>
         </div>
       </div>
@@ -47,12 +53,14 @@
   </mat-drawer>
   <mat-drawer-content class="columns-flex-container">
     <div class="planning-columns-container">
-      <app-column
-        *ngFor="let user of selectedUsers"
+      <ng-container *ngFor="let user of selectedUsers">
+      <app-column 
+        *ngIf="!user.isHidden"
         [currentDate]="selectedDate"
         [currentUser]="user"
         (delete)="deleteFromList($event)"
       ></app-column>
+      </ng-container>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -3,4 +3,5 @@ export interface IUser {
   id?: string;
   discipline?: string;
   userType?: string;
+  isHidden?: boolean;
 }

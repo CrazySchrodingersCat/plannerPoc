@@ -7,9 +7,9 @@ mat-toolbar-row {
   /* background-color: #ffffff; */
   color: white;
 }
-/* mat-toolbar-row > button {
-  color: white;;
-} */
+mat-icon {
+  color: white;
+}
 
 .user-label {
   display: flex;
