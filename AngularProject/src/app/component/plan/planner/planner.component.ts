@@ -5,7 +5,6 @@ import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
-
 @Component({
   selector: 'app-planner',
   templateUrl: './planner.component.html',
@@ -39,20 +38,27 @@ export class PlannerComponent {
     },
   ];
   appointmentsList: AgendaItem[] = [];
-
   selectedDate: Date = new Date();
+  pinedUserId: string = '';
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     console.log('users in selectedUsers list : ' + this.selectedUsers);
   }
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<IUser[]>) {
     // const dropEvent = event as CdkDragDrop<IUser[]>;
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
   deleteFromList(user: IUser) {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
+  }
+  pinUser(user: IUser) {
+    user.pined = true;
+    if (user && user.id !== undefined) {
+      this.pinedUserId = user.id;
+    }
+    console.log("user pinned: ", this.pinedUserId)
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;

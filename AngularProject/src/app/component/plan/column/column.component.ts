@@ -22,13 +22,14 @@ export class ColumnComponent implements OnChanges {
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
   id: string = '';
+  pinned: boolean = false;
+  @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   //css parameters for ngStyle
   time = 2;
   height = `${this.time * 58.58}px`;
   startTime = 10;
-  top = `${(this.startTime - 7)*58.58 + 151}px`;
-  
+  top = `${(this.startTime - 7) * 58.58 + 151}px`;
 
   userType = '';
   constructor(private agendaService: AgendaService) {}
@@ -49,7 +50,6 @@ export class ColumnComponent implements OnChanges {
       ) {
         console.log('Current date has changed');
         this.getAppointments();
-    
       }
     }
     this.previousDate = this.currentDate;
@@ -57,6 +57,10 @@ export class ColumnComponent implements OnChanges {
   closeMe() {
     console.log('close clicked');
     this.delete.emit(this.currentUser);
+  }
+  pinMe() {
+    this.pinUser.emit(this.currentUser);
+    console.log('pin clicked for user ' + this.currentUser.displayName);
   }
   getAppointments() {
     this.appointmentsList = [];
@@ -81,6 +85,5 @@ export class ColumnComponent implements OnChanges {
         this.appointmentsList = appointments;
         console.log(this.appointmentsList);
       });
-          
   }
 }

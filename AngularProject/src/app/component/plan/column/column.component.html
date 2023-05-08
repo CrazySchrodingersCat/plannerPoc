@@ -19,7 +19,25 @@
     </div>
     <div class="buttons-right">
       <button (click)="closeMe()"><mat-icon>close</mat-icon></button>
-      <mat-icon>more_vert</mat-icon>
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="pinMe()">
+          <mat-icon>push_pin</mat-icon>
+          <span>Pin als eerste</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>visibility</mat-icon>
+          <span>Hide</span>
+        </button>
+   
+      </mat-menu>
+      
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -85,7 +103,9 @@
               >{{ app.practitioner.displayName }},
               {{ app.practitioner.discipline }}</span
             >
-            <ng-template #practitioner>{{ app.client.displayName }}</ng-template>
+            <ng-template #practitioner>{{
+              app.client.displayName
+            }}</ng-template>
             <!-- <span *ngIf="userType == 'client'">{{app.practitioner.displayName}}</span> -->
           </div>
 

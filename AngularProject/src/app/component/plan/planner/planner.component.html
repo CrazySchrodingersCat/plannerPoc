@@ -11,14 +11,19 @@
           Agenda toevoegen
         </button>
       </div>
-      <div class="user-list" cdkDropList   >
+      <div class="user-list" cdkDropList>
         <!-- (cdkDropListDropped)="drop($event)" -->
-        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" >
-         
-    <!-- user details -->
-  
-          <p [ngStyle]="{'background-color': 'var(--color-' + user.userType + ')' }"
-         class="avatar"> {{ user.displayName | slice : 0 : 1 }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
+        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers">
+          <!-- user details -->
+
+          <p
+            [ngStyle]="{
+              'background-color': 'var(--color-' + user.userType + ')'
+            }"
+            class="avatar"
+          >
+            {{ user.displayName | slice : 0 : 1
+            }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
           </p>
           <div class="user-vert-flex">
             {{ user.displayName }}
@@ -29,37 +34,55 @@
             <ng-template #client>
               <div class="user-type">Client</div>
             </ng-template>
-            
           </div>
-          <div class="icons">
-            <button (click)="hideUser(user)">
-              <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
-              <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
+          <div class="settings">
+          <button  mat-menu-item (click)="hideUser(user)">
+                <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
+                <!-- <span *ngIf="!user.isHidden">Verstop agenda`s</span> -->
+                <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
+                <!-- <span *ngIf="user.isHidden">Toon agenda`s</span> -->
+              </button>
+
+            <button class="settings"
+              mat-icon-button
+              [matMenuTriggerFor]="menu"      
+            >
+              <mat-icon>more_vert</mat-icon>
             </button>
-            <button (click)="deleteFromList(user)"><mat-icon>close</mat-icon></button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>push_pin</mat-icon>
+                <span>Pin als eerste</span>
+              </button>
+              
+              <button mat-menu-item (click)="deleteFromList(user)">
+                <mat-icon>close</mat-icon> <span>Verwijder uit de list </span>
+              </button>
+            </mat-menu>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </div></div>
+
 
     <div class="legenda">
-      <div class="test1"> Client</div>
-      <div class="test2"> Psycholoog (PS)</div>      
-      <div class="test3"> Psycholoog(LV) </div>
-      <div class="test4"> Psycholoog (CGT)</div>
-      <div class="test5"> RegieRegiebehandelaar</div>
-      <div class="test6"> Fysiotherapeut</div>
+      <div class="test1">Client</div>
+      <div class="test2">Psycholoog (PS)</div>
+      <div class="test3">Psycholoog(LV)</div>
+      <div class="test4">Psycholoog (CGT)</div>
+      <div class="test5">RegieRegiebehandelaar</div>
+      <div class="test6">Fysiotherapeut</div>
     </div>
   </mat-drawer>
   <mat-drawer-content class="columns-flex-container">
     <div class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
-      <app-column 
-        *ngIf="!user.isHidden"
-        [currentDate]="selectedDate"
-        [currentUser]="user"
-        (delete)="deleteFromList($event)"
-      ></app-column>
+        <app-column
+          *ngIf="!user.isHidden"
+          [currentDate]="selectedDate"
+          [currentUser]="user"
+          (delete)="deleteFromList($event)"
+          (pinUser)="pinUser($event)"
+        ></app-column>
       </ng-container>
     </div>
   </mat-drawer-content>

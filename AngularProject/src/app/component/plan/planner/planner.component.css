@@ -93,6 +93,7 @@ app-column {
 .selectedUsers {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 .selectedUsers > div {
   display: flex;
@@ -104,7 +105,17 @@ app-column {
   display: flex;
   flex-direction: column;
 }
-.selectedUsers > div>button {   
+.settings{
+  position: absolute;
+  right: 0;
+}
+.hide{
+  position: absolute;
+  right: 50px;
+}
+
+
+.selectedUsers > div>div >button {   
   color: #ccccce;
   background-color: #ffffff;
   border: none !important;
@@ -113,11 +124,11 @@ app-column {
 mat-icon{
 font-size: medium !important;
 }
-.icons{
+/* .icons{
   align-self: end;
   padding: 0;
 
-}
+} */
 
 .user-type,
 ng-template {
