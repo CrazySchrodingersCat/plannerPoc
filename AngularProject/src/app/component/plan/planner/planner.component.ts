@@ -4,8 +4,6 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { th } from 'date-fns/locale';
-import { Client } from 'src/app/models/client.model';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { ClientService } from 'src/app/services/client.service';
 
@@ -15,17 +13,6 @@ import { ClientService } from 'src/app/services/client.service';
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent {
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX – The Rise of Skywalker',
-  ];
   selectedUsers: IUser[] = [
     {
       id: '9D2461E2-5F3C-3D1B-4907-CA52756A26C9',
@@ -43,7 +30,6 @@ export class PlannerComponent {
   ];
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();
-  // pinedUser: IUser = {} as IUser;
   pinedUser: IUser[] = [];
 
   userType: string = '';

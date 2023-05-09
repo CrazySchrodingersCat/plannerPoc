@@ -93,6 +93,7 @@
           *ngIf="!user.isHidden"
           [currentDate]="selectedDate"
           [currentUser]="user"
+          [pinned]=true
           (delete)="deleteFromList($event)"
           (pinUser)="pinUser($event)"
         ></app-column>

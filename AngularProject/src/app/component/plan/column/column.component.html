@@ -59,20 +59,9 @@
       <div>{{ hour }}</div>
     </div>
   </div>
-  <!-- <div class="grid-box-little-divider" > 
-     <div *ngFor="let hour of [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,19]">     
-      <mat-divider></mat-divider>
-    </div>
-  </div> -->
+
   <div class="grid-box">
     <ng-container *ngIf="appointmentsList.length > 0">
-      <!-- <app-appointment
-        class="app"
-        *ngFor="let app of appointmentsList"
-        [start]="app.startTime"
-        [end]="app.endTime"
-      >
-      </app-appointment> -->
 
       <div
         [matTooltip]="
