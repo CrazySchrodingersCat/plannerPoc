@@ -49,8 +49,8 @@ export class PlannerComponent {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
   }
   pinUser(user: IUser) {
-    user.pined = !user.pined;
-    this.hideUser(user);
+    user.pinned = !user.pinned;
+    user.isHidden = !user.isHidden;
     if (this.pinedUser.length === 0) {
       this.pinedUser.push(user);
       this.agendaService.setPinnedUserDate.next(user);

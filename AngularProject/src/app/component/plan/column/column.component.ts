@@ -23,7 +23,7 @@ export class ColumnComponent implements OnChanges {
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
   id: string = '';
-  pinned: boolean = false;
+  pinnedEmpty: boolean = true;
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   //css parameters for ngStyle
@@ -62,11 +62,11 @@ export class ColumnComponent implements OnChanges {
     if (this.userService.isPinned) {
       console.log('PINNED! ', this.userService.isPinned);
 
-      this.pinned = true;
-      console.log('EMPTY? ', this.pinned);
+      this.pinnedEmpty = false;
+      console.log('EMPTY? ', this.pinnedEmpty);
     } else {
-      this.pinned = false;
-      console.log('UNPINNED! ', this.agendaService.getPinnedUserDate);
+      this.pinnedEmpty = true;
+      console.log('UNPINNED! ', this.userService.isPinned);
     }
   }
   closeMe() {
@@ -76,7 +76,9 @@ export class ColumnComponent implements OnChanges {
   togglePin() {
     this.pinUser.emit(this.currentUser);
     this.userService.isPinned = !this.userService.isPinned;
-    console.log('pin clicked in component for user ' + this.currentUser.displayName);
+    console.log(
+      'pin clicked in component for user ' + this.currentUser.displayName
+    );
   }
   getAppointments() {
     this.appointmentsList = [];
