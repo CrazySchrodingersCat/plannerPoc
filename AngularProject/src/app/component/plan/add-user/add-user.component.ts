@@ -6,7 +6,7 @@ import { IUser } from 'src/app/models/IUser.model';
 import { Client } from 'src/app/models/client.model';
 import { Practitioner } from 'src/app/models/practitioner.model';
 import { ClientService } from 'src/app/services/client.service';
-import { PractitionerService } from 'src/app/services/practitioner.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-add-user',
@@ -33,23 +33,22 @@ export class AddUserComponent implements AfterViewInit {
   }
 
   constructor(
-    private practitionerService: PractitionerService,
-    private clientService: ClientService
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
-    let practitionersFetch = this.practitionerService.getPractitioners();
+    let practitionersFetch = this.userService.getPractitioners();
     practitionersFetch.subscribe((practitioners: any) => {
       this.practitionerList = practitioners;
 
-      this.clientService.getUserList.subscribe((userList: any) => {
+      this.userService.getUserList.subscribe((userList: any) => {
         const newUsers = practitioners.filter(
           (user: IUser) => !userList.map((u: IUser) => u.id).includes(user.id)
         );
         this.dataSource.data = newUsers;
       });
     });
-    this.clientService.getAllClients().subscribe((clients: any) => {
+    this.userService.getAllClients().subscribe((clients: any) => {
       this.clientList = clients;
     });
   }

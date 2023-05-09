@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Practitioner } from 'src/app/models/practitioner.model';
 
-import { PractitionerService } from 'src/app/services/practitioner.service';
+import {UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-practitioner-overview',
@@ -22,10 +22,13 @@ export class PractitionerOverviewComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private practitionerService: PractitionerService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    let practitionersFetch = this.practitionerService.getPractitioners();
+    let practitionersFetch = this.userService.getPractitioners();
     practitionersFetch.subscribe((practitioners: any) => {
       this.list = practitioners;
       this.dataSource.data = practitioners;
@@ -33,7 +36,7 @@ export class PractitionerOverviewComponent implements AfterViewInit, OnInit {
     });
   }
 
-  goToDetails(id: string){    
+  goToDetails(id: string) {
     this.router.navigate(['/practitioners/', id], { skipLocationChange: true });
   }
 }

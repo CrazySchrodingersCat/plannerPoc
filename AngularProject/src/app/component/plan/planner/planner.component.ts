@@ -36,11 +36,7 @@ export class PlannerComponent {
   constructor(public agendaService: AgendaService, public clientService: ClientService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.clientService.setUserList.next(this.selectedUsers)
-  
-    
-    // console.log('pinnedUser:', this.pinedUser);
-
+    this.clientService.setUserList.next(this.selectedUsers)  
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
   drop(event: CdkDragDrop<string[]>) {

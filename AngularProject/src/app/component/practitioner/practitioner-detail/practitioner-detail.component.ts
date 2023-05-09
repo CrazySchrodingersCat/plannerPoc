@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Practitioner } from 'src/app/models/practitioner.model';
-import { PractitionerService } from 'src/app/services/practitioner.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-practitioner-detail',
@@ -25,7 +25,7 @@ export class PractitionerDetailComponent {
   ];
 
   constructor(
-    private service: PractitionerService,
+    private service: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -35,7 +35,7 @@ export class PractitionerDetailComponent {
     if (this.id == '') {
       this.isNew = true;
       this.practitioner = new Practitioner('', '');
-    } else {      
+    } else {
       this.service
         .getPractitionerById(this.id)
         .subscribe((data: Practitioner) => {
