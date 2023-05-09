@@ -55,7 +55,7 @@ app-column {
   width: 360px;
   border-radius: 6px;
   background-color: white;
-  border: 1px  #e4e4e4;
+  border: 1px f #e4e4e4;
 }
 
 .columns-flex-container {
@@ -104,6 +104,7 @@ app-column {
 .pinned{
   width: 360px;
   top: 0;
+  border-right: solid #767474;
 
 }
 .user-vert-flex{

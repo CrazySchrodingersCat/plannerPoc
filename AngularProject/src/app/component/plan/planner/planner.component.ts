@@ -51,7 +51,7 @@ export class PlannerComponent {
     console.log('users in selectedUsers list : ' + this.selectedUsers);
     console.log('pinnedUser:', this.pinedUser);
 
-    this.agendaService.getUserDate.subscribe((iUser) => {
+    this.agendaService.getPinnedUserDate.subscribe((iUser) => {
       this.userType = iUser;
       console.log(this.userType);
     });
@@ -68,10 +68,10 @@ export class PlannerComponent {
     user.pined = !user.pined;
 
     if (this.userType === null) {
-      this.agendaService.setUserDate.next(user);
+      this.agendaService.setPinnedUserDate.next(user);
     } else {
       alert('empty user');
-      this.agendaService.setUserDate.next(null);
+      this.agendaService.setPinnedUserDate.next(null);
     }
     // this.pinedUser = {]}
     if (user && user.id !== undefined) {
