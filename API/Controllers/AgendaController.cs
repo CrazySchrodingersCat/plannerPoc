@@ -2,6 +2,7 @@
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Concurrent;
+using static API.AppLogic.Services.AgendaService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -80,11 +81,20 @@ namespace API.Controllers
         //{
         //}
 
-        //// PUT api/<AgendaController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT api/<AgendaController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult>  EditItem(string id, [FromBody]  AgendaItemRequestDTO request)
+        {
+            try
+            {
+                await _agendaService.EditItemAsync(id, request);
+                return Ok();
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
         //// DELETE api/<AgendaController>/5
         //[HttpDelete("{id}")]

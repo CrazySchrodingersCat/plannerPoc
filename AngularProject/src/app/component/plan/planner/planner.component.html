@@ -11,7 +11,7 @@
           Agenda toevoegen
         </button>
       </div>
-      <div class="user-list" cdkDropList>
+      <div class="user-list" cdkDropList (cdkDropListDropped)="drop($event)">
         <!-- (cdkDropListDropped)="drop($event)" -->
         <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers">
           <!-- user details -->

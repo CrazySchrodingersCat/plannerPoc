@@ -89,5 +89,22 @@ namespace API.AppLogic.Services
 
             return agendaItemDTOs;
         }
+
+        public async Task<AgendaItem?> EditItemAsync(string id, AgendaItemRequestDTO request)
+        {
+            var toUpdate = await _agendaRepository.GetByIdAsync(id);
+            if (toUpdate == null)
+            {
+                throw new ArgumentException("AgendaItem not found");
+            }
+            else
+            {
+                //var updated = new Practitioner(request.DisplayName, request.Discipline);
+                await _agendaRepository.EditItem(id, request);
+            }
+            return await _agendaRepository.GetByIdAsync(id);
+        }
+
+        public record AgendaItemRequestDTO(string Start, string End, string ClientId, string PractitionerId) { }
     }
 }

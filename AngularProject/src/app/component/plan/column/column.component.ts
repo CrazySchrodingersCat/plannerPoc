@@ -6,7 +6,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { AgendaService } from 'src/app/services/agenda.service';
@@ -32,12 +32,14 @@ export class ColumnComponent implements OnChanges {
   top = `${(this.startTime - 7) * 58.58 + 151}px`;
 
   userType = '';
+  pinnedEmpty: boolean = true;
   constructor(private agendaService: AgendaService) {}
 
   ngOnInit(): void {
-    this.agendaService.getPinnedUserDate.subscribe((iUser) => {      
-    });
-    this.userType = this.currentUser.discipline ? this.currentUser.discipline : 'client';
+    this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
+    this.userType = this.currentUser.discipline
+      ? this.currentUser.discipline
+      : 'client';
 
     this.getAppointments();
   }
@@ -53,6 +55,16 @@ export class ColumnComponent implements OnChanges {
       }
     }
     this.previousDate = this.currentDate;
+    if (this.agendaService.getPinnedUserDate) {
+      console.log('PINNED! ', this.agendaService.getPinnedUserDate);
+      
+      this.pinnedEmpty = false;
+      console.log('EMPTY? ', this.pinnedEmpty);
+    }else{
+      this.pinnedEmpty = true;;
+      console.log('UNPINNED! ', this.agendaService.getPinnedUserDate);
+      
+    }
   }
   closeMe() {
     console.log('close clicked');

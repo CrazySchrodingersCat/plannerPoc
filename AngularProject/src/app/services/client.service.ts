@@ -11,15 +11,20 @@ export class ClientService {
   public getUserName: any;
   public userName: any;
 
+  public setUserList = new BehaviorSubject<any>([]);
+  public getUserList = this.setUserList.asObservable();
+
   constructor(private http: HttpClient) {}
   getAllClients(): Observable<Client[]> {
     return this.http.get<Client[]>(environment.apiUrl + '/Client');
   }
-  getClientById(id: string): Observable<Client>{
+  getClientById(id: string): Observable<Client> {
     return this.http.get<Client>(environment.apiUrl + '/Client/' + id);
   }
   getUserNameById(id: string): string {
-    this.getClientById(id).subscribe(user=>this.userName=user.displayName);
+    this.getClientById(id).subscribe(
+      (user) => (this.userName = user.displayName)
+    );
     return this.userName;
   }
 }

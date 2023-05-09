@@ -1,6 +1,11 @@
-﻿using API.Models;
+﻿using API.AppLogic.Services;
+using API.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Collections.Concurrent;
+using static API.AppLogic.Services.AgendaService;
+using System;
 
 namespace API.AppLogic
 {
@@ -71,6 +76,36 @@ namespace API.AppLogic
             return await _context.AgendaItems
                  .Where(item => item.ClientId == id &&
                  item.Date >= manday && item.Date < manday.AddDays(7)).ToListAsync();
+        }
+
+        public async Task EditItem(string id, AgendaItemRequestDTO update)
+        {
+
+            var startSpan = ConvertStringToTimeSpan(update.Start);
+            var endSpan = ConvertStringToTimeSpan(update.End);
+            var item = _context.AgendaItems.Single(x => x.Id == id);
+            if (item != null)
+            {
+                item.StartTime = startSpan;
+                item.EndTime = endSpan;
+                await _context.SaveChangesAsync();
+            }
+            else throw new Exception("Item with id " + id + " not found");
+        }
+        public TimeSpan ConvertStringToTimeSpan(string timeString)
+        {
+            TimeSpan timeSpan;
+
+            if (TimeSpan.TryParse(timeString, out timeSpan))
+            {
+                // de conversie is gelukt, retourneer de timeSpan-waarde
+                return timeSpan;
+            }
+            else
+            {
+                // de conversie is mislukt, retourneer een standaardwaarde
+                return TimeSpan.Zero;
+            }
         }
 
         //public static class DateTimeExtensions

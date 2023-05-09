@@ -1,8 +1,4 @@
 ﻿using API.Models;
-using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-using System.Security.Cryptography;
 
 namespace API.AppLogic.Services
 {

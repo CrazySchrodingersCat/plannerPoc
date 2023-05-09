@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using static API.AppLogic.Services.AgendaService;
 
 namespace API.AppLogic
 {
@@ -15,5 +16,6 @@ namespace API.AppLogic
         Task<List<AgendaItem>?> GetByDateForPractitionerAsync(string id, DateTime date);
         Task<List<AgendaItem>?> GetWeekForPractitionerAsync(string id, DateTime date);
         Task<List<AgendaItem>?> GetWeekForClientAsync(string id, DateTime date);
+        Task EditItem(string id, AgendaItemRequestDTO request);
     }
 }

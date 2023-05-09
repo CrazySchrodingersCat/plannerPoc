@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { th } from 'date-fns/locale';
 import { Client } from 'src/app/models/client.model';
 import { AgendaService } from 'src/app/services/agenda.service';
+import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-planner',
@@ -46,40 +47,37 @@ export class PlannerComponent {
   pinedUser: IUser[] = [];
 
   userType: string = '';
-  constructor(public agendaService: AgendaService, public dialog: MatDialog) {}
+  constructor(public agendaService: AgendaService, public clientService: ClientService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    console.log('users in selectedUsers list : ' + this.selectedUsers);
+    this.clientService.setUserList.next(this.selectedUsers)
+  
+    
     // console.log('pinnedUser:', this.pinedUser);
 
-    this.agendaService.getPinnedUserDate.subscribe((iUser) => {
-
-    });
+    this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
-  drop(event: CdkDragDrop<IUser[]>) {
+  drop(event: CdkDragDrop<string[]>) {
+    console.log(event);
+    
     // const dropEvent = event as CdkDragDrop<IUser[]>;
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.selectedUsers, event.previousIndex, event.currentIndex);
   }
   deleteFromList(user: IUser) {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
   }
   pinUser(user: IUser) {
-    //this.pinedUser = null;
     user.pined = !user.pined;
-
-    if (this.pinedUser.length  === 0) {
-      alert('empty user');
+    this.hideUser(user);
+    if (this.pinedUser.length === 0) {
       this.pinedUser.push(user);
+      this.agendaService.setPinnedUserDate.next(user);
+      alert(user.displayName + ' pinned');
     } else {
-      alert(user.displayName + 'pinned');
-      // this.agendaService.setPinnedUserDate.next(null);
+      alert(user.displayName + ' unpined');
+      this.agendaService.setPinnedUserDate.next(null);
       this.pinedUser = [];
     }
-
-    if (user && user.id !== undefined) {
-      // this.pinedUser = user;
-    }
-    // console.log('user pinned: ', this.pinedUser.displayName);
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;

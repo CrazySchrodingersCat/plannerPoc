@@ -41,7 +41,13 @@ export class AddUserComponent implements AfterViewInit {
     let practitionersFetch = this.practitionerService.getPractitioners();
     practitionersFetch.subscribe((practitioners: any) => {
       this.practitionerList = practitioners;
-      this.dataSource.data = practitioners;
+
+      this.clientService.getUserList.subscribe((userList: any) => {
+        const newUsers = practitioners.filter(
+          (user: IUser) => !userList.map((u: IUser) => u.id).includes(user.id)
+        );
+        this.dataSource.data = newUsers;
+      });
     });
     this.clientService.getAllClients().subscribe((clients: any) => {
       this.clientList = clients;
