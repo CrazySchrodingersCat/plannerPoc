@@ -42,18 +42,18 @@ export class PlannerComponent {
   ];
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();
-  pinedUser: IUser = {} as IUser;
+  // pinedUser: IUser = {} as IUser;
+  pinedUser: IUser[] = [];
 
-  userType: any;
+  userType: string = '';
   constructor(public agendaService: AgendaService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     console.log('users in selectedUsers list : ' + this.selectedUsers);
-    console.log('pinnedUser:', this.pinedUser);
+    // console.log('pinnedUser:', this.pinedUser);
 
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {
-      this.userType = iUser;
-      console.log(this.userType);
+
     });
   }
   drop(event: CdkDragDrop<IUser[]>) {
@@ -67,17 +67,19 @@ export class PlannerComponent {
     //this.pinedUser = null;
     user.pined = !user.pined;
 
-    if (this.userType === null) {
-      this.agendaService.setPinnedUserDate.next(user);
-    } else {
+    if (this.pinedUser.length  === 0) {
       alert('empty user');
-      this.agendaService.setPinnedUserDate.next(null);
+      this.pinedUser.push(user);
+    } else {
+      alert(user.displayName + 'pinned');
+      // this.agendaService.setPinnedUserDate.next(null);
+      this.pinedUser = [];
     }
-    // this.pinedUser = {]}
+
     if (user && user.id !== undefined) {
-      this.pinedUser = user;
+      // this.pinedUser = user;
     }
-    console.log('user pinned: ', this.pinedUser.displayName);
+    // console.log('user pinned: ', this.pinedUser.displayName);
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;
