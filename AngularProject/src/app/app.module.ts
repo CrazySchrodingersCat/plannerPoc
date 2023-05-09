@@ -9,7 +9,7 @@ import { RoutingModule } from './routing/routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
-import { PlannerComponent } from './component/plan/planner/planner.component';
+import { PlannerComponent } from './component/plan/plannerPage/planner.component';
 import { PractitionerDetailComponent } from './component/practitioner/practitioner-detail/practitioner-detail.component';
 import { PractitionerOverviewComponent } from './component/practitioner/practitioner-overview/practitioner-overview.component';
 import { MatButtonModule } from '@angular/material/button';

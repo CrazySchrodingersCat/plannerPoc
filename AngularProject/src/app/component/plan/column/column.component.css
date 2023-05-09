@@ -7,8 +7,9 @@ mat-toolbar-row {
   padding-right: 6px;
   color: white;
 }
-mat-icon, svg {
+mat-icon, svg, .white{
   color: white;
+  margin-right: 0;
 }
 
 .user-label {

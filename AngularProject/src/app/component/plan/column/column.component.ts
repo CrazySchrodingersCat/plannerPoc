@@ -6,10 +6,11 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Observable, map, of } from 'rxjs';
+import { map } from 'rxjs';
 import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { AgendaService } from 'src/app/services/agenda.service';
+import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',
@@ -22,7 +23,7 @@ export class ColumnComponent implements OnChanges {
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
   id: string = '';
-  @Input() pinned: boolean = false;
+  pinned: boolean = false;
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   //css parameters for ngStyle
@@ -32,8 +33,11 @@ export class ColumnComponent implements OnChanges {
   top = `${(this.startTime - 7) * 58.58 + 151}px`;
 
   userType = '';
-  pinnedEmpty: boolean = true;
-  constructor(private agendaService: AgendaService) {}
+  // pinnedEmpty: boolean = true;
+  constructor(
+    private agendaService: AgendaService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
@@ -55,13 +59,13 @@ export class ColumnComponent implements OnChanges {
       }
     }
     this.previousDate = this.currentDate;
-    if (this.agendaService.getPinnedUserDate) {
-      console.log('PINNED! ', this.agendaService.getPinnedUserDate);
+    if (this.userService.isPinned) {
+      console.log('PINNED! ', this.userService.isPinned);
 
-      this.pinnedEmpty = false;
-      console.log('EMPTY? ', this.pinnedEmpty);
+      this.pinned = true;
+      console.log('EMPTY? ', this.pinned);
     } else {
-      this.pinnedEmpty = true;
+      this.pinned = false;
       console.log('UNPINNED! ', this.agendaService.getPinnedUserDate);
     }
   }
@@ -69,9 +73,10 @@ export class ColumnComponent implements OnChanges {
     console.log('close clicked');
     this.delete.emit(this.currentUser);
   }
-  pinMe() {
+  togglePin() {
     this.pinUser.emit(this.currentUser);
-    console.log('pin clicked for user ' + this.currentUser.displayName);
+    this.userService.isPinned = !this.userService.isPinned;
+    console.log('pin clicked in component for user ' + this.currentUser.displayName);
   }
   getAppointments() {
     this.appointmentsList = [];

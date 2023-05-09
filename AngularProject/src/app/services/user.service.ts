@@ -10,11 +10,13 @@ import { Client } from '../models/client.model';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-  public getUserName: any;
-  public userName: any;
+  // public getUserName: any;
+  // public userName: any;
 
   public setUserList = new BehaviorSubject<any>([]);
   public getUserList = this.setUserList.asObservable();
+
+  isPinned: boolean = false;
 
   getPractitioners(): Observable<Practitioner[]> {
     return this.http.get<Practitioner[]>(environment.apiUrl + '/Practitioner');
@@ -55,10 +57,10 @@ export class UserService {
   getClientById(id: string): Observable<Client> {
     return this.http.get<Client>(environment.apiUrl + '/Client/' + id);
   }
-  getUserNameById(id: string): string {
-    this.getClientById(id).subscribe(
-      (user) => (this.userName = user.displayName)
-    );
-    return this.userName;
-  }
+  // getUserNameById(id: string): string {
+  //   this.getClientById(id).subscribe(
+  //     (user) => (this.userName = user.displayName)
+  //   );
+  //   return this.userName;
+  // }
 }

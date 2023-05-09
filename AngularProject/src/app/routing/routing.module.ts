@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PractitionerOverviewComponent } from '../component/practitioner/practitioner-overview/practitioner-overview.component';
 import { PractitionerDetailComponent } from '../component/practitioner/practitioner-detail/practitioner-detail.component';
-import { PlannerComponent } from '../component/plan/planner/planner.component';
+import { PlannerComponent } from '../component/plan/plannerPage/planner.component';
 
 const routes: Routes = [
   { path: 'practitioners', component: PractitionerOverviewComponent },
