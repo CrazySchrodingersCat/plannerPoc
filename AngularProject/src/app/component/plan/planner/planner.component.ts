@@ -4,6 +4,9 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { th } from 'date-fns/locale';
+import { Client } from 'src/app/models/client.model';
+import { AgendaService } from 'src/app/services/agenda.service';
 
 @Component({
   selector: 'app-planner',
@@ -39,12 +42,19 @@ export class PlannerComponent {
   ];
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();
-  pinedUserId: string = '';
+  pinedUser: IUser = {} as IUser;
 
-  constructor(public dialog: MatDialog) {}
+  userType: any;
+  constructor(public agendaService: AgendaService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     console.log('users in selectedUsers list : ' + this.selectedUsers);
+    console.log('pinnedUser:', this.pinedUser);
+
+    this.agendaService.getUserDate.subscribe((iUser) => {
+      this.userType = iUser;
+      console.log(this.userType);
+    });
   }
   drop(event: CdkDragDrop<IUser[]>) {
     // const dropEvent = event as CdkDragDrop<IUser[]>;
@@ -54,11 +64,20 @@ export class PlannerComponent {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
   }
   pinUser(user: IUser) {
-    user.pined = true;
-    if (user && user.id !== undefined) {
-      this.pinedUserId = user.id;
+    //this.pinedUser = null;
+    user.pined = !user.pined;
+
+    if (this.userType === null) {
+      this.agendaService.setUserDate.next(user);
+    } else {
+      alert('empty user');
+      this.agendaService.setUserDate.next(null);
     }
-    console.log("user pinned: ", this.pinedUserId)
+    // this.pinedUser = {]}
+    if (user && user.id !== undefined) {
+      this.pinedUser = user;
+    }
+    console.log('user pinned: ', this.pinedUser.displayName);
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;

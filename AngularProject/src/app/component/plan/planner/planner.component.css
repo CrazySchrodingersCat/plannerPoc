@@ -55,7 +55,7 @@ app-column {
   width: 360px;
   border-radius: 6px;
   background-color: white;
-  border: 1px solid #e4e4e4;
+  border: 1px  #e4e4e4;
 }
 
 .columns-flex-container {
@@ -97,9 +97,14 @@ app-column {
 }
 .selectedUsers > div {
   display: flex;
-  padding: 0 2px 0 0;
+  padding: 0;
   font-weight: 500;
   font-size: 12px;
+}
+.pinned{
+  width: 360px;
+  top: 0;
+
 }
 .user-vert-flex{
   display: flex;
@@ -109,10 +114,10 @@ app-column {
   position: absolute;
   right: 0;
 }
-.hide{
+/* .hide{
   position: absolute;
-  right: 50px;
-}
+  right: 40px;
+} */
 
 
 .selectedUsers > div>div >button {   

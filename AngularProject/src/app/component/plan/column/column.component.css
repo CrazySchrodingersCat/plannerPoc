@@ -4,7 +4,7 @@ mat-toolbar-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* background-color: #ffffff; */
+  padding-right: 6px;
   color: white;
 }
 mat-icon {
@@ -43,7 +43,6 @@ mat-icon {
   display: flex;
   align-self: center;
   flex-direction: row;
-  /* background-color: inherit; */
 }
 .buttons-right > button {
   border: none;

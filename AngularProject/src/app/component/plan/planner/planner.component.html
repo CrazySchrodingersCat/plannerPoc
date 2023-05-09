@@ -1,5 +1,5 @@
 <mat-drawer-container class="flex-container">
-  <mat-drawer class="side-bar" mode="side" opened>
+  <mat-drawer class="side-bar" mode="side" opened position="end">
     <mat-card class="calendar-card">
       <mat-calendar [(selected)]="selectedDate"></mat-calendar>
     </mat-card>
@@ -36,17 +36,14 @@
             </ng-template>
           </div>
           <div class="settings">
-          <button  mat-menu-item (click)="hideUser(user)">
-                <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
-                <!-- <span *ngIf="!user.isHidden">Verstop agenda`s</span> -->
-                <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
-                <!-- <span *ngIf="user.isHidden">Toon agenda`s</span> -->
-              </button>
+            <button mat-menu-item (click)="hideUser(user)">
+              <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
+              <!-- <span *ngIf="!user.isHidden">Verstop agenda`s</span> -->
+              <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
+              <!-- <span *ngIf="user.isHidden">Toon agenda`s</span> -->
+            </button>
 
-            <button class="settings"
-              mat-icon-button
-              [matMenuTriggerFor]="menu"      
-            >
+            <button class="settings" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
@@ -54,15 +51,15 @@
                 <mat-icon>push_pin</mat-icon>
                 <span>Pin als eerste</span>
               </button>
-              
+
               <button mat-menu-item (click)="deleteFromList(user)">
                 <mat-icon>close</mat-icon> <span>Verwijder uit de list </span>
               </button>
             </mat-menu>
-            </div>
           </div>
-        </div></div>
-
+        </div>
+      </div>
+    </div>
 
     <div class="legenda">
       <div class="test1">Client</div>
@@ -73,8 +70,19 @@
       <div class="test6">Fysiotherapeut</div>
     </div>
   </mat-drawer>
+  <mat-drawer *ngIf='pinedUser!==null || pinedUser!== undefined' class="pinned" mode="side" opened position="start">
+    <app-column *ngIf="pinedUser !== null"
+     [currentDate]="selectedDate"
+          [currentUser]="pinedUser"
+          (delete)="deleteFromList($event)"
+          (pinUser)="pinUser($event)"
+    ></app-column> </mat-drawer  >
+
+
   <mat-drawer-content class="columns-flex-container">
+  
     <div class="planning-columns-container">
+
       <ng-container *ngFor="let user of selectedUsers">
         <app-column
           *ngIf="!user.isHidden"

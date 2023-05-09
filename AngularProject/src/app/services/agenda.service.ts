@@ -11,6 +11,9 @@ export class AgendaService {
   public setSelectedDate = new BehaviorSubject<any>([]);
   public getSelectedDate = this.setSelectedDate.asObservable();
 
+  public setUserDate = new BehaviorSubject<any>([]);
+  public getUserDate = this.setUserDate.asObservable();
+
   constructor(private http: HttpClient) {}
   getAgendaForClientByDate(id: string, date: string): Observable<any> {
     return this.http.get<AgendaItem[]>(

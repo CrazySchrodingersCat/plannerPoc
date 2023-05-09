@@ -35,10 +35,10 @@ export class ColumnComponent implements OnChanges {
   constructor(private agendaService: AgendaService) {}
 
   ngOnInit(): void {
-    this.userType = this.currentUser.discipline
-      ? this.currentUser.discipline
-      : 'client';
-    console.log(this.userType);
+    this.agendaService.getUserDate.subscribe((iUser) => {
+      this.userType = iUser.discipline ? iUser.discipline : 'client';
+    });
+
     this.getAppointments();
   }
 
