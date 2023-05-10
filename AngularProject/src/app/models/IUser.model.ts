@@ -4,5 +4,5 @@ export interface IUser {
   discipline?: string;
   userType?: string;
   isHidden?: boolean;
-  pinned?: boolean;
+  isPinned?: boolean;
 }

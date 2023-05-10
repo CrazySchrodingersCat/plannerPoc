@@ -12,10 +12,7 @@
         </button>
       </div>
       <div class="user-list" cdkDropList (cdkDropListDropped)="drop($event)">
-        <!-- (cdkDropListDropped)="drop($event)" -->
-        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers">
-          <!-- user details -->
-
+        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" >
           <p
             [ngStyle]="{
               'background-color': 'var(--color-' + user.userType + ')'
@@ -25,7 +22,7 @@
             {{ user.displayName | slice : 0 : 1
             }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
           </p>
-          <div class="user-vert-flex">
+          <div class="user-vert-flex" [ngStyle]="user.isPinned ? {'font-size': '14px', 'border-bottom': '1px solid gray'} : {}">
             {{ user.displayName }}
 
             <div *ngIf="user.discipline; else client" class="user-type">
@@ -38,11 +35,8 @@
           <div class="settings">
             <button mat-menu-item (click)="hideUser(user)">
               <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
-              <!-- <span *ngIf="!user.isHidden">Verstop agenda`s</span> -->
               <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
-              <!-- <span *ngIf="user.isHidden">Toon agenda`s</span> -->
             </button>
-
             <button class="settings" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>

@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { IUser } from 'src/app/models/IUser.model';
 import { Client } from 'src/app/models/client.model';
 import { Practitioner } from 'src/app/models/practitioner.model';
-import { ClientService } from 'src/app/services/client.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

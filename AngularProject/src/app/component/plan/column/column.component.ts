@@ -44,11 +44,11 @@ export class ColumnComponent implements OnChanges {
     this.userType = this.currentUser.discipline
       ? this.currentUser.discipline
       : 'client';
-
     this.getAppointments();
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    //data changes
     if (changes['currentDate'] && !changes['currentDate'].firstChange) {
       if (
         new Date(this.currentDate).getTime() !==
@@ -59,26 +59,24 @@ export class ColumnComponent implements OnChanges {
       }
     }
     this.previousDate = this.currentDate;
+
+    //pinned user  changes
     if (this.userService.isPinned) {
-      console.log('PINNED! ', this.userService.isPinned);
+      console.log('userService.isPinned ', this.userService.isPinned);
 
       this.pinnedEmpty = false;
-      console.log('EMPTY? ', this.pinnedEmpty);
+      console.log('pinnedEmpty? ', this.pinnedEmpty);
     } else {
       this.pinnedEmpty = true;
-      console.log('UNPINNED! ', this.userService.isPinned);
+      console.log('userService.isPinned ', this.userService.isPinned);
     }
   }
   closeMe() {
-    console.log('close clicked');
     this.delete.emit(this.currentUser);
   }
   togglePin() {
     this.pinUser.emit(this.currentUser);
     this.userService.isPinned = !this.userService.isPinned;
-    console.log(
-      'pin clicked in component for user ' + this.currentUser.displayName
-    );
   }
   getAppointments() {
     this.appointmentsList = [];
@@ -91,8 +89,7 @@ export class ColumnComponent implements OnChanges {
         : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
 
     appointmentsFetch
-      .pipe(
-        map((response: any) => {
+    .pipe(map((response: any) => {
           if (response.status === 404) {
             throw new Error('Not found');
           }
@@ -101,7 +98,6 @@ export class ColumnComponent implements OnChanges {
       )
       .subscribe((appointments: any) => {
         this.appointmentsList = appointments;
-        console.log(this.appointmentsList);
       });
   }
 }

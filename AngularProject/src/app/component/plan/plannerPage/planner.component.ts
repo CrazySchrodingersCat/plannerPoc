@@ -40,16 +40,13 @@ export class PlannerComponent {
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event);
-    
-    // const dropEvent = event as CdkDragDrop<IUser[]>;
     moveItemInArray(this.selectedUsers, event.previousIndex, event.currentIndex);
   }
   deleteFromList(user: IUser) {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
   }
   pinUser(user: IUser) {
-    user.pinned = !user.pinned;
+    user.isPinned = !user.isPinned;
     user.isHidden = !user.isHidden;
     if (this.pinedUser.length === 0) {
       this.pinedUser.push(user);
