@@ -62,13 +62,23 @@ export class ColumnComponent implements OnChanges {
 
     //pinned user  changes
     if (this.userService.isPinned) {
-      console.log('userService.isPinned ', this.userService.isPinned);
+      console.log(
+        'userService.isPinned ',
+        this.currentUser.displayName,
+        this.userService.isPinned
+      );
 
       this.pinnedEmpty = false;
-      console.log('pinnedEmpty? ', this.pinnedEmpty);
+      console.log(
+        'pinnedEmpty onChange ',
+        this.currentUser.displayName,
+        this.pinnedEmpty
+      );
     } else {
       this.pinnedEmpty = true;
-      console.log('userService.isPinned ', this.userService.isPinned);
+      this.currentUser.isPinned = false;
+      console.log('userService.isPinned ',this.currentUser.displayName, this.userService.isPinned);
+      console.log('pinnedEmpty onChange ',this.currentUser.displayName, this.pinnedEmpty);
     }
   }
   closeMe() {
@@ -77,6 +87,9 @@ export class ColumnComponent implements OnChanges {
   togglePin() {
     this.pinUser.emit(this.currentUser);
     this.userService.isPinned = !this.userService.isPinned;
+    this.pinnedEmpty = !this.pinnedEmpty;
+    console.log('pinnedEmpty toggle ', this.pinnedEmpty);
+    
   }
   getAppointments() {
     this.appointmentsList = [];
@@ -97,7 +110,7 @@ export class ColumnComponent implements OnChanges {
         })
       )
       .subscribe((appointments: any) => {
-        this.appointmentsList = appointments;
+        this.appointmentsList = appointments; 
       });
   }
 }

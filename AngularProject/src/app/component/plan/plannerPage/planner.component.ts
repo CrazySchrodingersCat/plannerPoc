@@ -19,6 +19,7 @@ export class PlannerComponent {
       displayName: 'Gabriella Washington',
       userType: '0',
       isHidden: false,
+      isPinned: false,
     },
     {
       id: 'C3E9184E-6BAF-4F76-3EB1-746811FD2051',
@@ -26,6 +27,7 @@ export class PlannerComponent {
       discipline: 'Fysiotherapeut',
       userType: '5',
       isHidden: false,
+      isPinned: false,
     },
   ];
   appointmentsList: AgendaItem[] = [];
@@ -33,14 +35,22 @@ export class PlannerComponent {
   pinedUser: IUser[] = [];
 
   userType: string = '';
-  constructor(public agendaService: AgendaService, public clientService: ClientService, public dialog: MatDialog) {}
+  constructor(
+    public agendaService: AgendaService,
+    public clientService: ClientService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.clientService.setUserList.next(this.selectedUsers)  
+    this.clientService.setUserList.next(this.selectedUsers);
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.selectedUsers, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.selectedUsers,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
   deleteFromList(user: IUser) {
     this.selectedUsers = this.selectedUsers.filter((x) => x !== user);
@@ -51,12 +61,13 @@ export class PlannerComponent {
     if (this.pinedUser.length === 0) {
       this.pinedUser.push(user);
       this.agendaService.setPinnedUserDate.next(user);
-      alert(user.displayName + ' pinned');
+      //alert(user.displayName + ' pinned');
     } else {
-      alert(user.displayName + ' unpined');
+      //alert(user.displayName + ' unpined');
       this.agendaService.setPinnedUserDate.next(null);
       this.pinedUser = [];
     }
+    this.setUserFirstInList(user);
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;
@@ -70,5 +81,16 @@ export class PlannerComponent {
         console.log(this.selectedUsers);
       }
     });
+  }
+  setUserFirstInList(user: IUser) {
+    // Zoek de index van de gebruiker in de lijst
+    const userIndex = this.selectedUsers.findIndex((u) => u.id === user.id);
+
+    if (userIndex !== -1) {
+      // Verwijder de gebruiker uit de lijst
+      const selectedUser = this.selectedUsers.splice(userIndex, 1)[0];
+      // Voeg de gebruiker weer toe aan de eerste positie
+      this.selectedUsers.unshift(selectedUser);
+    }
   }
 }

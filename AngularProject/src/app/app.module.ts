@@ -29,7 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { UserPipe } from './userpipe';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { AppointmentComponent } from './component/plan/appointment/appointment.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { AppointmentComponent } from './component/plan/appointment/appointment.c
     ColumnComponent,
     AddUserComponent,
     UserPipe,
-    AppointmentComponent,
+
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
   bootstrap: [AppComponent],

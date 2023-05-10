@@ -5,10 +5,8 @@
         public string Id { get; set; } = null!;
 
         public Client? Client { get; set; }
-        //public string? ClientName { get; set; }
 
         public Practitioner? Practitioner { get; set; }
-        //public string? PractitionerName { get; set; }
 
         public DateTime? Date { get; set; }
 

@@ -124,7 +124,8 @@ mat-icon, svg, .white{
   display: grid;
   height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+  
 }
 /* .grid-box-little-divider {
   grid-column: 2 / 3;
@@ -140,17 +141,19 @@ mat-icon, svg, .white{
   display: grid;
   height: 100%;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: repeat(14, 1fr);
+ 
 }
 
 .timestamp {
   position: relative;
   top: -10px;
-  /* height: 58.58px; */
+  /* height: 50.34px; */
 }
 .app-call {
   padding: 20px;
   text-align: center;
+  
 }
 .app {
   /* background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%); */
@@ -165,6 +168,6 @@ mat-icon, svg, .white{
   align-items: flex-start;
 }
 .app > div {
-  margin: 5px;
+  margin: 5px; 
   color: #ffffff;
 }
