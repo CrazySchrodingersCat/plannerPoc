@@ -67,7 +67,7 @@ app-column {
 .agendas-container {
   position: relative;
   top: 10px;
-  left: 4px;
+  /* left: 4px; */
   padding: 5px;
   height: 49%;
 }
