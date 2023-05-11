@@ -74,6 +74,24 @@ app-column {
 .user-list {
   position: relative;
   top: 60px;
+    /* width: 500px; */
+  max-width: 100%;
+  /* border: solid 1px #ccc; */
+  min-height: 60px;
+  display: block;
+  background: white;
+  /* border-radius: 4px; */
+  overflow: hidden;
+}
+.selectedUsers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
+  cursor: move;
+  background: white;
+
 }
 .avatar {
   display: flex;
@@ -91,17 +109,24 @@ app-column {
   position: relative;
   font-size: xx-small;
 }
-.selectedUsers {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+
 .selectedUsers > div {
   display: flex;
-  padding: 0;
+   
   font-weight: 500;
   font-size: 12px;
+  
 }
+.cdk-drag.selectedUsers.ng-star-inserted{
+padding-top: 5px !important; 
+}
+.cdk-drag.selectedUsers.ng-star-inserted.cdk-drag-disabled{
+  padding-top: 10px !important;
+  cursor: default !important;
+  position: relative;
+}
+
+
 mat-drawer{
   margin: 0;
 
@@ -171,6 +196,29 @@ ng-template {
 .test6 {
   background-color: var(--color-5);
 }
-/* .test7{  
-   background-color: var(--color-Fysiotherapeut);
-} */
+
+/* drag and drop  */
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

@@ -14,9 +14,8 @@
       <div class="user-list" cdkDropList (cdkDropListDropped)="drop($event)">
         <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" 
         [cdkDragDisabled]="user.isPinned" 
-        [ngStyle]="user.isPinned ? {'font-size': '14px',
-        'border-bottom': '1px solid #c9c9c9', 
-        'background-color': 'var(--color-' + user.userType + ')', 'color':'white'
+        [ngStyle]="user.isPinned ? {'font-size': '14px',        
+        'border-bottom':' 5px solid var(--color-' + user.userType + ')'
         
         } : {}"> 
           <p  [ngStyle]="{'background-color': 'var(--color-' + user.userType + ')','opacity':'1'}"
@@ -45,7 +44,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item>
+              <button mat-menu-item disabled> 
                 <mat-icon>push_pin</mat-icon>
                 <span>Pin als eerste</span>
               </button>
