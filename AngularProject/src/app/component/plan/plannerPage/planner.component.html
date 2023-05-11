@@ -13,6 +13,7 @@
       </div>
       <div class="user-list" cdkDropList (cdkDropListDropped)="drop($event)">
         <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" 
+        [cdkDragDisabled]="user.isPinned" 
         [ngStyle]="user.isPinned ? {'font-size': '14px',
         'border-bottom': '1px solid #c9c9c9', 
         'background-color': 'var(--color-' + user.userType + ')', 'color':'white'
