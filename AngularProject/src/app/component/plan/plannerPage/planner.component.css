@@ -55,8 +55,9 @@ app-column {
   width: 360px;
   border-radius: 6px;
   background-color: white;
-  border: 1px f #e4e4e4;
+  /* border: 1px solid #c6c6c6; */
 }
+
 
 .columns-flex-container {
   display: flex;
@@ -101,11 +102,15 @@ app-column {
   font-weight: 500;
   font-size: 12px;
 }
+mat-drawer{
+  margin: 0;
+
+}
 .pinned{
   width: 360px;
   top: 0;
   border-right: solid #767474;
-
+  border-top: none;
 }
 .user-vert-flex{
   display: flex;
@@ -141,8 +146,8 @@ ng-template {
   position: relative;
   top: -6px;
   font-weight: 400;
-  font-size: 12px;
-  color: rgb(150, 150, 150);
+  font-size: 10px;
+  /* color: rgb(150, 150, 150); */
 }
 .legenda {
   color: white !important;

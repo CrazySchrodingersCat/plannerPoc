@@ -12,17 +12,19 @@
         </button>
       </div>
       <div class="user-list" cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" >
-          <p
-            [ngStyle]="{
-              'background-color': 'var(--color-' + user.userType + ')'
-            }"
+        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" 
+        [ngStyle]="user.isPinned ? {'font-size': '14px',
+        'border-bottom': '1px solid #c9c9c9', 
+        'background-color': 'var(--color-' + user.userType + ')', 'color':'white'
+        
+        } : {}"> 
+          <p  [ngStyle]="{'background-color': 'var(--color-' + user.userType + ')','opacity':'1'}"
             class="avatar"
           >
             {{ user.displayName | slice : 0 : 1
             }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
           </p>
-          <div class="user-vert-flex" [ngStyle]="user.isPinned ? {'font-size': '14px', 'border-bottom': '1px solid gray'} : {}">
+          <div class="user-vert-flex" >
             {{ user.displayName }}
 
             <div *ngIf="user.discipline; else client" class="user-type">
@@ -35,7 +37,8 @@
           <div class="settings">
             <button mat-menu-item (click)="hideUser(user)">
               <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
-              <mat-icon *ngIf="user.isHidden">visibility_off</mat-icon>
+              <mat-icon *ngIf="user.isHidden && !user.isPinned">visibility_off</mat-icon>
+           
             </button>
             <button class="settings" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
@@ -60,21 +63,21 @@
       <div class="test2">Psycholoog (PS)</div>
       <div class="test3">Psycholoog(LV)</div>
       <div class="test4">Psycholoog (CGT)</div>
-      <div class="test5">RegieRegiebehandelaar</div>
+      <div class="test5">Regiebehandelaar</div>
       <div class="test6">Fysiotherapeut</div>
     </div>
   </mat-drawer>
   <mat-drawer
-    *ngIf="pinedUser.length > 0"
+    *ngIf="pinnedUser.length > 0"
     class="pinned"
     mode="side"
     opened
     position="start"
   >
     <app-column
-      *ngIf="pinedUser.length > 0"
+      *ngIf="pinnedUser.length > 0"
       [currentDate]="selectedDate"
-      [currentUser]="pinedUser[0]"
+      [currentUser]="pinnedUser[0]"
       (delete)="deleteFromList($event)"
       (pinUser)="pinUser($event)"
     ></app-column>
@@ -87,7 +90,7 @@
           *ngIf="!user.isHidden"
           [currentDate]="selectedDate"
           [currentUser]="user"
-          [pinned]=true
+          [pinned] = 'pinnedUser.length>0'
           (delete)="deleteFromList($event)"
           (pinUser)="pinUser($event)"
         ></app-column>

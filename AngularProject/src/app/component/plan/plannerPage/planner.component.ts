@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { IUser } from 'src/app/models/IUser.model';
@@ -32,13 +32,14 @@ export class PlannerComponent {
   ];
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();
-  pinedUser: IUser[] = [];
+  pinnedUser: IUser[] = [];
 
   userType: string = '';
   constructor(
     public agendaService: AgendaService,
     public clientService: ClientService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
@@ -58,16 +59,18 @@ export class PlannerComponent {
   pinUser(user: IUser) {
     user.isPinned = !user.isPinned;
     user.isHidden = !user.isHidden;
-    if (this.pinedUser.length === 0) {
-      this.pinedUser.push(user);
+    if (this.pinnedUser.length === 0) {
+      this.pinnedUser.push(user);
       this.agendaService.setPinnedUserDate.next(user);
-      //alert(user.displayName + ' pinned');
+      console.log('pinned user', this.pinnedUser);
     } else {
-      //alert(user.displayName + ' unpined');
       this.agendaService.setPinnedUserDate.next(null);
-      this.pinedUser = [];
+      this.pinnedUser = [];
     }
     this.setUserFirstInList(user);
+    //set no border
+    // const element = document.getElementById('app-column');
+    // this.renderer.setStyle(element, 'border', 'none  !important;');
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;

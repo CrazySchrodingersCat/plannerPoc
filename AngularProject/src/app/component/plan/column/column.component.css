@@ -1,3 +1,6 @@
+*{position: relative;
+  top: 0;
+}
 mat-toolbar-row {
   /* height: 48px; */
   border-bottom: 1px solid #e4e4e4;
@@ -11,7 +14,12 @@ mat-icon, svg, .white{
   color: white;
   margin-right: 0;
 }
+.pinned{
+  width: 360px;
+  top: 0;
+  border-right: solid var(--color-' + currentUser.userType + ');
 
+}
 .user-label {
   display: flex;
   align-self: center;
@@ -61,9 +69,9 @@ mat-icon, svg, .white{
 }
 .datum-dag {
   height: 24px;
-  left: 26px;
+  /* left: 26px; */
   top: 16px;
-  padding: 20px 16px 2px !important;
+  padding: 10px 16px 2px !important;
 
   /* Body / Semibold */
 

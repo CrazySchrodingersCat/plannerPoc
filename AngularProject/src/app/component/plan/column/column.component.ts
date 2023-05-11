@@ -23,7 +23,7 @@ export class ColumnComponent implements OnChanges {
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
   id: string = '';
-  pinnedEmpty: boolean = true;
+  @Input() pinned : boolean = false;
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   //css parameters for ngStyle
@@ -33,7 +33,7 @@ export class ColumnComponent implements OnChanges {
   top = `${(this.startTime - 7) * 58.58 + 151}px`;
 
   userType = '';
-  // pinnedEmpty: boolean = true;
+  pinnedEmpty: boolean = true;
   constructor(
     private agendaService: AgendaService,
     private userService: UserService
@@ -45,6 +45,7 @@ export class ColumnComponent implements OnChanges {
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
+     console.log('from parent ', this.pinned);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -59,27 +60,6 @@ export class ColumnComponent implements OnChanges {
       }
     }
     this.previousDate = this.currentDate;
-
-    //pinned user  changes
-    if (this.userService.isPinned) {
-      console.log(
-        'userService.isPinned ',
-        this.currentUser.displayName,
-        this.userService.isPinned
-      );
-
-      this.pinnedEmpty = false;
-      console.log(
-        'pinnedEmpty onChange ',
-        this.currentUser.displayName,
-        this.pinnedEmpty
-      );
-    } else {
-      this.pinnedEmpty = true;
-      this.currentUser.isPinned = false;
-      console.log('userService.isPinned ',this.currentUser.displayName, this.userService.isPinned);
-      console.log('pinnedEmpty onChange ',this.currentUser.displayName, this.pinnedEmpty);
-    }
   }
   closeMe() {
     this.delete.emit(this.currentUser);
@@ -87,9 +67,6 @@ export class ColumnComponent implements OnChanges {
   togglePin() {
     this.pinUser.emit(this.currentUser);
     this.userService.isPinned = !this.userService.isPinned;
-    this.pinnedEmpty = !this.pinnedEmpty;
-    console.log('pinnedEmpty toggle ', this.pinnedEmpty);
-    
   }
   getAppointments() {
     this.appointmentsList = [];
@@ -111,6 +88,8 @@ export class ColumnComponent implements OnChanges {
       )
       .subscribe((appointments: any) => {
         this.appointmentsList = appointments; 
+        console.log(appointments);
+        
       });
   }
 }
