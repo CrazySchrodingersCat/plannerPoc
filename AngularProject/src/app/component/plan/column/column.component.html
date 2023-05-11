@@ -59,17 +59,15 @@
   <div class="grid-box">
     <ng-container *ngIf="appointmentsList.length > 0">
 
-      <div
+      <div  
+        [matTooltipShowDelay]="1000"
+        [matTooltipHideDelay]="2000"
         [matTooltip]="
           'Afsprak met ' +
           (userType == 'client'
             ? app.practitioner.displayName + ', ' + app.practitioner.discipline
             : app.client.displayName) +
-          ' - ' +
-          '\n Tijd: ' +
-          app.startTime +
-          ' - ' +
-          app.endTime
+          ' - ' + '\n Tijd: ' +  app.startTime + ' - ' +  app.endTime
         "
         [ngStyle]="{
           height: app.duration * 50.34 + 'px',
