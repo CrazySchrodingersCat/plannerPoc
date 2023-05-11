@@ -71,12 +71,14 @@ namespace API.AppLogic.Services
                 foreach (var agendaItem in agendaItems)
                 {
                     var practitioner = await _practitionerRepository.GetByIdAsync(agendaItem.PractitionerId);
+                    var practitionerDTO =  Converter.ToDTO(practitioner);
+
                     var client = await _clientRepository.GetByIdAsync(agendaItem.ClientId);
 
                     var agendaItemDTO = new AgendaItemDTO
                     {
                         Id = agendaItem.Id,
-                        Practitioner = practitioner,
+                        Practitioner = practitionerDTO,
                         Client = client,
                         Date = agendaItem.Date,
                         StartTime = agendaItem.StartTime,
@@ -106,5 +108,14 @@ namespace API.AppLogic.Services
         }
 
         public record AgendaItemRequestDTO(string Start, string End, string ClientId, string PractitionerId) { }
+        
+        public static class Converter
+        {
+            public static PractitionerDTO ToDTO(Practitioner practitioner)
+            {
+                return new PractitionerDTO(practitioner);
+                
+            }
+        }
     }
 }

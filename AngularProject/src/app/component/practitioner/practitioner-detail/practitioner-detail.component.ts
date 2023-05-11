@@ -34,7 +34,7 @@ export class PractitionerDetailComponent {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id == '') {
       this.isNew = true;
-      this.practitioner = new Practitioner('', '');
+      this.practitioner = new Practitioner('', '', '', '');
     } else {
       this.service
         .getPractitionerById(this.id)

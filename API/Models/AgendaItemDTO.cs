@@ -6,7 +6,7 @@
 
         public Client? Client { get; set; }
 
-        public Practitioner? Practitioner { get; set; }
+        public PractitionerDTO? Practitioner { get; set; }
 
         public DateTime? Date { get; set; }
 

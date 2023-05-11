@@ -18,9 +18,6 @@ public partial class Practitioner
         Discipline = discipline;
         switch (discipline)
         {
-            //case "Fysiotherapeut":
-            //    UserType = UserType.Fysio;
-            //    break;
             case "Psycholoog (PS)":
                 UserType = UserType.PS;
                 break;
