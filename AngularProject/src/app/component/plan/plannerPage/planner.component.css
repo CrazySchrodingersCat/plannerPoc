@@ -61,7 +61,8 @@ app-test-calendar{
   width: 360px;
   border-radius: 6px;
   background-color: white;
-  left: 6px;
+  /* left: 6px; */
+  right: 6px;
   position: relative;
 }
 
