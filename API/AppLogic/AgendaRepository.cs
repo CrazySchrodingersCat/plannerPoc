@@ -6,6 +6,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Collections.Concurrent;
 using static API.AppLogic.Services.AgendaService;
 using System;
+using System.Linq;
 
 namespace API.AppLogic
 {
@@ -52,11 +53,11 @@ namespace API.AppLogic
         }
         public async Task<List<AgendaItem>?> GetByDateForClientAsync(string id, DateTime date)
         { 
-            return await _context.AgendaItems.Where(item => item.ClientId == id && item.Date == date).ToListAsync();
+            return await _context.AgendaItems.Where(item => item.ClientId == id && item.Date == date).OrderBy(i => i.StartTime).ToListAsync();
         }
         public async Task<List<AgendaItem>?> GetByDateForPractitionerAsync(string id, DateTime date)
         {
-            return await _context.AgendaItems.Where(item => item.PractitionerId == id && item.Date == date).ToListAsync();
+            return await _context.AgendaItems.Where(item => item.PractitionerId == id && item.Date == date).OrderBy(i=>i.StartTime).ToListAsync();
         }
 
         public async Task<List<AgendaItem>?> GetWeekForPractitionerAsync(string id, DateTime date)

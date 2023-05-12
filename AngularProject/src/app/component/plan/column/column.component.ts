@@ -23,7 +23,7 @@ export class ColumnComponent implements OnChanges {
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   appointmentsList: AgendaItem[] = [];
   id: string = '';
-  @Input() pinned : boolean = false;
+  @Input() pinned: boolean = false;
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   //css parameters for ngStyle
@@ -45,7 +45,7 @@ export class ColumnComponent implements OnChanges {
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
-     console.log('from parent ', this.pinned);
+    console.log('from parent ', this.pinned);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -79,7 +79,8 @@ export class ColumnComponent implements OnChanges {
         : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
 
     appointmentsFetch
-    .pipe(map((response: any) => {
+      .pipe(
+        map((response: any) => {
           if (response.status === 404) {
             throw new Error('Not found');
           }
@@ -87,9 +88,28 @@ export class ColumnComponent implements OnChanges {
         })
       )
       .subscribe((appointments: any) => {
-        this.appointmentsList = appointments; 
-        console.log(appointments);
+        this.appointmentsList = appointments;
+        this.findOverlapping(this.appointmentsList);
         
+        //this.appointmentsList.findOverlapping(this.appointmentsList)
+        console.log(this.appointmentsList);
       });
+  }
+
+  findOverlapping(list: AgendaItem[]): void {
+    list.forEach((item, index) => {
+      if (index === 0) {
+        return; // Skip the first item
+      }
+
+      const prevItem = list[index - 1];
+
+      if (item.startTime < prevItem.endTime) {
+        prevItem.hasOverlay = true;
+        // prevItem.position = 0;
+        item.hasOverlay = true;
+        item.shift = !item.shift;
+      }
+    });
   }
 }

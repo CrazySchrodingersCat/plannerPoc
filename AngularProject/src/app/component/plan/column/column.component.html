@@ -63,7 +63,7 @@
         [matTooltipShowDelay]="1000"
         [matTooltipHideDelay]="2000"
         [matTooltip]="
-          'Afsprak met ' +
+          'Afspraak met ' +
           (userType == 'client'
             ? app.practitioner.displayName + ', ' + app.practitioner.disciplineAbbreviation
             : app.client.displayName) +
@@ -79,13 +79,14 @@
         }"
         class="app"
         *ngFor="let app of appointmentsList"
+        [ngClass]="{'overlay1': app.hasOverlay && !app.shift, 'overlay2': app.hasOverlay && app.shift}"
       >
         <div class="appInfo">
           <div>
-            Afsprak met
+            Afspraak met
             <span *ngIf="userType == 'client'; else practitioner"
               >{{ app.practitioner.displayName }},
-              {{ app.practitioner.discipline }}</span
+              {{ app.practitioner.disciplineAbbreviation }}</span
             >
             <ng-template #practitioner>{{
               app.client.displayName

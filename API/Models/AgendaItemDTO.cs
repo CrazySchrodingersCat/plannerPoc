@@ -43,6 +43,25 @@
 
             return hours + 1;
         }
+
     }
-}
+        public double End
+        {
+            get
+            {
+                if (EndTime == null) return 0;
+
+                var hours = EndTime.Value.Hours;
+                var minutes = EndTime.Value.Minutes;
+
+                if (minutes < 15) return hours;
+                if (minutes < 30) return hours + 0.25;
+                if (minutes < 45) return hours + 0.5;
+                if (minutes < 59) return hours + 0.75;
+
+                return hours + 1;
+            }
+
+        }
+    }
 }

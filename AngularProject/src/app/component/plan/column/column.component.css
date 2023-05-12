@@ -30,7 +30,6 @@ mat-icon, svg, .white{
   gap: 6px;
 }
 .user-type {
-  /* background: #dadada; */
   color: #fff;
   border: 1px solid hsl(0, 0%, 98%);
   height: 24px;
@@ -69,19 +68,12 @@ mat-icon, svg, .white{
 }
 .datum-dag {
   height: 24px;
-  /* left: 26px; */
+
   top: 16px;
   padding: 10px 16px 2px !important;
-
-  /* Body / Semibold */
-
   font-weight: 600;
   font-size: 16px;
   line-height: 150%;
-  /* identical to box height, or 24px */
-
-  /* Lightgrey */
-
   color: #787878;
 }
 .avatar {
@@ -99,7 +91,7 @@ mat-icon, svg, .white{
   bottom: -5px;
   position: relative;
 }
-.appointment {
+/* .appointment {
   background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%);
   position: relative;
   display: flex;
@@ -111,7 +103,7 @@ mat-icon, svg, .white{
 
   border-radius: 6px;
   z-index: 10;
-}
+} */
 
 .hour {
   border-bottom: 1px solid #e4e4e4;
@@ -178,4 +170,11 @@ mat-icon, svg, .white{
 .app > div {
   margin: 5px; 
   color: #ffffff;
+}
+.overlay1 {
+  width: 143px;
+}
+.overlay2 {
+  width: 143px;
+  left:140px;
 }
