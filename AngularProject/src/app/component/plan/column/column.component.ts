@@ -11,6 +11,7 @@ import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { UserService } from 'src/app/services/user.service';
+
 @Component({
   selector: 'app-column',
   templateUrl: './column.component.html',

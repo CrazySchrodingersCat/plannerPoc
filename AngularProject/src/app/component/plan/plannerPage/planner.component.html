@@ -84,6 +84,7 @@
   </mat-drawer>
 
   <mat-drawer-content class="columns-flex-container">
+   
     <div class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
         <app-column
@@ -96,5 +97,6 @@
         ></app-column>
       </ng-container>
     </div>
+     <app-test-calendar [currentDate]="selectedDate"></app-test-calendar>
   </mat-drawer-content>
 </mat-drawer-container>

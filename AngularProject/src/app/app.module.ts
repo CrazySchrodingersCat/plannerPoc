@@ -29,6 +29,8 @@ import { MatInputModule } from '@angular/material/input';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { UserPipe } from './userpipe';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { TestCalendarComponent } from './component/test-calendar/test-calendar.component';
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ColumnComponent,
     AddUserComponent,
     UserPipe,
+    TestCalendarComponent,
 
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
@@ -48,6 +51,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     HttpClientModule,

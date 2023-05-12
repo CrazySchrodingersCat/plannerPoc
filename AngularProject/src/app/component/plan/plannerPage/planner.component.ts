@@ -5,7 +5,7 @@ import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AgendaService } from 'src/app/services/agenda.service';
-import { ClientService } from 'src/app/services/client.service';
+// import { ClientService } from 'src/app/services/client.service';
 
 @Component({
   selector: 'app-planner',
@@ -37,13 +37,13 @@ export class PlannerComponent {
   userType: string = '';
   constructor(
     public agendaService: AgendaService,
-    public clientService: ClientService,
+    // public clientService: ClientService,
     public dialog: MatDialog,
     private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
-    this.clientService.setUserList.next(this.selectedUsers);
+    // this.clientService.setUserList.next(this.selectedUsers);
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
   drop(event: CdkDragDrop<string[]>) {

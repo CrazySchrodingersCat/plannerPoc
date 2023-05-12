@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
-import { ClientService } from './services/client.service';
+// import { ClientService } from './services/client.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import * as moment from 'moment';
 
@@ -14,7 +14,7 @@ export class UserPipe implements PipeTransform {
   public getUserName = this.setUserName.asObservable();
 
   clientName: any;
-  constructor(private clientService: ClientService) {}
+  // constructor(private clientService: ClientService) {}
   transform(start: Date, end: Date): unknown {
     //const duration = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
     console.log(moment(start, 'HH:mm:ss'));

@@ -1,0 +1,48 @@
+  <mat-toolbar>
+    <mat-toolbar-row
+    [ngStyle]="{
+      'background-color': 'var(--color-' + currentUser.userType + ')'
+    }"
+  >
+    <div class="user-label">
+      <!-- <p  class="avatar">
+        {{ currentUser.displayName | slice : 0 : 1
+        }}{{ currentUser.displayName.split(" ")[1] | slice : 0 : 1 }}
+      </p> -->
+      <div>{{ currentUser.displayName }}</div>
+      <!-- <div *ngIf="currentUser.discipline; else client" class="user-type">
+        {{ userType | lowercase }}
+      </div> -->
+      <ng-template #client>
+        <div class="user-type">client</div>
+      </ng-template>
+    </div>
+
+    <div class="buttons-right">
+      <button mat-menu-item >
+          <mat-icon class="white" ></mat-icon>
+          <mat-icon class="white" >push_pin</mat-icon>
+        </button>
+      <button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item disabled>
+          <mat-icon>visibility</mat-icon>
+          <span>Verbergen</span>
+        </button>
+        <button  mat-menu-item  ><mat-icon>close</mat-icon><span>Verwijder</span></button>
+   
+      </mat-menu>
+      
+    </div>
+  </mat-toolbar-row>
+  </mat-toolbar>
+  <div class='demo-app-main'>
+    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+      <ng-template #eventContent let-arg>
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </ng-template>
+    </full-calendar>
+  </div>

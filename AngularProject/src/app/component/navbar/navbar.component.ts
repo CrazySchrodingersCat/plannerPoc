@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +9,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   url: string = '';
-  selectedTimeToggle:number = 1;
+  selectedTimeToggle: number = 1;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private sharedService: SharedService) {
     this.router.events.subscribe((val: any) => {
       this.url = this.router.url;
     });
@@ -27,14 +28,22 @@ export class NavbarComponent {
   // }
   dagToggeleClicked(event: any) {
     this.selectedTimeToggle = 1;
-     event.target.classList.toggle('selectedButton');
+    event.target.classList.toggle('selectedButton');
+    // this.global.viewType = 'timeGridDag';
+    // console.log(this.global.viewType);
+
+    this.sharedService.setViewType('timeGridDag');
+    console.log(this.sharedService.viewType);
     
   }
   weekToggeleClicked(event: any) {
     this.selectedTimeToggle = 2;
-    
+
     event.target.classList.toggle('selectedButton');
+    // this.global.viewType = 'timeGridWeek';
+    // console.log(this.global.viewType);
   }
+
   monthToggeleClicked(event: any) {
     this.selectedTimeToggle = 3;
     event.target.classList.toggle('selectedButton');
