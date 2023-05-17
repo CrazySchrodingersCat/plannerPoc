@@ -9,7 +9,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 })
 export class AppComponent {
   calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
+    initialView: 'timeGridDay',
     plugins: [dayGridPlugin],
   };
 }

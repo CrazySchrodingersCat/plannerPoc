@@ -5,6 +5,8 @@ import { IUser } from 'src/app/models/IUser.model';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AgendaService } from 'src/app/services/agenda.service';
+import * as moment from 'moment';
+import { SharedService } from 'src/app/services/shared.service';
 // import { ClientService } from 'src/app/services/client.service';
 
 @Component({
@@ -37,7 +39,7 @@ export class PlannerComponent {
   userType: string = '';
   constructor(
     public agendaService: AgendaService,
-    // public clientService: ClientService,
+    private sharedService: SharedService,
     public dialog: MatDialog,
     private renderer: Renderer2
   ) {}
@@ -45,6 +47,11 @@ export class PlannerComponent {
   ngOnInit(): void {
     // this.clientService.setUserList.next(this.selectedUsers);
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
+  }
+  getDateSelected(e: any) {
+    const newDate = moment(e).format('YYYY-MM-DD');
+    this.sharedService.setSelectedDate.next(newDate);
+    console.log(newDate);
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(
@@ -79,7 +86,7 @@ export class PlannerComponent {
   openDialog() {
     const dialogRef = this.dialog.open(AddUserComponent);
     dialogRef.afterClosed().subscribe((newUser) => {
-      if (newUser !== '' && newUser !== undefined ) {
+      if (newUser !== '' && newUser !== undefined) {
         this.selectedUsers.push(newUser);
         console.log(this.selectedUsers);
       }

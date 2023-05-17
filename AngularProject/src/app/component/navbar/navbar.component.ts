@@ -27,25 +27,13 @@ export class NavbarComponent {
 
   // }
   dagToggeleClicked(event: any) {
-    this.selectedTimeToggle = 1;
-    event.target.classList.toggle('selectedButton');
-    // this.global.viewType = 'timeGridDag';
-    // console.log(this.global.viewType);
-
-    this.sharedService.setViewType('timeGridDag');
-    console.log(this.sharedService.viewType);
-    
+    this.sharedService.setViewType.next('timeGridDay');      
   }
   weekToggeleClicked(event: any) {
-    this.selectedTimeToggle = 2;
-
-    event.target.classList.toggle('selectedButton');
-    // this.global.viewType = 'timeGridWeek';
-    // console.log(this.global.viewType);
+   this.sharedService.setViewType.next('timeGridWeek');      
   }
 
   monthToggeleClicked(event: any) {
-    this.selectedTimeToggle = 3;
-    event.target.classList.toggle('selectedButton');
+     this.sharedService.setViewType.next('dayGridMonth');
   }
 }

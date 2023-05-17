@@ -1,7 +1,10 @@
 <mat-drawer-container class="flex-container">
   <mat-drawer class="side-bar" mode="side" opened position="end">
     <mat-card class="calendar-card">
-      <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+      <mat-calendar
+        [(selected)]="selectedDate"
+        (selectedChange)="getDateSelected($event)"
+      ></mat-calendar>
     </mat-card>
     <div class="agendas-container">
       <p>Aganda's</p>
@@ -12,19 +15,32 @@
         </button>
       </div>
       <div class="user-list" cdkDropList (cdkDropListDropped)="drop($event)">
-        <div class="selectedUsers" cdkDrag *ngFor="let user of selectedUsers" 
-        [cdkDragDisabled]="user.isPinned" 
-        [ngStyle]="user.isPinned ? {'font-size': '14px',        
-        'border-bottom':' 5px solid var(--color-' + user.userType + ')'
-        
-        } : {}"> 
-          <p  [ngStyle]="{'background-color': 'var(--color-' + user.userType + ')','opacity':'1'}"
+        <div
+          class="selectedUsers"
+          cdkDrag
+          *ngFor="let user of selectedUsers"
+          [cdkDragDisabled]="user.isPinned"
+          [ngStyle]="
+            user.isPinned
+              ? {
+                  'font-size': '14px',
+                  'border-bottom':
+                    ' 5px solid var(--color-' + user.userType + ')'
+                }
+              : {}
+          "
+        >
+          <p
+            [ngStyle]="{
+              'background-color': 'var(--color-' + user.userType + ')',
+              opacity: '1'
+            }"
             class="avatar"
           >
             {{ user.displayName | slice : 0 : 1
             }}{{ user.displayName.split(" ")[1] | slice : 0 : 1 }}
           </p>
-          <div class="user-vert-flex" >
+          <div class="user-vert-flex">
             {{ user.displayName }}
 
             <div *ngIf="user.discipline; else client" class="user-type">
@@ -37,14 +53,15 @@
           <div class="settings">
             <button mat-menu-item (click)="hideUser(user)">
               <mat-icon *ngIf="!user.isHidden">visibility</mat-icon>
-              <mat-icon *ngIf="user.isHidden && !user.isPinned">visibility_off</mat-icon>
-           
+              <mat-icon *ngIf="user.isHidden && !user.isPinned"
+                >visibility_off</mat-icon
+              >
             </button>
             <button class="settings" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item disabled> 
+              <button mat-menu-item disabled>
                 <mat-icon>push_pin</mat-icon>
                 <span>Pin als eerste</span>
               </button>
@@ -84,19 +101,25 @@
   </mat-drawer>
 
   <mat-drawer-content class="columns-flex-container">
-   <app-test-calendar [currentDate]="selectedDate"></app-test-calendar>
+    <div class="test">
+      <ng-container *ngFor="let user of selectedUsers">
+         <app-test-calendar       
+          [currentUser]="user"
+        ></app-test-calendar>
+      </ng-container>
+    </div>
+
     <div class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
         <app-column
           *ngIf="!user.isHidden"
           [currentDate]="selectedDate"
           [currentUser]="user"
-          [pinned] = 'pinnedUser.length>0'
+          [pinned]="pinnedUser.length > 0"
           (delete)="deleteFromList($event)"
           (pinUser)="pinUser($event)"
         ></app-column>
       </ng-container>
     </div>
-     
   </mat-drawer-content>
 </mat-drawer-container>

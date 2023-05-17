@@ -1,5 +1,5 @@
-  <mat-toolbar>
-    <mat-toolbar-row
+<mat-toolbar>
+  <mat-toolbar-row
     [ngStyle]="{
       'background-color': 'var(--color-' + currentUser.userType + ')'
     }"
@@ -19,10 +19,10 @@
     </div>
 
     <div class="buttons-right">
-      <button mat-menu-item >
-          <mat-icon class="white" ></mat-icon>
-          <mat-icon class="white" >push_pin</mat-icon>
-        </button>
+      <button mat-menu-item>
+        <mat-icon class="white"></mat-icon>
+        <mat-icon class="white">push_pin</mat-icon>
+      </button>
       <button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
@@ -31,18 +31,19 @@
           <mat-icon>visibility</mat-icon>
           <span>Verbergen</span>
         </button>
-        <button  mat-menu-item  ><mat-icon>close</mat-icon><span>Verwijder</span></button>
-   
+        <button mat-menu-item>
+          <mat-icon>close</mat-icon><span>Verwijder</span>
+        </button>
       </mat-menu>
-      
     </div>
   </mat-toolbar-row>
-  </mat-toolbar>
-  <div class='demo-app-main'>
-    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
-      <ng-template #eventContent let-arg>
-        <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.title }}</i>
-      </ng-template>
-    </full-calendar>
-  </div>
+</mat-toolbar>
+<div class="demo-app-main">
+
+  <full-calendar [id]="'calendar' + currentUser.id">
+    <!-- <ng-template #eventContent let-arg>
+      <b>{{ arg.timeText }}</b>
+      <i>{{ arg.event.title }}</i>
+    </ng-template> -->
+  </full-calendar>
+</div>

@@ -3,12 +3,15 @@ import {
   ChangeDetectorRef,
   Input,
   SimpleChanges,
+  OnChanges,
 } from '@angular/core';
+import * as moment from 'moment';
 import {
   CalendarOptions,
   DateSelectArg,
   EventClickArg,
   EventApi,
+  Calendar,
 } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -16,6 +19,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { IUser } from 'src/app/models/IUser.model';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { SharedService } from 'src/app/services/shared.service';
+import { AgendaItem } from 'src/app/models/agentaItem.model';
+import { map } from 'rxjs';
+import { AgendaService } from 'src/app/services/agenda.service';
 // import { INITIAL_EVENTS, createEventId } from '../event-utils';
 
 @Component({
@@ -23,90 +29,105 @@ import { SharedService } from 'src/app/services/shared.service';
   templateUrl: './test-calendar.component.html',
   styleUrls: ['./test-calendar.component.css'],
 })
-export class TestCalendarComponent {
+export class TestCalendarComponent implements OnChanges {
   private previousDate!: Date;
   private previousView!: '';
-  @Input() currentDate = new Date();
-  @Input() viewType = 'timeGridDay';
+
+  private calendar!: Calendar;
+
+  currentDate = new Date();
+  @Input() currentUser!: IUser;
+  viewType = 'timeGridDay';
   userType = 'test';
-  currentUser: IUser = {
-    id: '9D2461E2-5F3C-3D1B-4907-CA52756A26C9',
-    displayName: 'TEST Gabriella Washington',
-    userType: '0',
-    isHidden: false,
-    isPinned: false,
-  };
+  appointmentsList: AgendaItem[] = [];
 
-  // calendar
-
-  calendarVisible = true;
-  calendarOptions: CalendarOptions = {
-    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
-    headerToolbar: {
-      // left: 'prev,next today',
-      center: '',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay',
-    },
-    initialView: '',
-    //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-    weekends: false,
-    editable: true,
-    selectable: true,
-    selectMirror: true,
-    allDaySlot: false,
-    dayMaxEvents: true,
-
-    locale: 'nl',
-    slotMinTime: '06:00:00',
-    slotMaxTime: '22:00:00',
-
-    slotDuration: '00:30:00',
-    select: this.handleDateSelect.bind(this),
-    eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this),
-    /* you can update a remote database when these fire:
-    eventAdd:
-    eventChange:
-    eventRemove:
-    */
-  };
-
-  // ngAfterViewInit() {
-  //   this.calendar.gotoDate(this.selectedDate);
-  // }
   currentEvents: EventApi[] = [];
 
   constructor(
-    private changeDetector: ChangeDetectorRef,
-    
+    public agendaService: AgendaService,
+    private sharedService: SharedService,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    //data changes
-    if (changes['currentDate'] && !changes['currentDate'].firstChange) {
-      if (
-        new Date(this.currentDate).getTime() !==
-        new Date(this.previousDate).getTime()
-      ) {
-        console.log('Current date has changed');
-        this.getAppointments();
-      }
-    }
-    this.previousDate = this.currentDate;
+  ngAfterViewInit(): void {
+    this.sharedService.getViewType.subscribe(async (viewType) => {  
 
-    //view changes
-    if (changes['viewType'] && !changes['viewType'].firstChange) {
-      if (this.viewType !== this.previousView) {
-        console.log('View has changed');
-      }
-    }
+      this.viewType = viewType ? viewType : this.viewType;
+
+      console.log(viewType);
+      
+      this.calendar.changeView(viewType);
+    });
+
+    this.sharedService.getSelectedDate.subscribe((date) => {
+      this.currentDate = date ? date : this.currentDate;
+      const newDateAngeda = moment(this.currentDate).format('YYYY-MM-DD');
+
+      var calendarId = 'calendar' + this.currentUser.id;
+
+      this.calendar = new Calendar(
+        document.getElementById(calendarId) as HTMLElement,
+        {
+          plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
+          headerToolbar: {
+            // left: 'prev,next today',
+            center: '',
+            right: '',
+          },
+
+          //initialView: 'timeGridDay',
+          initialDate: newDateAngeda,
+
+          //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+          weekends: false,
+          editable: true,
+          selectable: true,
+          selectMirror: true,
+          allDaySlot: false,
+          dayMaxEvents: true,
+
+          locale: 'nl',
+          slotMinTime: '06:00:00',
+          slotMaxTime: '22:00:00',
+
+          slotDuration: '00:30:00',
+          events: this.appointmentsList,
+        }
+      );
+
+      this.calendar.render();
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('test');
   }
   getAppointments() {
-    throw new Error('Method not implemented.');
-  }
+    this.appointmentsList = [];
+    const userId = this.currentUser.id!;
+    const dateStr = new Date(this.currentDate).toLocaleDateString();
 
-  handleCalendarToggle() {
-    this.calendarVisible = !this.calendarVisible;
+    const appointmentsFetch =
+      this.userType === 'client'
+        ? this.agendaService.getAgendaForClientByDate(userId, dateStr)
+        : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
+
+    appointmentsFetch
+      .pipe(
+        map((response: any) => {
+          if (response.status === 404) {
+            throw new Error('Not found');
+          }
+          return response;
+        })
+      )
+      .subscribe((appointments: any) => {
+        this.appointmentsList = appointments;
+        // this.findOverlapping(this.appointmentsList);
+
+        //this.appointmentsList.findOverlapping(this.appointmentsList)
+        console.log(this.appointmentsList);
+      });
   }
 
   // handleWeekendsToggle() {

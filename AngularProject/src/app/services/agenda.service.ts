@@ -8,8 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AgendaService {
-  public setSelectedDate = new BehaviorSubject<any>([]);
-  public getSelectedDate = this.setSelectedDate.asObservable();
+  
 
   public setPinnedUserDate = new BehaviorSubject<any>([]);
   public getPinnedUserDate = this.setPinnedUserDate.asObservable();
