@@ -4,6 +4,8 @@ import {
   Input,
   SimpleChanges,
   OnChanges,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import * as moment from 'moment';
 import {
@@ -22,6 +24,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { map } from 'rxjs';
 import { AgendaService } from 'src/app/services/agenda.service';
+import { UserService } from 'src/app/services/user.service';
 // import { INITIAL_EVENTS, createEventId } from '../event-utils';
 
 @Component({
@@ -42,20 +45,23 @@ export class TestCalendarComponent implements OnChanges {
   appointmentsList: AgendaItem[] = [];
 
   currentEvents: EventApi[] = [];
+  @Input() pinned: boolean = false;
+  @Output() delete: EventEmitter<IUser> = new EventEmitter();
+  @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   constructor(
     public agendaService: AgendaService,
     private sharedService: SharedService,
+    private userService: UserService,
     private changeDetector: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
-    this.sharedService.getViewType.subscribe(async (viewType) => {  
-
+    this.sharedService.getViewType.subscribe(async (viewType) => {
       this.viewType = viewType ? viewType : this.viewType;
 
       console.log(viewType);
-      
+
       this.calendar.changeView(viewType);
     });
 
@@ -75,9 +81,8 @@ export class TestCalendarComponent implements OnChanges {
             right: '',
           },
 
-          //initialView: 'timeGridDay',
+          initialView: 'timeGridDay',
           initialDate: newDateAngeda,
-
           //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
           weekends: false,
           editable: true,
@@ -101,6 +106,10 @@ export class TestCalendarComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('test');
+  }
+  togglePin() {
+    this.pinUser.emit(this.currentUser);
+    this.userService.isPinned = !this.userService.isPinned;
   }
   getAppointments() {
     this.appointmentsList = [];

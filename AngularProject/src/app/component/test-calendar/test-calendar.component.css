@@ -1,21 +1,21 @@
-
-.demo-app-main{
-height: calc(100% - 65px) !important;
-background-color: #ffffff;
-width: 360px !important;
+.container {
+  height: 500px;
+   position: relative;
   border: 1px solid #c2bfbf;
+}
+
+.calendar-main {
+  height: calc(100% - 65px) !important;
+  background-color: #ffffff;
+  width: 360px !important;
+  position: relative;
+  top: 10px !important;
+  height: 90vh ! important;
   
 }
-full-calendar{
-    position: relative;
-    top: 10px !	important;	
-    height: 96%;
-}
-
-.fc-headerToolbar{
-        color:RED
-    }
-
+/* full-calendar{
+    
+} */
 
 /* column  css*/
 
@@ -28,43 +28,18 @@ mat-toolbar-row {
   padding-right: 6px;
   color: white;
 }
-mat-icon, svg, .white{
+mat-icon,
+svg,
+.white {
   color: white;
   margin-right: 0;
 }
-.pinned{
+.pinned {
   width: 360px;
   top: 0;
-  border-right: solid var(--color-' + currentUser.userType + ');
-
+  border-right: solid var(--color- " + currentUser.userType + ");
 }
-/* .user-label {
-  display: flex;
-  align-self: center;
-  flex-direction: row;
-  align-items: stretch;
-  font-size: 14px;
-  font-weight: 600;
-  gap: 6px;
-} */
-/* .user-type {
-  color: #fff;
-  border: 1px solid hsl(0, 0%, 98%);
-  height: 24px;
-  margin: 1px;
-  border-radius: 50px;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0em;
-  text-align: center;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 0px 8px;
-} */
+
 .buttons-right {
   display: flex;
   align-self: center;
@@ -109,27 +84,7 @@ mat-icon, svg, .white{
   bottom: -5px;
   position: relative;
 }
-/* .appointment {
-  background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 8px;
-  width: 80%;
-  left: 26px;
 
-  border-radius: 6px;
-  z-index: 10;
-} */
-
-.hour {
-  border-bottom: 1px solid #e4e4e4;
-}
-
-.mat-divider {
-  margin: 0;
-}
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 10fr;
@@ -143,24 +98,14 @@ mat-icon, svg, .white{
   height: 100%;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(14, 1fr);
-  
 }
-/* .grid-box-little-divider {
-  grid-column: 2 / 3;
-  display: grid;
-  height: 100%;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(12, 1fr);
-
-} */
 
 .grid-box {
   grid-column: 2/3;
   display: grid;
-  height: 100%;
+  /* height: 100%; */
   grid-template-columns: 1fr;
   grid-template-rows: repeat(14, 1fr);
- 
 }
 
 .timestamp {
@@ -171,7 +116,6 @@ mat-icon, svg, .white{
 .app-call {
   padding: 20px;
   text-align: center;
-  
 }
 .app {
   /* background: linear-gradient(315deg, #6ded91 0%, #009f1a 100%); */
@@ -186,7 +130,7 @@ mat-icon, svg, .white{
   align-items: flex-start;
 }
 .app > div {
-  margin: 5px; 
+  margin: 5px;
   color: #ffffff;
 }
 .overlay1 {
@@ -194,5 +138,5 @@ mat-icon, svg, .white{
 }
 .overlay2 {
   width: 143px;
-  left:140px;
+  left: 140px;
 }

@@ -45,13 +45,13 @@ export class PlannerComponent {
   ) {}
 
   ngOnInit(): void {
-    // this.clientService.setUserList.next(this.selectedUsers);
-    this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
+
+    // this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
   getDateSelected(e: any) {
     const newDate = moment(e).format('YYYY-MM-DD');
     this.sharedService.setSelectedDate.next(newDate);
-    console.log(newDate);
+    // console.log(newDate);
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(

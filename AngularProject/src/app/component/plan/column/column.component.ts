@@ -21,10 +21,11 @@ export class ColumnComponent implements OnChanges {
   private previousDate!: Date;
   @Input() currentDate = new Date();
   @Input() currentUser!: IUser;
-  @Output() delete: EventEmitter<IUser> = new EventEmitter();
+
   appointmentsList: AgendaItem[] = [];
   id: string = '';
   @Input() pinned: boolean = false;
+  @Output() delete: EventEmitter<IUser> = new EventEmitter();
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
 
   //css parameters for ngStyle
@@ -91,7 +92,7 @@ export class ColumnComponent implements OnChanges {
       .subscribe((appointments: any) => {
         this.appointmentsList = appointments;
         this.findOverlapping(this.appointmentsList);
-        
+
         //this.appointmentsList.findOverlapping(this.appointmentsList)
         console.log(this.appointmentsList);
       });

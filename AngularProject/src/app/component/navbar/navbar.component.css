@@ -48,7 +48,7 @@ mat-toolbar-row {
   background: #f6f6f7;
   border-radius: 50px;
 }
-.time-toggle > .selectedButton {
+.time-toggle >.selectedButton  {
   background-color: white;
   width: 30%;
   height: 30px;

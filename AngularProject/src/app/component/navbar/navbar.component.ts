@@ -27,13 +27,19 @@ export class NavbarComponent {
 
   // }
   dagToggeleClicked(event: any) {
+     const buttonElement = event.target as HTMLButtonElement;
+     buttonElement.classList.toggle('selectedButton');
     this.sharedService.setViewType.next('timeGridDay');      
   }
   weekToggeleClicked(event: any) {
+     const buttonElement = event.target as HTMLButtonElement;
+     buttonElement.classList.toggle('selectedButton');
    this.sharedService.setViewType.next('timeGridWeek');      
   }
 
   monthToggeleClicked(event: any) {
+     const buttonElement = event.target as HTMLButtonElement;
+     buttonElement.classList.toggle('selectedButton');
      this.sharedService.setViewType.next('dayGridMonth');
   }
 }
