@@ -27,6 +27,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { UserPipe } from './userpipe';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -44,7 +48,6 @@ import { TestCalendarComponent } from './component/test-calendar/test-calendar.c
     AddUserComponent,
     UserPipe,
     TestCalendarComponent,
-
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
   bootstrap: [AppComponent],
@@ -68,7 +71,9 @@ import { TestCalendarComponent } from './component/test-calendar/test-calendar.c
     MatMomentDateModule,
     MatDialogModule,
     MatSelectModule,
+    MatDatepickerModule,
     MatInputModule,
+    MatFormFieldModule,
     MatOptionModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
