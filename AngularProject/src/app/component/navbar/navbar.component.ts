@@ -17,15 +17,7 @@ export class NavbarComponent {
     });
   }
 
-  // onInit(): void {
-  //   if (this.selectedTimeToggle == 1) {
-  //     const button = document.querySelector('.dayToggle');
-  //      if (button instanceof HTMLElement) {
-  //        button.classList.toggle('selectedButton');
-  //      }
-  //   }
 
-  // }
   dagToggeleClicked(event: any) {
      const buttonElement = event.target as HTMLButtonElement;
      buttonElement.classList.toggle('selectedButton');

@@ -1,7 +1,6 @@
 .container {
-  height: 500px;
-   position: relative;
-  border: 1px solid #c2bfbf;
+  position: relative;
+  border: 1px solid #d7d6d6;
 }
 
 .calendar-main {
@@ -9,13 +8,12 @@
   background-color: #ffffff;
   width: 360px !important;
   position: relative;
-  top: 10px !important;
-  height: 90vh ! important;
-  
+  top: 20px !important;  
 }
-/* full-calendar{
-    
-} */
+full-calendar{
+  position: relative;
+  height: 80vh ! important;
+}
 
 /* column  css*/
 

@@ -61,7 +61,6 @@ export class TestCalendarComponent implements OnChanges {
       this.viewType = viewType ? viewType : this.viewType;
 
       console.log(viewType);
-
       this.calendar.changeView(viewType);
     });
 
@@ -84,7 +83,8 @@ export class TestCalendarComponent implements OnChanges {
           initialView: 'timeGridDay',
           initialDate: newDateAngeda,
           //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-          weekends: false,
+          weekends: true,
+          firstDay:1,
           editable: true,
           selectable: true,
           selectMirror: true,

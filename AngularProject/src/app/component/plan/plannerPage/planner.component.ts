@@ -7,6 +7,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AgendaService } from 'src/app/services/agenda.service';
 import * as moment from 'moment';
 import { SharedService } from 'src/app/services/shared.service';
+import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { DateAdapter } from '@angular/material/core';
 // import { ClientService } from 'src/app/services/client.service';
 
 @Component({
@@ -41,11 +43,12 @@ export class PlannerComponent {
     public agendaService: AgendaService,
     private sharedService: SharedService,
     public dialog: MatDialog,
-    private renderer: Renderer2
-  ) {}
+    private dateAdapter: DateAdapter<Date>
+  ) {
+    this.dateAdapter.setLocale('nl');
+  }
 
   ngOnInit(): void {
-
     // this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
   }
   getDateSelected(e: any) {
@@ -74,10 +77,7 @@ export class PlannerComponent {
       this.agendaService.setPinnedUserDate.next(null);
       this.pinnedUser = [];
     }
-    this.setUserFirstInList(user);
-    //set no border
-    // const element = document.getElementById('app-column');
-    // this.renderer.setStyle(element, 'border', 'none  !important;');
+    this.setUserFirstInList(user);  
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;
@@ -103,4 +103,9 @@ export class PlannerComponent {
       this.selectedUsers.unshift(selectedUser);
     }
   }
+  filterWeekends = (date: Date): boolean => {
+    const day = date.getDay();
+    // Return true to enable the date if it's not a weekend (Saturday = 6, Sunday = 0)
+    return day !== 6 && day !== 0;
+  };
 }

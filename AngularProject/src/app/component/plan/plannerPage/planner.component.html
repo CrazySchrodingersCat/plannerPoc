@@ -3,6 +3,7 @@
     <mat-card class="calendar-card">
       <mat-calendar
         [(selected)]="selectedDate"
+ 
         (selectedChange)="getDateSelected($event)"
       ></mat-calendar>
     </mat-card>
@@ -114,7 +115,7 @@
       </ng-container>
     </div>
 
-    <!-- <div class="planning-columns-container">
+    <div class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
         <app-column
           *ngIf="!user.isHidden"
@@ -125,6 +126,6 @@
           (pinUser)="pinUser($event)"
         ></app-column>
       </ng-container>
-    </div> -->
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
