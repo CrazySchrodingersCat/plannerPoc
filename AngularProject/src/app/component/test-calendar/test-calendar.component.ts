@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import {
-  CalendarOptions,
   DateSelectArg,
   EventClickArg,
   EventApi,
@@ -19,7 +18,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { IUser } from 'src/app/models/IUser.model';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 import { SharedService } from 'src/app/services/shared.service';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
 import { map } from 'rxjs';
@@ -55,7 +53,13 @@ export class TestCalendarComponent implements OnChanges {
     private userService: UserService,
     private changeDetector: ChangeDetectorRef
   ) {}
-
+  ngOnInit(): void {
+    this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
+    this.userType = this.currentUser.discipline
+      ? this.currentUser.discipline
+      : 'client';
+    this.getAppointments();
+  }
   ngAfterViewInit(): void {
     this.sharedService.getViewType.subscribe(async (viewType) => {
       this.viewType = viewType ? viewType : this.viewType;
@@ -84,7 +88,7 @@ export class TestCalendarComponent implements OnChanges {
           initialDate: newDateAngeda,
           //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
           weekends: true,
-          firstDay:1,
+          firstDay: 1,
           editable: true,
           selectable: true,
           selectMirror: true,

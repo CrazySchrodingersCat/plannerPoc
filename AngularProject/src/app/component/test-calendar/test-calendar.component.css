@@ -138,3 +138,30 @@ svg,
   width: 143px;
   left: 140px;
 }
+.user-type {
+  color: #fff;
+  border: 1px solid hsl(0, 0%, 98%);
+  height: 24px;
+  margin: 1px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 8px;
+}
+.user-label {
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  align-items: stretch;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 6px;
+}

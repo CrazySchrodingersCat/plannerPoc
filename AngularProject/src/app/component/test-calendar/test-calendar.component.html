@@ -11,9 +11,9 @@
         }}{{ currentUser.displayName.split(" ")[1] | slice : 0 : 1 }}
       </p> -->
       <div>{{ currentUser.displayName }}</div>
-      <!-- <div *ngIf="currentUser.discipline; else client" class="user-type">
+      <div *ngIf="currentUser.discipline; else client" class="user-type">
         {{ userType | lowercase }}
-      </div> -->
+      </div>
       <ng-template #client>
         <div class="user-type">client</div>
       </ng-template>

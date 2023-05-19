@@ -47,7 +47,7 @@ export class ColumnComponent implements OnChanges {
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
-    console.log('from parent ', this.pinned);
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
