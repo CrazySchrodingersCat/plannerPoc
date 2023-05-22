@@ -38,7 +38,7 @@ export class PlannerComponent {
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();
   pinnedUser: IUser[] = [];
-  checked: boolean = false;
+  checked: boolean = true;
   color: ThemePalette = 'accent';
 
   userType: string = '';

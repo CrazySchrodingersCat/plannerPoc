@@ -70,7 +70,7 @@ export class TestCalendarComponent implements OnChanges {
         this.viewType = viewType;
         console.log(viewType);
         this.calendar.changeView(viewType);
-
+        this.getAppointments();
       }
 
          
@@ -114,9 +114,15 @@ export class TestCalendarComponent implements OnChanges {
 
           slotDuration: '00:30:00',
           events: this.events,
+          // events: [
+          //   {
+          //     // this object will be "parsed" into an Event Object
+          //     title: 'The Title', // a property!
+          //     start: '2023-22-05', // a property!
+          //     end: '2023-22-22', // a property! ** see important note below about 'end' **
+          //   },
+          // ],
         }
-        
-        
       );
       console.log(this.appointmentsList);
 
@@ -138,8 +144,8 @@ export class TestCalendarComponent implements OnChanges {
 
     const appointmentsFetch =
       this.userType === 'client'
-        ? this.agendaService.getAgendaForClientByDate(userId, dateStr)
-        : this.agendaService.getAgendaForPractitionerByDate(userId, dateStr);
+        ? this.agendaService.getWeekAgendaForClientByDate(userId, dateStr)
+        : this.agendaService.getWeekAgendaForPractitionerByDate(userId, dateStr);
 
     appointmentsFetch
       .pipe(
@@ -167,7 +173,7 @@ export class TestCalendarComponent implements OnChanges {
         this.events = appointments;
         // this.calendarEvents = appointments;
 
-        console.log(this.events);
+        console.log('events: ',appointments);
       });
   }
 

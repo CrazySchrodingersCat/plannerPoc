@@ -77,7 +77,7 @@ namespace API.AppLogic
             return await _context.AgendaItems
                  .Where(item => item.ClientId == id &&
                  item.Date >= manday && item.Date < manday.AddDays(7)).ToListAsync();
-        }
+        eek}
 
         public async Task EditItem(string id, AgendaItemRequestDTO update)
         {

@@ -9,7 +9,7 @@ import { SharedService } from 'src/app/services/shared.service';
 })
 export class NavbarComponent {
   url: string = '';
-  selectedTimeToggle: number = 1;
+  selectedTimeToggle: boolean = false;
 
   constructor(private router: Router, private sharedService: SharedService) {
     this.router.events.subscribe((val: any) => {

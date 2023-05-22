@@ -53,9 +53,10 @@ mat-toolbar-row {
 }
 .mat-button-toggle-label-content {
     position: relative;
+    top:- 9px !important;
     bottom: 10px !important;
 }
-.time-toggle >.selectedButton  {
+.selectedButton  {
   background-color: white;
   width: 30%;
   height: 30px;
