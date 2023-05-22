@@ -41,11 +41,13 @@ export class TestCalendarComponent implements OnChanges {
   viewType = 'timeGridDay';
   userType = 'test';
   appointmentsList: AgendaItem[] = [];
+  events = [];
 
   currentEvents: EventApi[] = [];
   @Input() pinned: boolean = false;
   @Output() delete: EventEmitter<IUser> = new EventEmitter();
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
+  calendarEvents: any[] = [];
 
   constructor(
     public agendaService: AgendaService,
@@ -59,13 +61,23 @@ export class TestCalendarComponent implements OnChanges {
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
+    console.log(this.appointmentsList);
+    
   }
   ngAfterViewInit(): void {
     this.sharedService.getViewType.subscribe(async (viewType) => {
-      this.viewType = viewType ? viewType : this.viewType;
+      if (this.viewType != viewType) {
+        this.viewType = viewType;
+        console.log(viewType);
+        this.calendar.changeView(viewType);
 
-      console.log(viewType);
-      this.calendar.changeView(viewType);
+      }
+
+         
+        //this.viewType = viewType ? viewType : this.viewType;
+
+      
+      
     });
 
     this.sharedService.getSelectedDate.subscribe((date) => {
@@ -73,6 +85,7 @@ export class TestCalendarComponent implements OnChanges {
       const newDateAngeda = moment(this.currentDate).format('YYYY-MM-DD');
 
       var calendarId = 'calendar' + this.currentUser.id;
+      this.getAppointments();
 
       this.calendar = new Calendar(
         document.getElementById(calendarId) as HTMLElement,
@@ -100,9 +113,12 @@ export class TestCalendarComponent implements OnChanges {
           slotMaxTime: '22:00:00',
 
           slotDuration: '00:30:00',
-          events: this.appointmentsList,
+          events: this.events,
         }
+        
+        
       );
+      console.log(this.appointmentsList);
 
       this.calendar.render();
     });
@@ -132,21 +148,30 @@ export class TestCalendarComponent implements OnChanges {
             throw new Error('Not found');
           }
           return response;
+        }),
+        map((appointments: any[]) => {
+          
+          return appointments.map((appointment) => ({
+            title: appointment.client.displayName,
+            start: new Date(
+              appointment.date.substring(0, 10) + 'T' + appointment.startTime
+            ),
+            end: new Date(
+              appointment.date.substring(0, 10) + 'T' + appointment.endTime
+            ), // Adjust as needed based on your event data
+            // Add more properties as needed
+          }));
         })
       )
       .subscribe((appointments: any) => {
-        this.appointmentsList = appointments;
-        // this.findOverlapping(this.appointmentsList);
+        this.events = appointments;
+        // this.calendarEvents = appointments;
 
-        //this.appointmentsList.findOverlapping(this.appointmentsList)
-        console.log(this.appointmentsList);
+        console.log(this.events);
       });
   }
 
-  // handleWeekendsToggle() {
-  //   const { calendarOptions } = this;
-  //   calendarOptions.weekends = !calendarOptions.weekends;
-  // }
+
 
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');

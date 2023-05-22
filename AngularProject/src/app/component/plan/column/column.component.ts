@@ -56,8 +56,7 @@ export class ColumnComponent implements OnChanges {
       if (
         new Date(this.currentDate).getTime() !==
         new Date(this.previousDate).getTime()
-      ) {
-        console.log('Current date has changed');
+      ) {  
         this.getAppointments();
       }
     }
@@ -92,9 +91,6 @@ export class ColumnComponent implements OnChanges {
       .subscribe((appointments: any) => {
         this.appointmentsList = appointments;
         this.findOverlapping(this.appointmentsList);
-
-        //this.appointmentsList.findOverlapping(this.appointmentsList)
-        console.log(this.appointmentsList);
       });
   }
 

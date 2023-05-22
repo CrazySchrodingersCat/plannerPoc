@@ -18,6 +18,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColumnComponent } from './component/plan/column/column.component';
 import { AddUserComponent } from './component/plan/add-user/add-user.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {
   MAT_DATE_LOCALE,
   MatNativeDateModule,
@@ -75,6 +76,7 @@ import { TestCalendarComponent } from './component/test-calendar/test-calendar.c
     MatInputModule,
     MatFormFieldModule,
     MatOptionModule,
+    MatSlideToggleModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

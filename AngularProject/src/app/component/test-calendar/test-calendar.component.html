@@ -41,7 +41,7 @@
 </mat-toolbar>
   <div class="calendar-main">
 
-    <full-calendar [id]="'calendar' + currentUser.id">
+    <full-calendar [id]="'calendar' + currentUser.id" [events]="calendarEvents">
       <!-- <ng-template #eventContent let-arg>
         <b>{{ arg.timeText }}</b>
         <i>{{ arg.event.title }}</i>

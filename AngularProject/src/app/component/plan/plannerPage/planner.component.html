@@ -2,8 +2,8 @@
   <mat-drawer class="side-bar" mode="side" opened position="end">
     <mat-card class="calendar-card">
       <mat-calendar
-        [(selected)]="selectedDate"  
-        (selectedChange)="getDateSelected($event)"   
+        [(selected)]="selectedDate"
+        (selectedChange)="getDateSelected($event)"
       ></mat-calendar>
     </mat-card>
     <div class="agendas-container">
@@ -74,14 +74,20 @@
         </div>
       </div>
     </div>
+    <mat-slide-toggle class="toggle" (click)="calendarOn()">Full-calendar</mat-slide-toggle
+    > 
+  
+    
 
     <div class="legenda">
+      
       <div class="test1">Client</div>
       <div class="test2">Psycholoog (PS)</div>
       <div class="test3">Psycholoog(LV)</div>
       <div class="test4">Psycholoog (CGT)</div>
       <div class="test5">Regiebehandelaar</div>
       <div class="test6">Fysiotherapeut</div>
+      <!-- <div><button mat-button class="calendarButton" (click)="calendarOn()">Full-calendar toggle</button></div> -->
     </div>
   </mat-drawer>
   <mat-drawer
@@ -101,20 +107,19 @@
   </mat-drawer>
 
   <mat-drawer-content class="columns-flex-container">
-    <div class="planning-columns-container">
+    <div *ngIf="checked" class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
-         <app-test-calendar  
-          *ngIf="!user.isHidden"     
+        <app-test-calendar
+          *ngIf="!user.isHidden"
           [currentUser]="user"
           [pinned]="pinnedUser.length > 0"
           (delete)="deleteFromList($event)"
           (pinUser)="pinUser($event)"
-
         ></app-test-calendar>
       </ng-container>
     </div>
 
-    <div class="planning-columns-container">
+    <div *ngIf="!checked" class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
         <app-column
           *ngIf="!user.isHidden"

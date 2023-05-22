@@ -8,7 +8,8 @@ import { AgendaService } from 'src/app/services/agenda.service';
 import * as moment from 'moment';
 import { SharedService } from 'src/app/services/shared.service';
 import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
-import { DateAdapter } from '@angular/material/core';
+import { DateAdapter, ThemePalette } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { ClientService } from 'src/app/services/client.service';
 
 @Component({
@@ -37,6 +38,8 @@ export class PlannerComponent {
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();
   pinnedUser: IUser[] = [];
+  checked: boolean = false;
+  color: ThemePalette = 'accent';
 
   userType: string = '';
   constructor(
@@ -77,7 +80,7 @@ export class PlannerComponent {
       this.agendaService.setPinnedUserDate.next(null);
       this.pinnedUser = [];
     }
-    this.setUserFirstInList(user);  
+    this.setUserFirstInList(user);
   }
   hideUser(user: IUser) {
     user.isHidden = !user.isHidden;
@@ -108,4 +111,7 @@ export class PlannerComponent {
     // Return true to enable the date if it's not a weekend (Saturday = 6, Sunday = 0)
     return day !== 6 && day !== 0;
   };
+  calendarOn() {
+    this.checked = !this.checked;
+  }
 }
