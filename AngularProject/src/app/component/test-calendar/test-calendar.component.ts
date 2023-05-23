@@ -61,6 +61,8 @@ export class TestCalendarComponent {
   ) {}
   ngOnInit(): void {
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
+    console.log(this.currentUser.discipline);
+    
     this.userType = this.currentUser.discipline
       ? this.currentUser.discipline
       : 'client';

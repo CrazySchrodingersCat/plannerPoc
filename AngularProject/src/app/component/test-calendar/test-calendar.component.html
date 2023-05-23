@@ -12,7 +12,7 @@
       </p> -->
         <div>{{ currentUser.displayName }}</div>
         <div *ngIf="currentUser.discipline; else client" class="user-type">
-          {{ userType | lowercase }}
+          {{ currentUser.discipline | lowercase }}
         </div>
         <ng-template #client>
           <div class="user-type">client</div>
