@@ -26,3 +26,13 @@ body {
 
   /* --fc-timegrid-event : background-color:var(--color-0); */
 }
+.fc .fc-toolbar-title{
+    height: 24px;
+    position: relative;
+    top: -1px;
+    padding: 10px 16px 2px !important;
+    /* font-weight: 600; */
+    font-size: 16px;
+    line-height: 150%;
+    color: #787878;
+}

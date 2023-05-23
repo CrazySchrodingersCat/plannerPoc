@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import {
   EventApi,
   Calendar,
+  CalendarOptions,
   DateSelectArg,
   EventClickArg,
 } from '@fullcalendar/core';
@@ -22,6 +23,7 @@ import { customEvent } from 'src/app/models/customEvent.model';
 import { map } from 'rxjs';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { UserService } from 'src/app/services/user.service';
+import { INITIAL_EVENTS } from 'src/app/event-utils';
 // import { INITIAL_EVENTS, createEventId } from '../event-utils';
 
 @Component({
@@ -48,6 +50,9 @@ export class TestCalendarComponent {
   @Output() pinUser: EventEmitter<IUser> = new EventEmitter();
   calendarEvents: any[] = [];
 
+  calendarOptions: CalendarOptions = {
+    plugins: [dayGridPlugin],
+  };
   constructor(
     public agendaService: AgendaService,
     private sharedService: SharedService,
@@ -56,12 +61,10 @@ export class TestCalendarComponent {
   ) {}
   ngOnInit(): void {
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
-    // this.currentDate = new Date(2023, 4, 3);
     this.userType = this.currentUser.discipline
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
-    console.log(this.appointmentsList);
   }
   ngAfterViewInit(): void {
     this.sharedService.getSelectedDate.subscribe((date) => {
@@ -70,6 +73,8 @@ export class TestCalendarComponent {
 
       var calendarId = 'calendar' + this.currentUser.id;
       this.getAppointments();
+      // console.log('events: ', this.currentUser.displayName, this.events);
+      
 
       this.calendar = new Calendar(
         document.getElementById(calendarId) as HTMLElement,
@@ -83,7 +88,7 @@ export class TestCalendarComponent {
 
           initialView: 'timeGridDay',
           initialDate: newDateAngeda,
-          //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
+          initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
           weekends: true,
           firstDay: 1,
           editable: true,
@@ -99,27 +104,21 @@ export class TestCalendarComponent {
           slotDuration: '00:30:00',
 
           eventColor: 'var(--color-0)',
-          events: this.events,
-          // events: [
-          //   {
-          //     // this object will be "parsed" into an Event Object
-          //     title: 'The Title', // a property!
-          //     start: '2023-22-05', // a property!
-          //     end: '2023-22-22', // a property! ** see important note below about 'end' **
-          //   },
-          // ],
+          // 'background-color':
+            // currentUser.userType == '0'
+            //   ? 'var(--color-' + app.practitioner.userType + ')'
+            //   : 'var(--color-0)'
+          events: this.events,  
         }
       );
-      console.log(this.appointmentsList);
-
       this.calendar.render();
     });
     this.sharedService.getViewType.subscribe(async (viewType) => {
       if (this.viewType != viewType) {
         this.viewType = viewType;
-        console.log(viewType);
+
         this.calendar.changeView(viewType);
-        this.getAppointments();
+        // this.getAppointments();
       }
     });
   }
@@ -132,12 +131,8 @@ export class TestCalendarComponent {
     this.appointmentsList = [];
     this.viewType = '';
     const userId = this.currentUser.id!;
-    // const dateStr = new Date(this.currentDate).toLocaleString();
     const currentDate = new Date(this.currentDate);
     const dateStr = currentDate.toLocaleString();
-    console.log(this.currentDate);
-
-    console.log(dateStr);
 
     if (!isNaN(currentDate.getTime())) {
       const appointmentsFetch =
@@ -158,25 +153,29 @@ export class TestCalendarComponent {
           })
         )
         .subscribe((appointments: any) => {
-          console.log(appointments);
-
+          console.log('appointments: ',this.currentUser.displayName, appointments);
           this.events = this.convertAgendaItemToCustomEvent(appointments);
-
-          console.log('events: ', this.currentUser.displayName, appointments);
+          console.log('events: ', this.currentUser.displayName, this.events);
         });
     }
   }
   convertAgendaItemToCustomEvent(appointments: any): any[] {
     const convertedEvents: customEvent[] = [];
-
+   
     for (const item of appointments) {
-      console.log(item);
-
+       let info: string = '';
+       if (this.userType = 'client'){
+          info =
+            item.practitioner.displayName +
+            ', ' +
+            item.practitioner.discipline;
+        }else{
+          info = item.client.displayName;
+        }
       const dateStr = item.date.split('T')[0];
-      console.log(dateStr);
 
       const convertedEvent: customEvent = {
-        title: item.client.displayName,
+        title: info,
         start: new Date(dateStr + 'T' + item.startTime),
         end: new Date(dateStr + 'T' + item.endTime),
       };
