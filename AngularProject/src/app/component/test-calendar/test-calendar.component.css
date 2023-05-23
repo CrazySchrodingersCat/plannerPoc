@@ -165,3 +165,8 @@ svg,
   font-weight: 600;
   gap: 6px;
 }
+.fc-timegrid-event .fc-event-main{
+   padding: 1px 1px 0;
+    background-color: rgb(70, 193, 193);
+}
+   

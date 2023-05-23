@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { IUser } from 'src/app/models/IUser.model';
@@ -7,9 +7,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AgendaService } from 'src/app/services/agenda.service';
 import * as moment from 'moment';
 import { SharedService } from 'src/app/services/shared.service';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { DateAdapter, ThemePalette } from '@angular/material/core';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import { ClientService } from 'src/app/services/client.service';
 
 @Component({

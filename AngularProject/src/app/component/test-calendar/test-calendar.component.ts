@@ -2,17 +2,15 @@ import {
   Component,
   ChangeDetectorRef,
   Input,
-  SimpleChanges,
-  OnChanges,
   EventEmitter,
   Output,
 } from '@angular/core';
 import * as moment from 'moment';
 import {
-  DateSelectArg,
-  EventClickArg,
   EventApi,
   Calendar,
+  DateSelectArg,
+  EventClickArg,
 } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -20,6 +18,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { IUser } from 'src/app/models/IUser.model';
 import { SharedService } from 'src/app/services/shared.service';
 import { AgendaItem } from 'src/app/models/agentaItem.model';
+import { customEvent } from 'src/app/models/customEvent.model';
 import { map } from 'rxjs';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { UserService } from 'src/app/services/user.service';
@@ -30,7 +29,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './test-calendar.component.html',
   styleUrls: ['./test-calendar.component.css'],
 })
-export class TestCalendarComponent implements OnChanges {
+export class TestCalendarComponent {
   private previousDate!: Date;
   private previousView!: '';
 
@@ -41,7 +40,7 @@ export class TestCalendarComponent implements OnChanges {
   viewType = 'timeGridDay';
   userType = 'test';
   appointmentsList: AgendaItem[] = [];
-  events = [];
+  events: customEvent[] = [];
 
   currentEvents: EventApi[] = [];
   @Input() pinned: boolean = false;
@@ -57,29 +56,14 @@ export class TestCalendarComponent implements OnChanges {
   ) {}
   ngOnInit(): void {
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
+    // this.currentDate = new Date(2023, 4, 3);
     this.userType = this.currentUser.discipline
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
     console.log(this.appointmentsList);
-    
   }
   ngAfterViewInit(): void {
-    this.sharedService.getViewType.subscribe(async (viewType) => {
-      if (this.viewType != viewType) {
-        this.viewType = viewType;
-        console.log(viewType);
-        this.calendar.changeView(viewType);
-        this.getAppointments();
-      }
-
-         
-        //this.viewType = viewType ? viewType : this.viewType;
-
-      
-      
-    });
-
     this.sharedService.getSelectedDate.subscribe((date) => {
       this.currentDate = date ? date : this.currentDate;
       const newDateAngeda = moment(this.currentDate).format('YYYY-MM-DD');
@@ -113,6 +97,8 @@ export class TestCalendarComponent implements OnChanges {
           slotMaxTime: '22:00:00',
 
           slotDuration: '00:30:00',
+
+          eventColor: 'var(--color-0)',
           events: this.events,
           // events: [
           //   {
@@ -128,56 +114,78 @@ export class TestCalendarComponent implements OnChanges {
 
       this.calendar.render();
     });
+    this.sharedService.getViewType.subscribe(async (viewType) => {
+      if (this.viewType != viewType) {
+        this.viewType = viewType;
+        console.log(viewType);
+        this.calendar.changeView(viewType);
+        this.getAppointments();
+      }
+    });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('test');
-  }
   togglePin() {
     this.pinUser.emit(this.currentUser);
     this.userService.isPinned = !this.userService.isPinned;
   }
   getAppointments() {
     this.appointmentsList = [];
+    this.viewType = '';
     const userId = this.currentUser.id!;
-    const dateStr = new Date(this.currentDate).toLocaleDateString();
+    // const dateStr = new Date(this.currentDate).toLocaleString();
+    const currentDate = new Date(this.currentDate);
+    const dateStr = currentDate.toLocaleString();
+    console.log(this.currentDate);
 
-    const appointmentsFetch =
-      this.userType === 'client'
-        ? this.agendaService.getWeekAgendaForClientByDate(userId, dateStr)
-        : this.agendaService.getWeekAgendaForPractitionerByDate(userId, dateStr);
+    console.log(dateStr);
 
-    appointmentsFetch
-      .pipe(
-        map((response: any) => {
-          if (response.status === 404) {
-            throw new Error('Not found');
-          }
-          return response;
-        }),
-        map((appointments: any[]) => {
-          
-          return appointments.map((appointment) => ({
-            title: appointment.client.displayName,
-            start: new Date(
-              appointment.date.substring(0, 10) + 'T' + appointment.startTime
-            ),
-            end: new Date(
-              appointment.date.substring(0, 10) + 'T' + appointment.endTime
-            ), // Adjust as needed based on your event data
-            // Add more properties as needed
-          }));
-        })
-      )
-      .subscribe((appointments: any) => {
-        this.events = appointments;
-        // this.calendarEvents = appointments;
+    if (!isNaN(currentDate.getTime())) {
+      const appointmentsFetch =
+        this.userType === 'client'
+          ? this.agendaService.getWeekAgendaForClientByDate(userId, dateStr)
+          : this.agendaService.getWeekAgendaForPractitionerByDate(
+              userId,
+              dateStr
+            );
 
-        console.log('events: ',appointments);
-      });
+      appointmentsFetch
+        .pipe(
+          map((response: any) => {
+            if (response.status === 404) {
+              throw new Error('Not found');
+            }
+            return response;
+          })
+        )
+        .subscribe((appointments: any) => {
+          console.log(appointments);
+
+          this.events = this.convertAgendaItemToCustomEvent(appointments);
+
+          console.log('events: ', this.currentUser.displayName, appointments);
+        });
+    }
   }
+  convertAgendaItemToCustomEvent(appointments: any): any[] {
+    const convertedEvents: customEvent[] = [];
 
+    for (const item of appointments) {
+      console.log(item);
 
+      const dateStr = item.date.split('T')[0];
+      console.log(dateStr);
+
+      const convertedEvent: customEvent = {
+        title: item.client.displayName,
+        start: new Date(dateStr + 'T' + item.startTime),
+        end: new Date(dateStr + 'T' + item.endTime),
+      };
+
+      convertedEvents.push(convertedEvent);
+    }
+
+    return convertedEvents;
+  }
 
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');
