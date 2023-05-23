@@ -32,6 +32,13 @@ export class PlannerComponent {
       isHidden: false,
       isPinned: false,
     },
+    {
+      id: '122B4803-6383-9084-23CE-9DB90B1689A3',
+      displayName: 'Stafford Moss',    
+      userType: '0',
+      isHidden: false,
+      isPinned: false,
+    },
   ];
   appointmentsList: AgendaItem[] = [];
   selectedDate: Date = new Date();

@@ -23,8 +23,8 @@ import { customEvent } from 'src/app/models/customEvent.model';
 import { map } from 'rxjs';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { UserService } from 'src/app/services/user.service';
-import { INITIAL_EVENTS } from 'src/app/event-utils';
-// import { INITIAL_EVENTS, createEventId } from '../event-utils';
+// import { INITIAL_EVENTS } from 'src/app/event-utils';
+ import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
 @Component({
   selector: 'app-test-calendar',
@@ -155,7 +155,7 @@ export class TestCalendarComponent {
         .subscribe((appointments: any) => {
           console.log('appointments: ',this.currentUser.displayName, appointments);
           this.events = this.convertAgendaItemToCustomEvent(appointments);
-          console.log('events: ', this.currentUser.displayName, this.events);
+          console.log('events: ', this.currentUser.id, this.events);
         });
     }
   }
