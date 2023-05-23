@@ -19,6 +19,7 @@ import { ColumnComponent } from './component/plan/column/column.component';
 import { AddUserComponent } from './component/plan/add-user/add-user.component';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {
   MAT_DATE_LOCALE,
   MatNativeDateModule,
@@ -77,6 +78,7 @@ import { TestCalendarComponent } from './component/test-calendar/test-calendar.c
     MatFormFieldModule,
     MatOptionModule,
     MatSlideToggleModule,
+    MatButtonToggleModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,

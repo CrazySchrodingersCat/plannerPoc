@@ -3,17 +3,17 @@
     <div class="menu">FRITH.Planner App POC.V_1</div>
     <div [ngSwitch]="url" >
       <span class="toggles"  *ngSwitchCase="'/planner'">
-        <mat-button-toggle-group>
-        <div class="time-toggle">
-          <mat-button-toggle [checked]="selectedTimeToggle" (click)="dagToggeleClicked($event)">Dag</mat-button-toggle> 
-          <mat-button-toggle (click)="weekToggeleClicked($event)">Week</mat-button-toggle>
-          <mat-button-toggle (click)="monthToggeleClicked($event)">Maand</mat-button-toggle>
-        </div>
+        <mat-button-toggle-group  #group="matButtonToggleGroup" class="time-toggle" [value]="selectedGrid"  (change)="onValChange(group.value)">
+      
+          <mat-button-toggle value="timeGridDay">Dag</mat-button-toggle> 
+          <mat-button-toggle value="timeGridWeek" >Week</mat-button-toggle>
+          <mat-button-toggle value="dayGridMonth" >Maand</mat-button-toggle>
+
          </mat-button-toggle-group>
-        <div class="view-toggle">
+        <!-- <div class="view-toggle">
           <button><mat-icon>view_column</mat-icon></button>
           <button><mat-icon>calendar_today</mat-icon></button>
-        </div>
+        </div> -->
        
       </span>
     </div>
