@@ -62,7 +62,6 @@ export class PlannerComponent {
   getDateSelected(e: any) {
     const newDate = moment(e).format('YYYY-MM-DD');
     this.sharedService.setSelectedDate.next(newDate);
-    // console.log(newDate);
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(

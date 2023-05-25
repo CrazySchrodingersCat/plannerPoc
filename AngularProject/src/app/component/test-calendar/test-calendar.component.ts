@@ -89,27 +89,19 @@ export class TestCalendarComponent {
           },
 
           initialView: 'timeGridDay',
-          initialDate: newDateAngeda,
-          initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-          weekends: true,
+          initialDate: newDateAngeda,         
+          weekends: false,
           firstDay: 1,
           editable: true,
           selectable: true,
           selectMirror: true,
           allDaySlot: false,
           dayMaxEvents: true,
-
           locale: 'nl',
           slotMinTime: '06:00:00',
           slotMaxTime: '22:00:00',
-
           slotDuration: '00:30:00',
-
-          eventColor: 'var(--color-0)',
-          // 'background-color':
-            // currentUser.userType == '0'
-            //   ? 'var(--color-' + app.practitioner.userType + ')'
-            //   : 'var(--color-0)'
+          eventColor: 'var(--color-0)',   
           events: this.events,  
         }
       );

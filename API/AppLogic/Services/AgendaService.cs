@@ -63,6 +63,21 @@ namespace API.AppLogic.Services
             var agendaItems = await _agendaRepository.GetWeekForPractitionerAsync(id, date);
             return await ConvertToDTOList(agendaItems);
         }
+        public async Task<List<AgendaItemDTO>?> Get2MonthForPractitionerAsync(string id, DateTime date)
+        {
+            var agendaItems = await _agendaRepository.Get2MonthForPractitionerAsync(id, date);
+            return await ConvertToDTOList(agendaItems);
+        }
+
+        public async Task<List<AgendaItemDTO>?> Get2MonthForClientAsync(string id, DateTime date)
+        {
+            var agendaItems = await _agendaRepository.Get2MonthForClientAsync(id, date);
+            return await ConvertToDTOList(agendaItems);
+        }
+
+
+
+
         private async Task<List<AgendaItemDTO>?> ConvertToDTOList(List<AgendaItem>? agendaItems)
         {
             List<AgendaItemDTO> agendaItemDTOs = new List<AgendaItemDTO>();
@@ -92,20 +107,9 @@ namespace API.AppLogic.Services
             return agendaItemDTOs;
         }
 
-        public async Task<AgendaItem?> EditItemAsync(string id, AgendaItemRequestDTO request)
-        {
-            var toUpdate = await _agendaRepository.GetByIdAsync(id);
-            if (toUpdate == null)
-            {
-                throw new ArgumentException("AgendaItem not found");
-            }
-            else
-            {
-                //var updated = new Practitioner(request.DisplayName, request.Discipline);
-                await _agendaRepository.EditItem(id, request);
-            }
-            return await _agendaRepository.GetByIdAsync(id);
-        }
+
+
+     
 
         public record AgendaItemRequestDTO(string Start, string End, string ClientId, string PractitionerId) { }
         

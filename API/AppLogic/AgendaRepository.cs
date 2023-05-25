@@ -79,6 +79,22 @@ namespace API.AppLogic
                  item.Date >= manday && item.Date < manday.AddDays(7)).ToListAsync();
         }
 
+
+        public async Task<List<AgendaItem>?> Get2MonthForPractitionerAsync(string id, DateTime date)
+        {            
+            return await _context.AgendaItems
+                 .Where(item => item.PractitionerId == id &&
+                 item.Date >= date.AddDays(-7) && item.Date < date.AddDays(40)).ToListAsync();
+        }
+
+        public async Task<List<AgendaItem>?> Get2MonthForClientAsync(string id, DateTime date)
+        {           
+             return await _context.AgendaItems
+                 .Where(item => item.ClientId == id &&
+                 item.Date >= date.AddDays(-7) && item.Date < date.AddDays(40)).ToListAsync();
+        }
+
+
         public async Task EditItem(string id, AgendaItemRequestDTO update)
         {
 
@@ -108,6 +124,8 @@ namespace API.AppLogic
                 return TimeSpan.Zero;
             }
         }
+
+  
 
         //public static class DateTimeExtensions
         //{

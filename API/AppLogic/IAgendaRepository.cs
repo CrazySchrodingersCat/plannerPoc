@@ -16,6 +16,8 @@ namespace API.AppLogic
         Task<List<AgendaItem>?> GetByDateForPractitionerAsync(string id, DateTime date);
         Task<List<AgendaItem>?> GetWeekForPractitionerAsync(string id, DateTime date);
         Task<List<AgendaItem>?> GetWeekForClientAsync(string id, DateTime date);
-        Task EditItem(string id, AgendaItemRequestDTO request);
+       // Task EditItem(string id, AgendaItemRequestDTO request);
+        Task<List<AgendaItem>?> Get2MonthForPractitionerAsync(string id, DateTime date);
+        Task<List<AgendaItem>?> Get2MonthForClientAsync(string id, DateTime date);
     }
 }

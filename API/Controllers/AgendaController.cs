@@ -21,13 +21,7 @@ namespace API.Controllers
             _logger = logger;
             _agendaService = service;
         }
-    
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAppointmentById(string id)
-        {
-            var appointment = await _agendaService.GetById(id);
-            return appointment == null ? NotFound() : Ok(appointment);
-        }
+   
         //[Route("/Client")]
         [HttpGet("Client/{id}/Periode/{from}/{till}")]
         public async Task<IActionResult> GetAppointmentsByClientIdForPeriode(string id, DateTime from, DateTime till)
@@ -75,26 +69,42 @@ namespace API.Controllers
             return appointments == null ? NotFound() : Ok(appointments);
         }
 
+        //[Route("/Client")]
+        [HttpGet("Client/{id}/Months/{dateInput}")]
+        public async Task<IActionResult> GetAppointmentsByClientIdFor2Month(string id, string dateInput)
+        {
+            var appointments = await _agendaService.Get2MonthForClientAsync(id, DateTime.Parse(dateInput));
+            return appointments == null ? NotFound() : Ok(appointments);
+        }
+        //[Route("/Practitioner")]
+        [HttpGet("Practitioner/{id}/Months/{dateInput}")]
+        public async Task<IActionResult> GetAppointmentsByPractitionerIdFor2Month(string id, string dateInput)
+        {
+
+            var appointments = await _agendaService.Get2MonthForPractitionerAsync(id, DateTime.Parse(dateInput));
+            return appointments == null ? NotFound() : Ok(appointments);
+        }
+
         // POST api/<AgendaController>
         //[HttpPost]
         //public void Post([FromBody] string value)
         //{
         //}
 
-        // PUT api/<AgendaController>/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult>  EditItem(string id, [FromBody]  AgendaItemRequestDTO request)
-        {
-            try
-            {
-                await _agendaService.EditItemAsync(id, request);
-                return Ok();
-            }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
+        //// PUT api/<AgendaController>/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult>  EditItem(string id, [FromBody]  AgendaItemRequestDTO request)
+        //{
+        //    try
+        //    {
+        //        await _agendaService.EditItemAsync(id, request);
+        //        return Ok();
+        //    }
+        //    catch (ArgumentException ex)
+        //    {
+        //        return NotFound(ex.Message);
+        //    }
+        //}
 
         //// DELETE api/<AgendaController>/5
         //[HttpDelete("{id}")]
