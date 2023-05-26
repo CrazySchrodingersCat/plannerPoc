@@ -80,7 +80,7 @@ namespace API.AppLogic.Services
 
         private async Task<List<AgendaItemDTO>?> ConvertToDTOList(List<AgendaItem>? agendaItems)
         {
-            List<AgendaItemDTO> agendaItemDTOs = new List<AgendaItemDTO>();
+             List<AgendaItemDTO> agendaItemDTOs = new List<AgendaItemDTO>();
             if (agendaItems != null)
             {
                 foreach (var agendaItem in agendaItems)

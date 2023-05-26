@@ -14,36 +14,37 @@
 
         public PractitionerDTO(Practitioner practitioner)
         {
-            Id = practitioner.Id;
-            DisplayName = practitioner.DisplayName;
-            
-            //UserType = UserType.GetType();
-            Discipline = practitioner.Discipline;
-            switch (practitioner.Discipline)
-            {
-                case "Psycholoog (PS)":
-                    UserType = UserType.PS;
-                    DisciplineAbbreviation = "PS";
-                    break;
-                case "Psycholoog(LV)":
-                    UserType = UserType.LV;
-                    DisciplineAbbreviation = "LV";
-                    break;
-                case "Psycholoog (CGT)":
-                    UserType = UserType.CGT;
-                    DisciplineAbbreviation = "CGT";
-                    break;
-                case "Regiebehandelaar":
-                    UserType = UserType.Regie;
-                    DisciplineAbbreviation = "Rg";
-                    break;
-                default:
-                    UserType = UserType.Fysio;
-                    DisciplineAbbreviation = "Fs";
-                    break;
+            if (practitioner != null && !string.IsNullOrEmpty(practitioner.Id)) {
+                Id = practitioner.Id;
+                DisplayName = practitioner.DisplayName;
+
+                //UserType = UserType.GetType();
+                Discipline = practitioner.Discipline;
+                switch (practitioner.Discipline)
+                {
+                    case "Psycholoog (PS)":
+                        UserType = UserType.PS;
+                        DisciplineAbbreviation = "PS";
+                        break;
+                    case "Psycholoog(LV)":
+                        UserType = UserType.LV;
+                        DisciplineAbbreviation = "LV";
+                        break;
+                    case "Psycholoog (CGT)":
+                        UserType = UserType.CGT;
+                        DisciplineAbbreviation = "CGT";
+                        break;
+                    case "Regiebehandelaar":
+                        UserType = UserType.Regie;
+                        DisciplineAbbreviation = "Rg";
+                        break;
+                    default:
+                        UserType = UserType.Fysio;
+                        DisciplineAbbreviation = "Fs";
+                        break;
+                }
+
             }
 
         }
-
-    }
-}
+    }}

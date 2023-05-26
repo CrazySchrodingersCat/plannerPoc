@@ -131,11 +131,8 @@ export class TestCalendarComponent {
     if (!isNaN(currentDate.getTime())) {
       const appointmentsFetch =
         this.userType === 'client'
-          ? this.agendaService.getWeekAgendaForClientByDate(userId, dateStr)
-          : this.agendaService.getWeekAgendaForPractitionerByDate(
-              userId,
-              dateStr
-            );
+          ? this.agendaService.getMonthAgendaForClientByDate(userId, dateStr)
+          : this.agendaService.getMonthAgendaForPractitionerByDate( userId,dateStr);
 
       appointmentsFetch
         .pipe(

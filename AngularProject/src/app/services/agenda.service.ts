@@ -28,9 +28,27 @@ export class AgendaService {
       environment.apiUrl + '/Practitioner/' + id + '/Date/' + date
     );
   }
-  getWeekAgendaForPractitionerByDate(id: string, date: string): Observable<any> {
+  getWeekAgendaForPractitionerByDate(
+    id: string,
+    date: string
+  ): Observable<any> {
     return this.http.get<AgendaItem[]>(
       environment.apiUrl + '/Practitioner/' + id + '/Week/' + date
+    );
+  }
+
+  getMonthAgendaForPractitionerByDate(
+    id: string,
+    date: string
+  ): Observable<any> {
+    return this.http.get<AgendaItem[]>(
+      environment.apiUrl + '/Practitioner/' + id + '/Months/' + date
+    );
+  }
+
+  getMonthAgendaForClientByDate(id: string, date: string): Observable<any> {
+    return this.http.get<AgendaItem[]>(
+      environment.apiUrl + '/Client/' + id + '/Months/' + date
     );
   }
 }
