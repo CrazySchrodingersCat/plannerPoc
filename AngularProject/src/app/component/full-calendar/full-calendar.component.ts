@@ -27,11 +27,11 @@ import { UserService } from 'src/app/services/user.service';
  import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
 @Component({
-  selector: 'app-test-calendar',
-  templateUrl: './test-calendar.component.html',
-  styleUrls: ['./test-calendar.component.css'],
+  selector: 'app-full-calendar',
+  templateUrl: './full-calendar.component.html',
+  styleUrls: ['./full-calendar.component.css'],
 })
-export class TestCalendarComponent {
+export class FullCalendarComponent {
   private previousDate!: Date;
   private previousView!: '';
 
@@ -61,8 +61,6 @@ export class TestCalendarComponent {
   ) {}
   ngOnInit(): void {
     this.agendaService.getPinnedUserDate.subscribe((iUser) => {});
-    console.log(this.currentUser.discipline);
-    
     this.userType = this.currentUser.discipline
       ? this.currentUser.discipline
       : 'client';
@@ -76,7 +74,7 @@ export class TestCalendarComponent {
       var calendarId = 'calendar' + this.currentUser.id;
       this.getAppointments();
       // console.log('events: ', this.currentUser.displayName, this.events);
-      
+      console.log(this.viewType);
 
       this.calendar = new Calendar(
         document.getElementById(calendarId) as HTMLElement,
@@ -88,8 +86,8 @@ export class TestCalendarComponent {
             right: '',
           },
 
-          initialView: 'timeGridDay',
-          initialDate: newDateAngeda,         
+          initialView: this.viewType,
+          initialDate: newDateAngeda,
           weekends: false,
           firstDay: 1,
           editable: true,
@@ -101,18 +99,19 @@ export class TestCalendarComponent {
           slotMinTime: '06:00:00',
           slotMaxTime: '22:00:00',
           slotDuration: '00:30:00',
-          eventColor: 'var(--color-0)',   
-          events: this.events,  
+          eventColor: 'var(--color-0)',
+          events: this.events,
         }
       );
       this.calendar.render();
+      console.log('new calendar initialized');
     });
     this.sharedService.getViewType.subscribe(async (viewType) => {
       if (this.viewType != viewType) {
         this.viewType = viewType;
 
         this.calendar.changeView(viewType);
-        // this.getAppointments();
+        this.getAppointments();
       }
     });
   }
@@ -132,7 +131,10 @@ export class TestCalendarComponent {
       const appointmentsFetch =
         this.userType === 'client'
           ? this.agendaService.getMonthAgendaForClientByDate(userId, dateStr)
-          : this.agendaService.getMonthAgendaForPractitionerByDate( userId,dateStr);
+          : this.agendaService.getMonthAgendaForPractitionerByDate(
+              userId,
+              dateStr
+            );
 
       appointmentsFetch
         .pipe(
@@ -144,25 +146,31 @@ export class TestCalendarComponent {
           })
         )
         .subscribe((appointments: any) => {
-          console.log('appointments: ',this.currentUser.displayName, appointments);
+          console.log(
+            'appointments: ',
+            this.currentUser.displayName,
+            appointments
+          );
           this.events = this.convertAgendaItemToCustomEvent(appointments);
-          console.log('events: ', this.currentUser.id, this.events);
+          console.log(
+            'events from get : ',
+            this.currentUser.displayName,
+            this.events
+          );
         });
     }
   }
   convertAgendaItemToCustomEvent(appointments: any): any[] {
     const convertedEvents: customEvent[] = [];
-   
+
     for (const item of appointments) {
-       let info: string = '';
-       if (this.userType = 'client'){
-          info =
-            item.practitioner.displayName +
-            ', ' +
-            item.practitioner.discipline;
-        }else{
-          info = item.client.displayName;
-        }
+      let info: string = '';
+      if ((this.userType = 'client')) {
+        info =
+          item.practitioner.displayName + ', ' + item.practitioner.discipline;
+      } else {
+        info = item.client.displayName;
+      }
       const dateStr = item.date.split('T')[0];
 
       const convertedEvent: customEvent = {
@@ -211,6 +219,6 @@ export class TestCalendarComponent {
 }
 function ViewChild(
   arg0: string
-): (target: TestCalendarComponent, propertyKey: 'calendar') => void {
+): (target: FullCalendarComponent, propertyKey: 'calendar') => void {
   throw new Error('Function not implemented.');
 }

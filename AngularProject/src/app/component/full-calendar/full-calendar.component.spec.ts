@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestCalendarComponent } from './test-calendar.component';
+import { TestCalendarComponent } from './full-calendar.component';
 
 describe('TestCalendarComponent', () => {
   let component: TestCalendarComponent;
@@ -8,9 +8,8 @@ describe('TestCalendarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TestCalendarComponent ]
-    })
-    .compileComponents();
+      declarations: [TestCalendarComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TestCalendarComponent);
     component = fixture.componentInstance;

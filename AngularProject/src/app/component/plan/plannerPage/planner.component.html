@@ -107,13 +107,13 @@
   <mat-drawer-content class="columns-flex-container">
     <div *ngIf="checked" class="planning-columns-container">
       <ng-container *ngFor="let user of selectedUsers">
-        <app-test-calendar
+        <app-full-calendar
           *ngIf="!user.isHidden"
           [currentUser]="user"
           [pinned]="pinnedUser.length > 0"
           (delete)="deleteFromList($event)"
           (pinUser)="pinUser($event)"
-        ></app-test-calendar>
+        ></app-full-calendar>
       </ng-container>
     </div>
 

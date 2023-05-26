@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { PlannerComponent } from './component/plan/plannerPage/planner.component';
+import { FullCalendarComponent } from './component/full-calendar/full-calendar.component';
 import { PractitionerDetailComponent } from './component/practitioner/practitioner-detail/practitioner-detail.component';
 import { PractitionerOverviewComponent } from './component/practitioner/practitioner-overview/practitioner-overview.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserPipe } from './userpipe';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { TestCalendarComponent } from './component/test-calendar/test-calendar.component';
+
+// import { FullCalendarComponent } from './component/full-calendar/full-calendar.component';
 
 
 @NgModule({
@@ -49,7 +51,7 @@ import { TestCalendarComponent } from './component/test-calendar/test-calendar.c
     ColumnComponent,
     AddUserComponent,
     UserPipe,
-    TestCalendarComponent,
+    FullCalendarComponent,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
   bootstrap: [AppComponent],
@@ -57,6 +59,7 @@ import { TestCalendarComponent } from './component/test-calendar/test-calendar.c
   imports: [
     BrowserModule,
     FullCalendarModule,
+
     BrowserAnimationsModule,
     AngularMaterialModule,
     HttpClientModule,

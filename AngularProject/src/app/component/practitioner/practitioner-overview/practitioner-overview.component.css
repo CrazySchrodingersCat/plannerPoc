@@ -1,9 +1,11 @@
 .container {
   position: relative;
+  padding: 0 30px ;
 }
 .dashbord {
   position: relative;
   height: 70px;
+  
 }
 .menu-spacer {
   flex: 1 1 auto;

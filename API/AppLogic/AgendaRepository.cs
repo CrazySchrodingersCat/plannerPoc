@@ -81,17 +81,19 @@ namespace API.AppLogic
 
 
         public async Task<List<AgendaItem>?> Get2MonthForPractitionerAsync(string id, DateTime date)
-        {            
+        {
+            DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
             return await _context.AgendaItems
                  .Where(item => item.PractitionerId == id &&
-                 item.Date >= date.AddDays(-7) && item.Date < date.AddDays(40)).ToListAsync();
+                 item.Date >= firstDayOfMonth.AddDays(-7) && item.Date < firstDayOfMonth.AddDays(40)).ToListAsync();
         }
 
         public async Task<List<AgendaItem>?> Get2MonthForClientAsync(string id, DateTime date)
         {           
-             return await _context.AgendaItems
+            DateTime firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
+            return await _context.AgendaItems
                  .Where(item => item.ClientId == id &&
-                 item.Date >= date.AddDays(-7) && item.Date < date.AddDays(40)).ToListAsync();
+                 item.Date >= firstDayOfMonth.AddDays(-7) && item.Date < firstDayOfMonth.AddDays(40)).ToListAsync();
         }
 
 
