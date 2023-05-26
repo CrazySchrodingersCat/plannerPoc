@@ -65,14 +65,14 @@ export class PractitionerDetailComponent {
       if (this.id == '') {
         this.service.addPractitioner(newPractitioner).subscribe(() => {
           alert('Practitioner added successfully');
-          this.router.navigate(['/Practitioners']);
+          this.router.navigate(['/practitioners']);
         });
       } else {
         this.service
           .editPractitioner(this.id, newPractitioner)
           .subscribe(() => {
             alert('Practitioner changed successfully');
-            this.router.navigate(['/Practitioners']);
+            this.router.navigate(['/practitioners']);
           });
       }
     } else {
@@ -83,7 +83,7 @@ export class PractitionerDetailComponent {
 
   delete() {
     this.service.deleteById(this.id).subscribe((data) => {
-      this.router.navigate(['/Practitioners']);
+      this.router.navigate(['/practitioners']);
     });
   }
 }
