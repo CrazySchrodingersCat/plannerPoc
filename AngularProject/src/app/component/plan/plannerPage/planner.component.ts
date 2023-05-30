@@ -16,7 +16,8 @@ import { DateAdapter, ThemePalette } from '@angular/material/core';
   styleUrls: ['./planner.component.css'],
 })
 export class PlannerComponent {
-  selectedUsers: IUser[] = [
+  selectedUsers: IUser[] //=[]
+  = [
     {
       id: '9D2461E2-5F3C-3D1B-4907-CA52756A26C9',
       displayName: 'Gabriella Washington',

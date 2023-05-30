@@ -65,53 +65,22 @@ export class FullCalendarComponent {
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
-  }
-  ngAfterViewInit(): void {
-    this.sharedService.getSelectedDate.subscribe((date) => {
-      this.currentDate = date ? date : this.currentDate;
-      const newDateAngeda = moment(this.currentDate).format('YYYY-MM-DD');
+      this.sharedService.getViewType.subscribe(async (viewType) => {
+        if (this.viewType != viewType) {
+          this.viewType = viewType;
 
-      var calendarId = 'calendar' + this.currentUser.id;
-      this.getAppointments();
-      // console.log('events: ', this.currentUser.displayName, this.events);
-      this.viewType = 'timeGridDay';
-
-      this.calendar = new Calendar(
-        document.getElementById(calendarId) as HTMLElement,
-        {
-          plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
-          headerToolbar: {
-            // left: 'prev,next today',
-            center: '',
-            right: '',
-          },
-
-          initialView: this.viewType,
-          // views: {
-          //   dayGridFourWeek: {
-          //     type: 'dayGrid',
-          //     duration: { weeks: 4 },
-          //   },
-          // },
-          initialDate: newDateAngeda,
-          weekends: false,
-          firstDay: 1,
-          editable: true,
-          selectable: true,
-          selectMirror: true,
-          allDaySlot: false,
-          dayMaxEvents: true,
-          locale: 'nl',
-          slotMinTime: '06:00:00',
-          slotMaxTime: '22:00:00',
-          slotDuration: '00:30:00',
-          eventColor: 'var(--color-0)',
-          events: this.events,
+          this.calendar.changeView(viewType);
+          this.getAppointments();
         }
-      );
-      this.calendar.render();
-      console.log('new calendar initialized');
-    });
+      });
+
+    this.setCalendar();
+   
+  }
+
+  ngAfterViewInit(): void {
+    this.setCalendar();
+
     this.sharedService.getViewType.subscribe(async (viewType) => {
       if (this.viewType != viewType) {
         this.viewType = viewType;
@@ -165,6 +134,47 @@ export class FullCalendarComponent {
           );
         });
     }
+  }
+
+  private setCalendar() {
+    this.sharedService.getSelectedDate.subscribe((date) => {
+      this.currentDate = date ? date : this.currentDate;
+      const newDateAngeda = moment(this.currentDate).format('YYYY-MM-DD');
+
+      var calendarId = 'calendar' + this.currentUser.id;
+      this.getAppointments();
+      this.viewType = 'timeGridDay';
+
+      this.calendar = new Calendar(
+        document.getElementById(calendarId) as HTMLElement,
+        {
+          plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
+          headerToolbar: {
+            // left: 'prev,next today',
+            center: '',
+            right: '',
+          },
+
+          initialView: this.viewType,
+          initialDate: newDateAngeda,
+          weekends: false,
+          firstDay: 1,
+          editable: true,
+          selectable: true,
+          selectMirror: true,
+          allDaySlot: false,
+          dayMaxEvents: true,
+          locale: 'nl',
+          slotMinTime: '06:00:00',
+          slotMaxTime: '22:00:00',
+          slotDuration: '00:30:00',
+          eventColor: 'var(--color-0)',
+          events: this.events,
+        }
+      );
+      this.calendar.render();
+      // console.log('new calendar initialized in OnInit');
+    });
   }
   convertAgendaItemToCustomEvent(appointments: any): any[] {
     const convertedEvents: customEvent[] = [];
