@@ -24,7 +24,7 @@ import { map } from 'rxjs';
 import { AgendaService } from 'src/app/services/agenda.service';
 import { UserService } from 'src/app/services/user.service';
 // import { INITIAL_EVENTS } from 'src/app/event-utils';
- import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
+import { INITIAL_EVENTS, createEventId } from 'src/app/event-utils';
 
 @Component({
   selector: 'app-full-calendar',
@@ -39,7 +39,7 @@ export class FullCalendarComponent {
 
   currentDate = new Date();
   @Input() currentUser!: IUser;
-  viewType = 'timeGridDay';
+  viewType = '';
   userType = 'test';
   appointmentsList: AgendaItem[] = [];
   events: customEvent[] = [];
@@ -74,7 +74,7 @@ export class FullCalendarComponent {
       var calendarId = 'calendar' + this.currentUser.id;
       this.getAppointments();
       // console.log('events: ', this.currentUser.displayName, this.events);
-      console.log(this.viewType);
+      this.viewType = 'timeGridDay';
 
       this.calendar = new Calendar(
         document.getElementById(calendarId) as HTMLElement,
@@ -87,6 +87,12 @@ export class FullCalendarComponent {
           },
 
           initialView: this.viewType,
+          // views: {
+          //   dayGridFourWeek: {
+          //     type: 'dayGrid',
+          //     duration: { weeks: 4 },
+          //   },
+          // },
           initialDate: newDateAngeda,
           weekends: false,
           firstDay: 1,
