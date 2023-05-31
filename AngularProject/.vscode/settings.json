@@ -1,0 +1,5 @@
+{
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/e5b05a2e-5c71-4f03-9264-6c97633427c0/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/PlannerAngularPoc",
+  "appService.deploySubpath": "dist\\angular-project"
+}
