@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { S } from '@fullcalendar/core/internal-common';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SharedService {
-  public setViewType = new BehaviorSubject<any>([]);
+  public setViewType = new BehaviorSubject<string>('timeGridDay');
   public getViewType = this.setViewType.asObservable();
   //'dayGridMonth,timeGridWeek,timeGridDay',
 
@@ -15,7 +14,7 @@ export class SharedService {
 
   private dateSource = new Subject<Date>();
   date$ = this.dateSource.asObservable();
-  viewType: string = '';
+  viewType: string = 'timeGridDay';
 
   getViewByDay() {
     this.viewType = 'timeGridWeek';

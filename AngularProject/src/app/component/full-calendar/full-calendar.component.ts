@@ -65,17 +65,17 @@ export class FullCalendarComponent {
       ? this.currentUser.discipline
       : 'client';
     this.getAppointments();
-      this.sharedService.getViewType.subscribe(async (viewType) => {
-        if (this.viewType != viewType) {
-          this.viewType = viewType;
+    
+    this.sharedService.getViewType.subscribe(async (viewType) => {
+      if (this.viewType != viewType) {
+        this.viewType = viewType;
 
-          this.calendar.changeView(viewType);
-          this.getAppointments();
-        }
-      });
+        this.calendar.changeView(viewType);
+        this.getAppointments();
+      }
+    });
 
     this.setCalendar();
-   
   }
 
   ngAfterViewInit(): void {
@@ -143,7 +143,10 @@ export class FullCalendarComponent {
 
       var calendarId = 'calendar' + this.currentUser.id;
       this.getAppointments();
-      this.viewType = 'timeGridDay';
+      this.sharedService.getViewType.subscribe((viewType) => {
+        this.viewType = viewType;
+      });
+      // this.viewType = 'timeGridDay';
 
       this.calendar = new Calendar(
         document.getElementById(calendarId) as HTMLElement,
