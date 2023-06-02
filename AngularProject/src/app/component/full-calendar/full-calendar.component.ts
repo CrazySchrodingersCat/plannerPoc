@@ -120,13 +120,17 @@ export class FullCalendarComponent {
             return response;
           })
         )
-        .subscribe((appointments: any) => {
+        .subscribe((appointments: any) => {    
+
           console.log(
             'appointments: ',
             this.currentUser.displayName,
             appointments
+
           );
+          
           this.events = this.convertAgendaItemToCustomEvent(appointments);
+          this.calendar.addEventSource(this.events);
           console.log(
             'events from get : ',
             this.currentUser.displayName,
@@ -146,8 +150,6 @@ export class FullCalendarComponent {
       this.sharedService.getViewType.subscribe((viewType) => {
         this.viewType = viewType;
       });
-      // this.viewType = 'timeGridDay';
-
       this.calendar = new Calendar(
         document.getElementById(calendarId) as HTMLElement,
         {
