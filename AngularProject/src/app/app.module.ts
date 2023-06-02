@@ -34,7 +34,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { UserPipe } from './userpipe';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -50,7 +49,6 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     PractitionerOverviewComponent,
     ColumnComponent,
     AddUserComponent,
-    UserPipe,
     FullCalendarComponent,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'nl-Nl' }],
