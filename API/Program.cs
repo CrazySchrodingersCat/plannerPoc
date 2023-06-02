@@ -47,7 +47,7 @@ builder.Services.AddSwaggerGen();
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddDbContext<PlannerDbContext>(options =>
 {
-    string connectionstring = configuration["DefaultConnection"];
+    string connectionstring = configuration.GetConnectionString("DefaultConnection");;
     options.UseSqlServer(connectionstring, sqloptions =>
     {
         sqloptions.EnableRetryOnFailure(
