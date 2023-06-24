@@ -14,7 +14,7 @@ export class SharedService {
 
   private dateSource = new Subject<Date>();
   date$ = this.dateSource.asObservable();
-  viewType: string = 'timeGridDay';
+  viewType: string = 'timeGridWeek';
 
   getViewByDay() {
     this.viewType = 'timeGridWeek';

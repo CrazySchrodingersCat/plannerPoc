@@ -17,12 +17,12 @@ body {
   background-color: #fafafa;
 }
 :root {
-  --color-0: #b5d2b4; /* ach gray */
-  --color-1: #d9a0a0; /* mimi pink */
-  --color-2: #efb9cb; /* orchid pink */
-  --color-3: #e6adec; /* plum web */
-  --color-4: #c287e8; /* lavander floral */
-  --color-5: #807182; /* roze */
+  --color-0: #b5d2b4; 
+  --color-1: #d9a0a0; 
+  --color-2: #efb9cb; 
+  --color-3: #e6adec; 
+  --color-4: #c287e8; 
+  --color-5: #807182; 
 
   /* --fc-timegrid-event : background-color:var(--color-0); */
 }
